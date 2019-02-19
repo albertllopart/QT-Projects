@@ -18,6 +18,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void ConnectSignalsSlots();
+
+public slots:
+
+    void menuBar_Action_Testing();
+
 private:
     Ui::MainWindow *ui_main_window;
     Ui::Rendering *ui_rendering;

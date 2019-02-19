@@ -28,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //Create the inspector widget and add it to the inspector
     inspector = new Inspector();
     ui_main_window->dock_inspector->setWidget(inspector);
+
+    //Connect Signals and Slots
+    ConnectSignalsSlots();
 }
 
 MainWindow::~MainWindow()
@@ -35,3 +38,14 @@ MainWindow::~MainWindow()
     delete ui_main_window;
     delete ui_rendering;
 }
+
+void MainWindow::ConnectSignalsSlots()
+{
+    connect(ui_main_window->actionExit, SIGNAL(triggered()), qApp, SLOT(quit()));
+}
+
+void MainWindow::menuBar_Action_Testing()
+{
+
+}
+
