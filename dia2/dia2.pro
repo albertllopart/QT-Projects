@@ -27,14 +27,16 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     inspector.cpp \
-    myopenglwidget.cpp
+    myopenglwidget.cpp \
+    hierarchy.cpp
 
 HEADERS += \
         mainwindow.h \
     inspector.h \
-    myopenglwidget.h
+    myopenglwidget.h \
+    hierarchy.h
 
 FORMS += \
         mainwindow.ui \
-    rendering.ui \
-    inspector.ui
+    inspector.ui \
+    hierarchy.ui

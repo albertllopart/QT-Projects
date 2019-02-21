@@ -5,9 +5,9 @@
 
 namespace Ui {
 class MainWindow;
-class Rendering;
 }
 
+class Hierarchy;
 class Inspector;
 
 class MainWindow : public QMainWindow
@@ -26,7 +26,8 @@ public slots:
 
 private:
     Ui::MainWindow *ui_main_window;
-    Ui::Rendering *ui_rendering;
+
+    Hierarchy *hierarchy;
     Inspector *inspector;
 };
 
