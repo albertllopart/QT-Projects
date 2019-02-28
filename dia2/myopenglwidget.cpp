@@ -1,5 +1,6 @@
 #include "myopenglwidget.h"
 #include <iostream>
+#include <QDir>
 
 MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
@@ -19,10 +20,42 @@ void MyOpenGLWidget::initializeGL()
     //Handle context destructions
     connect(context(), SIGNAL(aboutToBeDestroyed()), this, SLOT(finalizeGL()));
 
+    createSampleTriangle();
+}
+
+void MyOpenGLWidget::resizeGL(int width, int height)
+{
+    //TODO: resize textures
+}
+
+void MyOpenGLWidget::paintGL()
+{
+    glClearColor(0.9f, 0.85f, 1.0f, 1.0f);
+
+    if(program.bind())
+    {
+        vao.bind();
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        vao.release();
+        program.release();
+    }
+
+    //glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void MyOpenGLWidget::finalizeGL()
+{
+    std::cout << "finalizeGL()" << std::endl;
+}
+
+void MyOpenGLWidget::createSampleTriangle()
+{
     //Program
     program.create();
-    program.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/shader1_vert");
-    program.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/shader1_frag");
+    //program.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/shader1_vert");
+    //program.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/shader1_frag");
+    program.addShaderFromSourceCode(QOpenGLShader::Vertex, default_shader_vert);
+    program.addShaderFromSourceCode(QOpenGLShader::Fragment, default_shader_frag);
     program.link();
     program.bind();
 
@@ -53,31 +86,6 @@ void MyOpenGLWidget::initializeGL()
     vao.release();
     vbo.release();
     program.release();
-}
-
-void MyOpenGLWidget::resizeGL(int width, int height)
-{
-    //TODO: resize textures
-}
-
-void MyOpenGLWidget::paintGL()
-{
-    glClearColor(0.9f, 0.85f, 1.0f, 1.0f);
-
-    if(program.bind())
-    {
-        vao.bind();
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        vao.release();
-        program.release();
-    }
-
-    glClear(GL_COLOR_BUFFER_BIT);
-}
-
-void MyOpenGLWidget::finalizeGL()
-{
-    std::cout << "finalizeGL()" << std::endl;
 }
 
 
