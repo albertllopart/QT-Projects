@@ -28,15 +28,18 @@ SOURCES += \
         mainwindow.cpp \
     inspector.cpp \
     myopenglwidget.cpp \
-    hierarchy.cpp
+    hierarchy.cpp \
+    component2dtransform.cpp
 
 HEADERS += \
         mainwindow.h \
     inspector.h \
     myopenglwidget.h \
-    hierarchy.h
+    hierarchy.h \
+    component2dtransform.h
 
 FORMS += \
         mainwindow.ui \
     inspector.ui \
-    hierarchy.ui
+    hierarchy.ui \
+    component2dtransform.ui

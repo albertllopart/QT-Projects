@@ -33,16 +33,17 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionTesting"/>
+    <addaction name="actionNew_Scene"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuEdit">
+   <widget class="QMenu" name="menuEntities">
     <property name="title">
-     <string>Edit</string>
+     <string>Entities</string>
     </property>
+    <addaction name="actionNew_Entity"/>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuEdit"/>
+   <addaction name="menuEntities"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -77,14 +78,19 @@
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_7"/>
   </widget>
-  <action name="actionTesting">
-   <property name="text">
-    <string>Testing</string>
-   </property>
-  </action>
   <action name="actionExit">
    <property name="text">
     <string>Exit (Alt + f4)</string>
+   </property>
+  </action>
+  <action name="actionNew_Scene">
+   <property name="text">
+    <string>New Scene</string>
+   </property>
+  </action>
+  <action name="actionNew_Entity">
+   <property name="text">
+    <string>New Entity</string>
    </property>
   </action>
  </widget>
