@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Inspector</class>
- <widget class="QWidget" name="Inspector">
+ <class>Widget2DTransform</class>
+ <widget class="QWidget" name="Widget2DTransform">
   <property name="geometry">
    <rect>
     <x>0</x>

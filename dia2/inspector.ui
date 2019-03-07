@@ -15,130 +15,11 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QLabel" name="label_transform">
-         <property name="frameShape">
-          <enum>QFrame::Panel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
-         </property>
-         <property name="lineWidth">
-          <number>1</number>
-         </property>
-         <property name="text">
-          <string>Transform</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::AutoText</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_transform_translation">
-         <property name="text">
-          <string>Translation</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_transform_scale">
-         <property name="text">
-          <string>Scale</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_transform_rotation">
-         <property name="text">
-          <string>Rotation</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QLabel" name="label_transform_x">
-         <property name="frameShape">
-          <enum>QFrame::Panel</enum>
-         </property>
-         <property name="text">
-          <string>x</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_translation_x"/>
-       </item>
-       <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_scale_x"/>
-       </item>
-       <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_rotation_x"/>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QLabel" name="label_transform_y">
-         <property name="frameShape">
-          <enum>QFrame::Panel</enum>
-         </property>
-         <property name="text">
-          <string>y</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_translation_y"/>
-       </item>
-       <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_scale_y"/>
-       </item>
-       <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_rotation_y"/>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <widget class="QLabel" name="label_transform_z">
-         <property name="frameShape">
-          <enum>QFrame::Panel</enum>
-         </property>
-         <property name="text">
-          <string>z</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_translation_z"/>
-       </item>
-       <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_scale_z"/>
-       </item>
-       <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_rotation_z"/>
-       </item>
-      </layout>
-     </item>
-    </layout>
+    <widget class="QLineEdit" name="entity_name">
+     <property name="text">
+      <string>Entity Name</string>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">
@@ -148,7 +29,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>174</height>
+       <height>40</height>
       </size>
      </property>
     </spacer>
