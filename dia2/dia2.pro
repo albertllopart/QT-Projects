@@ -33,7 +33,8 @@ SOURCES += \
     scene.cpp \
     gameobject.cpp \
     component.cpp \
-    transform.cpp
+    transform.cpp \
+    widgetshaperenderer.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,13 +45,15 @@ HEADERS += \
     scene.h \
     gameobject.h \
     component.h \
-    transform.h
+    transform.h \
+    widgetshaperenderer.h
 
 FORMS += \
         mainwindow.ui \
     inspector.ui \
     hierarchy.ui \
-    widget2dtransform.ui
+    widget2dtransform.ui \
+    widgetshaperenderer.ui
 
 RESOURCES += \
     icons.qrc \
