@@ -29,17 +29,29 @@ SOURCES += \
     inspector.cpp \
     myopenglwidget.cpp \
     hierarchy.cpp \
-    component2dtransform.cpp
+    widget2dtransform.cpp \
+    scene.cpp \
+    gameobject.cpp \
+    component.cpp \
+    transform.cpp
 
 HEADERS += \
         mainwindow.h \
     inspector.h \
     myopenglwidget.h \
     hierarchy.h \
-    component2dtransform.h
+    widget2dtransform.h \
+    scene.h \
+    gameobject.h \
+    component.h \
+    transform.h
 
 FORMS += \
         mainwindow.ui \
     inspector.ui \
     hierarchy.ui \
-    component2dtransform.ui
+    widget2dtransform.ui
+
+RESOURCES += \
+    icons.qrc \
+    shaders.qrc
