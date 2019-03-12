@@ -1,6 +1,5 @@
 #include "inspector.h"
 #include "ui_inspector.h"
-#include "widget2dtransform.h"
 #include <QVBoxLayout>
 #include <QLayout>
 #include <QLineEdit>
@@ -15,7 +14,8 @@ Inspector::Inspector(QWidget *parent) :
     QLineEdit* entity_name = new QLineEdit("Entity Name");
 
     //Body (components)
-    Widget2DTransform* transform = new Widget2DTransform;
+    transform = new Widget2DTransform;
+    renderer = new WidgetShapeRenderer;
 
     //Bottom
     QPushButton* add_background_renderer = new QPushButton("Add Background Renderer");
@@ -26,6 +26,7 @@ Inspector::Inspector(QWidget *parent) :
     //elements to layout
     layout->addWidget(entity_name);
     layout->addWidget(transform);
+    layout->addWidget(renderer);
     layout->addWidget(add_background_renderer);
 
     //set the layout for this widget

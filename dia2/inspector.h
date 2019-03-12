@@ -2,6 +2,8 @@
 #define INSPECTOR_H
 
 #include <QWidget>
+#include "widget2dtransform.h"
+#include "widgetshaperenderer.h"
 
 namespace Ui {
 class Inspector;
@@ -16,7 +18,10 @@ public:
     ~Inspector();
 
 private:
+
     Ui::Inspector *ui;
+    Widget2DTransform *transform;
+    WidgetShapeRenderer *renderer;
 };
 
 #endif // INSPECTOR_H
