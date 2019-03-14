@@ -2,6 +2,7 @@
 #define WIDGETSHAPERENDERER_H
 
 #include <QWidget>
+#include <QColorDialog>
 
 namespace Ui {
 class WidgetShapeRenderer;
@@ -15,8 +16,16 @@ public:
     explicit WidgetShapeRenderer(QWidget *parent = 0);
     ~WidgetShapeRenderer();
 
+    void ConnectSignalsSlots();
+
+public slots:
+
+    void pushButton_fillColor();
+
 private:
+
     Ui::WidgetShapeRenderer *ui;
+
 };
 
 #endif // WIDGETSHAPERENDERER_H

@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QColorDialog>
+#include <QColor>
 
 namespace Ui {
 class MainWindow;
@@ -22,13 +24,17 @@ public:
 
 public slots:
 
-    void menuBar_Action_Testing();
+    void OpenColorDialog();
+    void ColorTest();
 
 private:
     Ui::MainWindow *ui_main_window;
 
     Hierarchy *hierarchy;
     Inspector *inspector;
+
+    QColorDialog *color_dialog;
+    QColor testing;
 };
 
 #endif // MAINWINDOW_H

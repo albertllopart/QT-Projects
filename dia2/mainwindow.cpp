@@ -20,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     inspector = new Inspector();
     ui_main_window->dock_inspector->setWidget(inspector);
 
+    //Create the color dialog
+    color_dialog = new QColorDialog(this);
+
     //Connect Signals and Slots
     ConnectSignalsSlots();
 }
@@ -32,9 +35,17 @@ MainWindow::~MainWindow()
 void MainWindow::ConnectSignalsSlots()
 {
     connect(ui_main_window->actionExit, SIGNAL(triggered()), qApp, SLOT(quit()));
+    connect(ui_main_window->actionNew_Entity, SIGNAL(triggered()), this, SLOT(OpenColorDialog()));
+
+    connect(color_dialog, SIGNAL(color_dialog->colorSelected(testing)), this, SLOT(ColorTest()));
 }
 
-void MainWindow::menuBar_Action_Testing()
+void MainWindow::OpenColorDialog()
+{
+    color_dialog->open();
+}
+
+void MainWindow::ColorTest()
 {
 
 }

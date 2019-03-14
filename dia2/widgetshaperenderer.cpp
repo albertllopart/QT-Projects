@@ -16,3 +16,13 @@ WidgetShapeRenderer::~WidgetShapeRenderer()
 {
     delete ui;
 }
+
+void WidgetShapeRenderer::ConnectSignalsSlots()
+{
+    connect(ui->pushButton_fillColor, SIGNAL(clicked()), this, SLOT(pushButton_fillColor()));
+}
+
+void WidgetShapeRenderer::pushButton_fillColor()
+{
+
+}
