@@ -14,8 +14,8 @@ Inspector::Inspector(QWidget *parent) :
     QLineEdit* entity_name = new QLineEdit("Entity Name");
 
     //Body (components)
-    transform = new Widget2DTransform;
-    renderer = new WidgetShapeRenderer;
+    transform = new Widget2DTransform();
+    renderer = new WidgetShapeRenderer();
 
     //Bottom
     QPushButton* add_background_renderer = new QPushButton("Add Background Renderer");

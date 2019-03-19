@@ -34,7 +34,8 @@ SOURCES += \
     gameobject.cpp \
     component.cpp \
     transform.cpp \
-    widgetshaperenderer.cpp
+    widgetshaperenderer.cpp \
+    drawrect.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,7 +47,8 @@ HEADERS += \
     gameobject.h \
     component.h \
     transform.h \
-    widgetshaperenderer.h
+    widgetshaperenderer.h \
+    drawrect.h
 
 FORMS += \
         mainwindow.ui \

@@ -6,17 +6,32 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>642</width>
-    <height>473</height>
+    <width>612</width>
+    <height>434</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
-     <widget class="MyOpenGLWidget" name="openGLWidget"/>
+     <widget class="drawRect" name="widget" native="true"/>
     </item>
    </layout>
   </widget>
@@ -25,7 +40,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>642</width>
+     <width>612</width>
      <height>21</height>
     </rect>
    </property>
@@ -69,7 +84,6 @@
    <addaction name="actionactionSave_Scene_Icon"/>
    <addaction name="separator"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dock_hierarchy">
    <property name="allowedAreas">
     <set>Qt::RightDockWidgetArea</set>
@@ -136,7 +150,7 @@
   </action>
   <action name="actionactionNew_Scene_Icon">
    <property name="icon">
-    <iconset resource="icons.qrc">
+    <iconset>
      <normaloff>:/Icons/Icons/Empty document new.png</normaloff>:/Icons/Icons/Empty document new.png</iconset>
    </property>
    <property name="text">
@@ -148,7 +162,7 @@
   </action>
   <action name="actionactionSave_Scene_Icon">
    <property name="icon">
-    <iconset resource="icons.qrc">
+    <iconset>
      <normaloff>:/Icons/Icons/Disquette.png</normaloff>:/Icons/Icons/Disquette.png</iconset>
    </property>
    <property name="text">
@@ -165,13 +179,12 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>MyOpenGLWidget</class>
-   <extends>QOpenGLWidget</extends>
-   <header>myopenglwidget.h</header>
+   <class>drawRect</class>
+   <extends>QWidget</extends>
+   <header>drawrect.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -11,6 +11,7 @@ class MainWindow;
 
 class Hierarchy;
 class Inspector;
+class drawRect;
 
 class MainWindow : public QMainWindow
 {
@@ -32,6 +33,7 @@ private:
 
     Hierarchy *hierarchy;
     Inspector *inspector;
+    drawRect  *drawrect;
 
     QColorDialog *color_dialog;
     QColor testing;

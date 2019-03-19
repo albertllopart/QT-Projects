@@ -14,7 +14,7 @@ class Inspector : public QWidget
     Q_OBJECT
 
 public:
-    explicit Inspector(QWidget *parent = 0);
+    explicit Inspector(QWidget *parent = nullptr);
     ~Inspector();
 
 private:
