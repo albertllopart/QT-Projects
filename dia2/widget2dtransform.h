@@ -16,10 +16,21 @@ public:
     explicit Widget2DTransform(QWidget *parent = 0);
     ~Widget2DTransform();
 
+    void ConnectSignalsSlots();
+
+public slots:
+
+    void UpdateTransform();
+
 private:
 
     Ui::Widget2DTransform *ui;
 
+    int translation_x;
+    int translation_y;
+
+    int scale_x;
+    int scale_y;
 };
 
 #endif // WIDGET2DTRANSFORM_H

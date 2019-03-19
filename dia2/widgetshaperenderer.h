@@ -13,14 +13,20 @@ class WidgetShapeRenderer : public QWidget
     Q_OBJECT
 
 public:
-    explicit WidgetShapeRenderer(QWidget *parent = 0);
+    explicit WidgetShapeRenderer(QWidget *parent = nullptr);
     ~WidgetShapeRenderer();
 
     void ConnectSignalsSlots();
+    void AdaptWidgetToEntity();
 
 public slots:
 
-    void pushButton_fillColor();
+    void UpdateShape();
+    void UpdateSize();
+    void UpdateFillColor();
+    void UpdateStrokeColor();
+    void UpdateStrokeThickness();
+    void UpdateStrokeStyle();
 
 private:
 
