@@ -18,13 +18,14 @@ public:
 
     void ConnectSignalsSlots();
     void AdaptWidgetToEntity();
+    void UpdateFillColor();
+    void UpdateStrokeColor();
 
 public slots:
 
     void UpdateShape();
     void UpdateSize();
-    void UpdateFillColor();
-    void UpdateStrokeColor();
+    void OpenColorSelector();
     void UpdateStrokeThickness();
     void UpdateStrokeStyle();
 
