@@ -43,5 +43,6 @@ Inspector::~Inspector()
 void Inspector::ShowGameObject(GameObject* selected)
 {
     this->selected = selected;
+    ui->entity_name->setText(this->selected->name);
     //layout->w;
 }
