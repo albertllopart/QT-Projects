@@ -6,10 +6,13 @@
 class GameObject
 {
 public:
-    GameObject();
+    GameObject(int uid, QString nameGameObject);
+    ~GameObject();
 
 public:
     Transform *transform = nullptr;
+    int uuid;
+    QString name;
 };
 
 #endif // GAMEOBJECT_H

@@ -1,6 +1,8 @@
 #include "gameobject.h"
 
-GameObject::GameObject()
+GameObject::GameObject(int uid, QString nameGameObject)
 {
     transform = new Transform();
+    uuid = uid;
+    name = nameGameObject;
 }

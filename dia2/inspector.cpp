@@ -4,8 +4,9 @@
 #include <QLayout>
 #include <QLineEdit>
 #include <QPushButton>
+#include "scene.h"
 
-Inspector::Inspector(QWidget *parent) :
+Inspector::Inspector(Scene* sceneA, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Inspector)
 {
@@ -13,6 +14,7 @@ Inspector::Inspector(QWidget *parent) :
     //Head
     QLineEdit* entity_name = new QLineEdit("Entity Name");
 
+    scene = sceneA;
     //Body (components)
     transform = new Widget2DTransform();
     renderer = new WidgetShapeRenderer();
@@ -36,4 +38,10 @@ Inspector::Inspector(QWidget *parent) :
 Inspector::~Inspector()
 {
     delete ui;
+}
+
+void Inspector::ShowGameObject(GameObject* selected)
+{
+    this->selected = selected;
+    //layout->w;
 }

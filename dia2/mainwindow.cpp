@@ -3,6 +3,7 @@
 #include "hierarchy.h"
 #include "inspector.h"
 #include "drawrect.h"
+#include "scene.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,15 +14,18 @@ MainWindow::MainWindow(QWidget *parent) :
     //All tab positions on top of the docking area
     setTabPosition(Qt::AllDockWidgetAreas, QTabWidget::TabPosition::North);
 
+    scene = new Scene();
+
     //Create the hierarchy widget and add it to the hierarchy
-    hierarchy = new Hierarchy();
+    hierarchy = new Hierarchy(scene);
     ui_main_window->dock_hierarchy->setWidget(hierarchy);
 
     //Create the inspector widget and add it to the inspector
-    inspector = new Inspector();
+    inspector = new Inspector(scene);
     ui_main_window->dock_inspector->setWidget(inspector);
 
     //
+    scene->SyncWindows(inspector, hierarchy);
     //drawrect = new drawRect();
     //ui_main_window->centralWidget->setLayout(new QVBoxLayout);
     //ui_main_window->centralWidget->layout()->addWidget(drawrect);
