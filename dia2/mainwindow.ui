@@ -31,7 +31,7 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="drawRect" name="widget" native="true"/>
+     <widget class="DrawRectWindow" name="widget" native="true"/>
     </item>
    </layout>
   </widget>
@@ -150,7 +150,7 @@
   </action>
   <action name="actionactionNew_Scene_Icon">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons.qrc">
      <normaloff>:/Icons/Icons/Empty document new.png</normaloff>:/Icons/Icons/Empty document new.png</iconset>
    </property>
    <property name="text">
@@ -162,7 +162,7 @@
   </action>
   <action name="actionactionSave_Scene_Icon">
    <property name="icon">
-    <iconset>
+    <iconset resource="icons.qrc">
      <normaloff>:/Icons/Icons/Disquette.png</normaloff>:/Icons/Icons/Disquette.png</iconset>
    </property>
    <property name="text">
@@ -179,12 +179,14 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>drawRect</class>
+   <class>DrawRectWindow</class>
    <extends>QWidget</extends>
-   <header>drawrect.h</header>
+   <header>drawrectwindow.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
