@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>193</width>
-    <height>85</height>
+    <width>207</width>
+    <height>117</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,80 +19,102 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <property name="sizeConstraint">
-    <enum>QLayout::SetFixedSize</enum>
-   </property>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label_transform">
-     <property name="frameShape">
-      <enum>QFrame::Panel</enum>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>120</height>
+      </size>
      </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
+     <property name="title">
+      <string>GroupBox</string>
      </property>
-     <property name="lineWidth">
-      <number>1</number>
-     </property>
-     <property name="text">
-      <string>Transform</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_transform">
+        <property name="maximumSize">
+         <size>
+          <width>70</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="lineWidth">
+         <number>1</number>
+        </property>
+        <property name="text">
+         <string>Transform</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_transform_x">
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="text">
+         <string>x</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_transform_y">
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="text">
+         <string>y</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="3">
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_transform_translation">
+          <property name="text">
+           <string>Translation</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_translation_x"/>
+        </item>
+        <item row="0" column="2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_translation_y"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_transform_scale">
+          <property name="text">
+           <string>Scale</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_scale_x"/>
+        </item>
+        <item row="1" column="2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_scale_y"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLabel" name="label_transform_x">
-     <property name="frameShape">
-      <enum>QFrame::Panel</enum>
-     </property>
-     <property name="text">
-      <string>x</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QLabel" name="label_transform_y">
-     <property name="frameShape">
-      <enum>QFrame::Panel</enum>
-     </property>
-     <property name="text">
-      <string>y</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_transform_translation">
-     <property name="text">
-      <string>Translation</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_translation_x"/>
-   </item>
-   <item row="1" column="2">
-    <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_translation_y"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_transform_scale">
-     <property name="text">
-      <string>Scale</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_scale_x"/>
-   </item>
-   <item row="2" column="2">
-    <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_scale_y"/>
    </item>
   </layout>
  </widget>

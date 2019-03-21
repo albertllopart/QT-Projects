@@ -24,9 +24,10 @@ public:
     void GameObjectHierarchyClicked(int uid);
 
     int GetUUID();
+    void RemoveGameObject(int uid);
 
 public:
-    QList<GameObject*>* gameobjects;
+    QList<GameObject*> gameobjects;
     Inspector* inspector;
     Hierarchy* hierarchy;
 };

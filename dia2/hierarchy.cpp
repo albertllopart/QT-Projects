@@ -1,6 +1,7 @@
 #include "hierarchy.h"
 #include "ui_hierarchy.h"
 #include "scene.h"
+#include<QDebug>
 
 Hierarchy::Hierarchy(Scene* sceneA, QWidget *parent) :
     QWidget(parent),
@@ -40,16 +41,34 @@ void Hierarchy::RemoveGameObject()
     QList<QListWidgetItem*> items = ui->listWidget_entities->selectedItems();
     foreach(QListWidgetItem * item, items)
     {
+        scene->RemoveGameObject(gameobjects->at(ui->listWidget_entities->row(item)));
         delete ui->listWidget_entities->takeItem(ui->listWidget_entities->row(item));
     }
 }
 
 void Hierarchy::GameObjectClicked(QListWidgetItem* itemSelected)
 {
+
     QList<QListWidgetItem*> items = ui->listWidget_entities->selectedItems();
     foreach(QListWidgetItem * item, items)
     {
         if(item == itemSelected)
+        {
+            qInfo() << "C++ Style Info Message";
             scene->GameObjectHierarchyClicked(gameobjects->at(ui->listWidget_entities->row(item)));
+
+        }
     }
 }
+
+void Hierarchy::Update()
+{
+    ui->listWidget_entities->clear();
+    for(int i=0;i<scene->gameobjects.count();i++)
+    {
+        GameObject* item = scene->gameobjects[i];
+        ui->listWidget_entities->addItem(item->name);
+    }
+}
+
+

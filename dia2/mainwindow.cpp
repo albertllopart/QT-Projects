@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui_main_window(new Ui::MainWindow)
 {
     ui_main_window->setupUi(this);
-    setMinimumSize(QSize(900, 600));
+    setMinimumSize(QSize(1200, 600));
     //All tab positions on top of the docking area
     setTabPosition(Qt::AllDockWidgetAreas, QTabWidget::TabPosition::North);
 
@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Create the inspector widget and add it to the inspector
     inspector = new Inspector(scene);
     ui_main_window->dock_inspector->setWidget(inspector);
+    ui_main_window->dock_inspector->setMinimumWidth(300);
 
     //
     scene->SyncWindows(inspector, hierarchy);

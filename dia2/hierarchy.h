@@ -27,6 +27,7 @@ public slots:
     void AddGameObject();
     void RemoveGameObject();
     void GameObjectClicked(QListWidgetItem* item);
+    void Update();
 
 private:
     Scene* scene;

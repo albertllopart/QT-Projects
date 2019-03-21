@@ -2,8 +2,9 @@
 #define INSPECTOR_H
 
 #include <QWidget>
-#include "widget2dtransform.h"
-#include "widgetshaperenderer.h"
+//#include "widget2dtransform.h"
+//#include "widgetshaperenderer.h"
+#include <QVBoxLayout>
 
 namespace Ui {
 class Inspector;
@@ -20,14 +21,22 @@ public:
     ~Inspector();
 
     void ShowGameObject(GameObject*);
+    void DeleteLayout();
+
+public slots:
+    void SetName(QString);
+
+public:
+    GameObject* selected;
 
 private:
 
     Ui::Inspector *ui;
     Scene* scene;
-    GameObject* selected;
-    Widget2DTransform *transform;
-    WidgetShapeRenderer *renderer;
+
+    //Widget2DTransform *transform;
+    //WidgetShapeRenderer *renderer;
+    QVBoxLayout *layout=nullptr;
 };
 
 #endif // INSPECTOR_H
