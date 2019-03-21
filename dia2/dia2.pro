@@ -35,7 +35,7 @@ SOURCES += \
     component.cpp \
     transform.cpp \
     widgetshaperenderer.cpp \
-    drawrect.cpp
+    drawrectwindow.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -48,14 +48,15 @@ HEADERS += \
     component.h \
     transform.h \
     widgetshaperenderer.h \
-    drawrect.h
+    drawrectwindow.h
 
 FORMS += \
         mainwindow.ui \
     inspector.ui \
     hierarchy.ui \
     widget2dtransform.ui \
-    widgetshaperenderer.ui
+    widgetshaperenderer.ui \
+    drawrectwindow.ui
 
 RESOURCES += \
     icons.qrc \

@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "hierarchy.h"
 #include "inspector.h"
-#include "drawrect.h"
+#include "drawrectwindow.h"
 #include "scene.h"
 
 MainWindow::MainWindow(QWidget *parent) :
