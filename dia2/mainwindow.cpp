@@ -27,9 +27,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //
     scene->SyncWindows(inspector, hierarchy);
-    //drawrect = new drawRect();
+    //drawRect = new DrawRectWindow(scene);
     //ui_main_window->centralWidget->setLayout(new QVBoxLayout);
-    //ui_main_window->centralWidget->layout()->addWidget(drawrect);
+    //ui_main_window->centralWidget->layout()->addWidget(drawRect);
+    drawRect = ui_main_window->widget;
+    drawRect->setScene(scene);
 
     //Create the color dialog
     color_dialog = new QColorDialog(this);
@@ -53,7 +55,8 @@ void MainWindow::ConnectSignalsSlots()
 
 void MainWindow::OpenColorDialog()
 {
-    color_dialog->open();
+    //color_dialog->open();
+    this->setWindowTitle(QString::number(scene->gameobjects.size()));
 }
 
 void MainWindow::ColorTest()

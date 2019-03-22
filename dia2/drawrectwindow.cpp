@@ -25,6 +25,11 @@ QSize DrawRectWindow::minimumSizeHint() const
     return QSize(64,64);
 }
 
+void DrawRectWindow::setScene(Scene *scene)
+{
+    this->scene = scene;
+}
+
 void DrawRectWindow::paintEvent(QPaintEvent *)
 {
     QColor blueColor = QColor::fromRgb(127,190,220);
@@ -54,23 +59,15 @@ void DrawRectWindow::paintEvent(QPaintEvent *)
     painter.setBrush(brush);
     painter.setPen(pen);
 
-    // Draw Circle
-    int r = 64;
-    int w = r * 2;
-    int h = r * 2;
-    int x = rect().width() / 2 - r;
-    int y = rect().height() / 2 - r;
-    QRect circleRect(x, y, w, h);
-    painter.drawEllipse(circleRect);
-
-
-
-
-
-
-
-
-
-
+    foreach(GameObject* item, scene->gameobjects)
+    {
+        int r = 64;
+        int w = r * 2;
+        int h = r * 2;
+        int x = rect().width() / 2 - r;
+        int y = rect().height() / 2 - r;
+        QRect circleRect(x, y, w, h);
+        painter.drawEllipse(circleRect);
+    }
 }
 

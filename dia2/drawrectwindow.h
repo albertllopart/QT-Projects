@@ -2,6 +2,7 @@
 #define DRAWRECTWINDOW_H
 
 #include <QWidget>
+#include "scene.h"
 
 namespace Ui {
 class DrawRectWindow;
@@ -18,16 +19,19 @@ public:
     QSize sizeHint() const override;
     QSize minimumSizeHint() const override;
 
+    void setScene(Scene *scene);
+
 signals:
 
 public slots:
 
 private:
-    void paintEvent(QPaintEvent *event) override;
 
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     Ui::DrawRectWindow *ui;
+    Scene *scene;
 };
 
 #endif // DRAWRECTWINDOW_H
