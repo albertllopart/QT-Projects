@@ -3,14 +3,24 @@
 
 #include <qstring.h>
 
+class GameObject;
+
+enum Type
+{
+    ComponentTransform,
+    ComponentRenderer
+};
+
 class Component
 {
 public:
-    Component();
+    Component(GameObject* gameobject,Type type);
     ~Component();
 
 public:
     QString name;
+    GameObject* gameobject;
+    Type type;
 };
 
 #endif // COMPONENT_H

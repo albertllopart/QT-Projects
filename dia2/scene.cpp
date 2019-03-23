@@ -29,38 +29,23 @@ void Scene::LoadScene()
 
 }
 
-void Scene::GameObjectHierarchyClicked(int uid)
+void Scene::GameObjectHierarchyClicked(GameObject* gameobject)
 {
-    for(int i = 0; i < gameobjects.size(); i++)
-    {
-        GameObject* gameobject = gameobjects[i];
-        if(gameobject->uuid == uid)
-        {
-            inspector->ShowGameObject(gameobject);
-            break;
-        }
-    }
+    inspector->ShowGameObject(gameobject);
 }
 
 void Scene::RemoveGameObject(int uid)
 {
-    GameObject* gameobjectToRemove;
-    for(int i = 0; i < gameobjects.size(); i++)
-    {
-        gameobjectToRemove = gameobjects[i];
-        if(gameobjectToRemove->uuid == uid)
-        {
-            if(inspector->selected == gameobjectToRemove)
-            {
-                inspector->DeleteLayout();
-            }
-            gameobjects.removeOne(gameobjectToRemove);
-            break;
-        }
-    }
+    GameObject *go= gameobjects.at(uid);
+    gameobjects.removeAt(uid);
+    delete go;
+
 }
 
 int Scene::GetUUID()
 {
-    return gameobjects.size() + 1;
+    if(gameobjects.size() > 0)
+        return gameobjects.size();
+    else
+        return 0;
 }

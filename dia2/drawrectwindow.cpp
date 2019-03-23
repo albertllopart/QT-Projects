@@ -1,6 +1,7 @@
 #include "drawrectwindow.h"
 #include "ui_drawrectwindow.h"
 #include <qpainter.h>
+#include "transform.h"
 
 DrawRectWindow::DrawRectWindow(QWidget *parent) :
     QWidget(parent),
@@ -61,12 +62,9 @@ void DrawRectWindow::paintEvent(QPaintEvent *)
 
     foreach(GameObject* item, scene->gameobjects)
     {
-        int r = 64;
-        int w = r * 2;
-        int h = r * 2;
-        int x = rect().width() / 2 - r;
-        int y = rect().height() / 2 - r;
-        QRect circleRect(x, y, w, h);
+
+        Transform* transform = item->GetTransform();
+        QRect circleRect(transform->position.x(), transform->position.y(), 64, 64);
         painter.drawEllipse(circleRect);
     }
 }

@@ -11,6 +11,8 @@ class Inspector;
 }
 class GameObject;
 class Scene;
+class Widget2DTransform;
+class Component;
 
 class Inspector : public QWidget
 {
@@ -23,19 +25,22 @@ public:
     void ShowGameObject(GameObject*);
     void DeleteLayout();
 
+private:
+    QWidget* GetWidget(Component* component);
+
 public slots:
     void SetName(QString);
 
 public:
     GameObject* selected;
 
+signals:
+    void MainUpdate();
+
 private:
 
     Ui::Inspector *ui;
     Scene* scene;
-
-    //Widget2DTransform *transform;
-    //WidgetShapeRenderer *renderer;
     QVBoxLayout *layout=nullptr;
 };
 

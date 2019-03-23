@@ -1,11 +1,14 @@
 #include "widgetshaperenderer.h"
 #include "ui_widgetshaperenderer.h"
+# include "shaperenderer.h"
 
-WidgetShapeRenderer::WidgetShapeRenderer(QWidget *parent) :
+WidgetShapeRenderer::WidgetShapeRenderer(ShapeRenderer* rendererGo, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::WidgetShapeRenderer)
 {
     ui->setupUi(this);
+
+    renderer = rendererGo;
     ui->comboBox_shape->addItem("Circle");
     ui->comboBox_shape->addItem("Square");
 

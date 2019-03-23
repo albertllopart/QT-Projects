@@ -7,11 +7,15 @@
 class Transform : public Component
 {
 public:
-    Transform();
+    Transform(GameObject* gameobject);
     ~Transform();
 
+
+
 public:
-    QVector2D *position;
+    QPointF position;
+    QPointF rotation;
+    QPointF scale;
 };
 
 #endif // TRANSFORM_H

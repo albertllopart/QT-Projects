@@ -1,7 +1,7 @@
 #include "hierarchy.h"
 #include "ui_hierarchy.h"
 #include "scene.h"
-#include<QDebug>
+#include <QDebug>
 
 Hierarchy::Hierarchy(Scene* sceneA, QWidget *parent) :
     QWidget(parent),
@@ -10,7 +10,7 @@ Hierarchy::Hierarchy(Scene* sceneA, QWidget *parent) :
     ui->setupUi(this);
     scene = sceneA;
 
-    gameobjects = new QList<int>();
+    //gameobjects = new QList<int>();
 
     ConnectSignalsSlots();
 }
@@ -22,18 +22,23 @@ Hierarchy::~Hierarchy()
 
 void Hierarchy::ConnectSignalsSlots()
 {
-    connect(ui->pushButton_addEntity,SIGNAL(clicked()), this, SLOT(AddGameObject()));
-    connect(ui->pushButton_removeEntity,SIGNAL(clicked()), this, SLOT(RemoveGameObject()));
+    //connect(ui->pushButton_addEntity,SIGNAL(clicked()), this, SLOT(AddGameObject()));
+    //connect(ui->pushButton_removeEntity,SIGNAL(clicked()), this, SLOT(RemoveGameObject()));
     connect(ui->listWidget_entities, SIGNAL(itemClicked(QListWidgetItem*)), this,
             SLOT(GameObjectClicked(QListWidgetItem*)));
 }
 
-void Hierarchy::AddGameObject()
+void Hierarchy::AddGameObject(GameObject* gameobject)
 {
-    GameObject* gameobject = scene->CreateGameObject();
-    gameobjects->push_back(gameobject->uuid);
+    //gameobjects->push_back(gameobject->uuid);
     ui->listWidget_entities->addItem(gameobject->name);
 }
+
+void Hierarchy::Testing()
+{
+    qInfo() << "aaaah";
+}
+
 
 void Hierarchy::RemoveGameObject()
 {
@@ -41,24 +46,14 @@ void Hierarchy::RemoveGameObject()
     QList<QListWidgetItem*> items = ui->listWidget_entities->selectedItems();
     foreach(QListWidgetItem * item, items)
     {
-        scene->RemoveGameObject(gameobjects->at(ui->listWidget_entities->row(item)));
-        delete ui->listWidget_entities->takeItem(ui->listWidget_entities->row(item));
+        ui->listWidget_entities->removeItemWidget(item);
+        delete item;
     }
 }
 
 void Hierarchy::GameObjectClicked(QListWidgetItem* itemSelected)
 {
-
-    QList<QListWidgetItem*> items = ui->listWidget_entities->selectedItems();
-    foreach(QListWidgetItem * item, items)
-    {
-        if(item == itemSelected)
-        {
-            qInfo() << "C++ Style Info Message";
-            scene->GameObjectHierarchyClicked(gameobjects->at(ui->listWidget_entities->row(item)));
-
-        }
-    }
+    scene->GameObjectHierarchyClicked(scene->gameobjects[itemSelected->listWidget()->currentRow()]);
 }
 
 void Hierarchy::Update()

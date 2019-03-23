@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>207</width>
-    <height>117</height>
+    <width>211</width>
+    <height>120</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -93,10 +93,18 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_translation_x"/>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_translation_x">
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item row="0" column="2">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_translation_y"/>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_translation_y">
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_transform_scale">
@@ -106,10 +114,18 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_scale_x"/>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_scale_x">
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item row="1" column="2">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_scale_y"/>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_transform_scale_y">
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

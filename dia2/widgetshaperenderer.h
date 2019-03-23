@@ -8,12 +8,14 @@ namespace Ui {
 class WidgetShapeRenderer;
 }
 
+class ShapeRenderer;
+
 class WidgetShapeRenderer : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit WidgetShapeRenderer(QWidget *parent = nullptr);
+    explicit WidgetShapeRenderer(ShapeRenderer* rendererGo, QWidget *parent = nullptr);
     ~WidgetShapeRenderer();
 
     void ConnectSignalsSlots();
@@ -32,7 +34,7 @@ public slots:
 private:
 
     Ui::WidgetShapeRenderer *ui;
-
+    ShapeRenderer* renderer;
 };
 
 #endif // WIDGETSHAPERENDERER_H

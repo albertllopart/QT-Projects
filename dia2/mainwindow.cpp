@@ -1,9 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "hierarchy.h"
+#include "ui_hierarchy.h"
 #include "inspector.h"
 #include "drawrectwindow.h"
 #include "scene.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -30,8 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //drawRect = new DrawRectWindow(scene);
     //ui_main_window->centralWidget->setLayout(new QVBoxLayout);
     //ui_main_window->centralWidget->layout()->addWidget(drawRect);
-    drawRect = ui_main_window->widget;
-    drawRect->setScene(scene);
+    //drawRect = ui_main_window->SceneRect;
+    //drawRect->setScene(scene);
+    ui_main_window->SceneRect->setScene(scene);
 
     //Create the color dialog
     color_dialog = new QColorDialog(this);
@@ -50,7 +53,11 @@ void MainWindow::ConnectSignalsSlots()
     connect(ui_main_window->actionExit, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(ui_main_window->actionNew_Entity, SIGNAL(triggered()), this, SLOT(OpenColorDialog()));
 
+    connect(hierarchy->ui->pushButton_addEntity,SIGNAL(clicked()), this, SLOT(AddGameObject()));
+    connect(hierarchy->ui->pushButton_removeEntity,SIGNAL(clicked()), this, SLOT(RemoveGameObject()));
+
     connect(color_dialog, SIGNAL(color_dialog->colorSelected(testing)), this, SLOT(ColorTest()));
+    connect(inspector, SIGNAL(MainUpdate()), this, SLOT(updateGameObject()));
 }
 
 void MainWindow::OpenColorDialog()
@@ -63,4 +70,35 @@ void MainWindow::ColorTest()
 {
 
 }
+
+void MainWindow::updateGameObject()
+{
+     //qInfo() << "C++ Style Info Message";
+     ui_main_window->SceneRect->update();
+}
+
+void MainWindow::AddGameObject()
+{
+    GameObject* gameobject = scene->CreateGameObject();
+    hierarchy->AddGameObject(gameobject);
+    ui_main_window->SceneRect->update();
+}
+
+void MainWindow::RemoveGameObject()
+{
+    int index = hierarchy->ui->listWidget_entities->currentRow();
+    if(index < 0 || index > scene->gameobjects.size())
+        return; // No Remove...
+    qInfo() << "1";
+    inspector->DeleteLayout();
+    qInfo() << "2";
+    hierarchy->RemoveGameObject();
+    qInfo() << "3";
+        qInfo() << index;
+    scene->RemoveGameObject(index);
+    qInfo() << "4";
+    ui_main_window->SceneRect->update();
+}
+
+
 

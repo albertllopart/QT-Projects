@@ -1,9 +1,11 @@
 #include "transform.h"
 
-Transform::Transform() : Component()
+Transform::Transform(GameObject* gameobject) : Component(gameobject, Type::ComponentTransform)
 {
     name = "Transform";
-    position = new QVector2D(0.0f,0.0f);
+    position = QPoint(0,0);
+    rotation = QPoint(0,0);
+    scale = QPoint(1,1);
 }
 
 Transform::~Transform()

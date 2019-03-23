@@ -7,13 +7,15 @@ namespace Ui {
 class Widget2DTransform;
 }
 
+class Transform;
+
 class Widget2DTransform : public QWidget
 {
     Q_OBJECT
 
 public:
 
-    explicit Widget2DTransform(QWidget *parent = 0);
+    explicit Widget2DTransform(Transform* transformGo, QWidget *parent = 0);
     ~Widget2DTransform();
 
     void ConnectSignalsSlots();
@@ -22,15 +24,13 @@ public slots:
 
     void UpdateTransform();
 
+signals:
+    void InspectorUpdate();
+
 private:
 
     Ui::Widget2DTransform *ui;
-
-    int translation_x;
-    int translation_y;
-
-    int scale_x;
-    int scale_y;
+    Transform* transform;
 };
 
 #endif // WIDGET2DTRANSFORM_H

@@ -1,18 +1,25 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include "transform.h"
+#include <QList>
+#include "component.h"
+
+class Transform;
+class ShapeRenderer;
 
 class GameObject
 {
 public:
     GameObject(int uid, QString nameGameObject);
-    ~GameObject();
+
+    Transform* GetTransform();
+    ShapeRenderer* GetShapeRenderer();
 
 public:
-    Transform *transform = nullptr;
     int uuid;
     QString name;
+    QList<Component*> components;
+
 };
 
 #endif // GAMEOBJECT_H

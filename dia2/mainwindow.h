@@ -28,6 +28,9 @@ public slots:
 
     void OpenColorDialog();
     void ColorTest();
+    void updateGameObject();
+    void AddGameObject();
+    void RemoveGameObject();
 
 private:
     Ui::MainWindow *ui_main_window;

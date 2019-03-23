@@ -35,7 +35,8 @@ SOURCES += \
     component.cpp \
     transform.cpp \
     widgetshaperenderer.cpp \
-    drawrectwindow.cpp
+    drawrectwindow.cpp \
+    shaperenderer.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -48,7 +49,8 @@ HEADERS += \
     component.h \
     transform.h \
     widgetshaperenderer.h \
-    drawrectwindow.h
+    drawrectwindow.h \
+    shaperenderer.h
 
 FORMS += \
         mainwindow.ui \

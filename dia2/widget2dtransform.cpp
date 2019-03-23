@@ -1,12 +1,19 @@
 #include "widget2dtransform.h"
 #include "ui_widget2dtransform.h"
+#include "transform.h"
 
-Widget2DTransform::Widget2DTransform(QWidget *parent) :
+Widget2DTransform::Widget2DTransform(Transform* transformGo, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget2DTransform)
 {
     ui->setupUi(this);
 
+    if(transform!=nullptr)
+    {
+        transform = transformGo;
+        ui->doubleSpinBox_transform_translation_x->setValue(transform->position.x());
+        ui->doubleSpinBox_transform_translation_y->setValue(transform->position.y());
+    }
     ConnectSignalsSlots();
 }
 
@@ -32,11 +39,12 @@ void Widget2DTransform::ConnectSignalsSlots()
 
 void Widget2DTransform::UpdateTransform()
 {
-    translation_x = ui->doubleSpinBox_transform_translation_x->value();
-    translation_y = ui->doubleSpinBox_transform_translation_y->value();
+    transform->position.setX(ui->doubleSpinBox_transform_translation_x->value());
+    transform->position.setY(ui->doubleSpinBox_transform_translation_y->value());
 
-    scale_x = ui->doubleSpinBox_transform_scale_x->value();
-    scale_y = ui->doubleSpinBox_transform_scale_y->value();
+    transform->scale.setX(ui->doubleSpinBox_transform_scale_x->value());
+    transform->scale.setY(ui->doubleSpinBox_transform_scale_y->value());
 
     //TODO: Actualitzar transform del GO seleccionat
+    emit InspectorUpdate();
 }

@@ -9,6 +9,7 @@ class Hierarchy;
 }
 class Scene;
 class QListWidgetItem;
+class GameObject;
 
 class Hierarchy : public QWidget
 {
@@ -20,19 +21,19 @@ public:
 
     void ConnectSignalsSlots();
 
-signals:
-
 public slots:
 
-    void AddGameObject();
+    void AddGameObject(GameObject* gameobject);
     void RemoveGameObject();
     void GameObjectClicked(QListWidgetItem* item);
     void Update();
+    void Testing();
+
+public:
+    Ui::Hierarchy *ui;
 
 private:
     Scene* scene;
-    Ui::Hierarchy *ui;
-    QList<int> *gameobjects;
 };
 
 #endif // HIERARCHY_H

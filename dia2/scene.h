@@ -21,7 +21,7 @@ public:
 
     void SaveScene();
     void LoadScene();
-    void GameObjectHierarchyClicked(int uid);
+    void GameObjectHierarchyClicked(GameObject* gameobject);
 
     int GetUUID();
     void RemoveGameObject(int uid);
