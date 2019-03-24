@@ -9,7 +9,7 @@ Scene::Scene()
 
 GameObject* Scene::CreateGameObject()
 {
-    GameObject *gameobject = new GameObject(GetUUID(), "Empty");
+    GameObject *gameobject = new GameObject(GetUUID(), "GameObject" + GetCountUUID());
     gameobjects.push_back(gameobject);
     return gameobject;
 }
@@ -39,7 +39,6 @@ void Scene::RemoveGameObject(int uid)
     GameObject *go= gameobjects.at(uid);
     gameobjects.removeAt(uid);
     delete go;
-
 }
 
 int Scene::GetUUID()
@@ -49,3 +48,16 @@ int Scene::GetUUID()
     else
         return 0;
 }
+
+QString Scene::GetCountUUID()
+{
+    QString ret = "";
+    if(gameobjects.size() > 0)
+    {
+
+        ret = " (" + QString::number(gameobjects.size());
+        ret += ")";
+    }
+    return ret;
+}
+

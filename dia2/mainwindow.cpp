@@ -58,6 +58,8 @@ void MainWindow::ConnectSignalsSlots()
 
     connect(color_dialog, SIGNAL(color_dialog->colorSelected(testing)), this, SLOT(ColorTest()));
     connect(inspector, SIGNAL(MainUpdate()), this, SLOT(updateGameObject()));
+
+    connect(ui_main_window->actionSave_Scene, SIGNAL(clicked()), this, SLOT());
 }
 
 void MainWindow::OpenColorDialog()

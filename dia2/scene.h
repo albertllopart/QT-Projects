@@ -24,6 +24,7 @@ public:
     void GameObjectHierarchyClicked(GameObject* gameobject);
 
     int GetUUID();
+    QString GetCountUUID();
     void RemoveGameObject(int uid);
 
 public:
