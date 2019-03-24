@@ -20,16 +20,19 @@ public:
 
     void ConnectSignalsSlots();
     void AdaptWidgetToEntity();
-    void UpdateFillColor();
-    void UpdateStrokeColor();
 
 public slots:
 
     void UpdateShape();
     void UpdateSize();
-    void OpenColorSelector();
     void UpdateStrokeThickness();
     void UpdateStrokeStyle();
+    void UpdateFillColor();
+    void UpdateStrokeColor();
+
+signals:
+
+    void InspectorUpdate();
 
 private:
 

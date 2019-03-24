@@ -2,6 +2,7 @@
 #include "ui_drawrectwindow.h"
 #include <qpainter.h>
 #include "transform.h"
+#include "shaperenderer.h"
 
 DrawRectWindow::DrawRectWindow(QWidget *parent) :
     QWidget(parent),
@@ -64,8 +65,69 @@ void DrawRectWindow::paintEvent(QPaintEvent *)
     {
 
         Transform* transform = item->GetTransform();
-        QRect circleRect(transform->position.x(), transform->position.y(), 64, 64);
-        painter.drawEllipse(circleRect);
+        ShapeRenderer* renderer = item->GetShapeRenderer();
+
+        brush.setColor(renderer->fillColor);
+        pen.setColor(renderer->strokeColor);
+        pen.setWidth(renderer->strokeThickness);
+
+        switch(renderer->strokeStyle)
+        {
+            case SolidLine:
+            {
+                pen.setStyle(Qt::PenStyle::SolidLine);
+                break;
+            }
+            case DashLine:
+            {
+                pen.setStyle(Qt::PenStyle::DashLine);
+                break;
+            }
+            case DotLine:
+            {
+                pen.setStyle(Qt::PenStyle::DotLine);
+                break;
+            }
+            case DashDotLine:
+            {
+                pen.setStyle(Qt::PenStyle::DashDotLine);
+                break;
+            }
+            case DashDotDotLine:
+            {
+                pen.setStyle(Qt::PenStyle::DashDotDotLine);
+                break;
+            }
+            case NoStroke:
+            {
+                pen.setStyle(Qt::PenStyle::NoPen);
+                break;
+            }
+        }
+
+        painter.setBrush(brush);
+        painter.setPen(pen);
+
+        QRect rect(transform->position.x(), transform->position.y(), 64, 64);
+
+        switch(renderer->type)
+        {
+            case Circle:
+            {
+                painter.drawEllipse(rect);
+                break;
+            }
+            case Square:
+            {
+                painter.drawRect(rect);
+                break;
+            }
+            case Triangle:
+            {
+                painter.drawPolygon(rect);
+                break;
+            }
+        }
     }
 }
 
