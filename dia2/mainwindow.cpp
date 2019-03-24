@@ -131,6 +131,7 @@ void MainWindow::LoadScene()
         if(file.open(QIODevice::ReadOnly))
         {
             // Go to save
+            NewScene();
             QByteArray loadFile = file.readAll();
             QJsonDocument loadDocument(QJsonDocument::fromJson(loadFile));
             scene->LoadScene(loadDocument.object());
