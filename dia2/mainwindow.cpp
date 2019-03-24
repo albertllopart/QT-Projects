@@ -65,6 +65,7 @@ void MainWindow::ConnectSignalsSlots()
     connect(inspector, SIGNAL(MainUpdate()), this, SLOT(updateGameObject()));
 
     connect(ui_main_window->actionSave_Scene, SIGNAL(triggered()), this, SLOT(SaveScene()));
+    connect(ui_main_window->actionOpen_Scene, SIGNAL(triggered()), this, SLOT(LoadScene()));
 }
 
 void MainWindow::OpenColorDialog()
@@ -119,15 +120,26 @@ void MainWindow::SaveScene()
             // Go to save
             QJsonObject json;
             scene->SaveScene(json);
-            QJsonDocument saveDoc(json);
-            file.write(saveDoc.toJson());
+            QJsonDocument saveDocument(json);
+            file.write(saveDocument.toJson());
         }
     }
 }
 
 void MainWindow::LoadScene()
 {
-
+    QString path = QFileDialog::getOpenFileName(this, tr("Save Scene"), "", tr("JSon (*.json);;All Files (*)"));
+    if(!path.isEmpty())
+    {
+        QFile file(path);
+        if(file.open(QIODevice::ReadOnly))
+        {
+            // Go to save
+            QByteArray loadFile = file.readAll();
+            QJsonDocument loadDocument(QJsonDocument::fromJson(loadFile));
+            scene->LoadScene(loadDocument.object());
+        }
+    }
 }
 
 

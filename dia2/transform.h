@@ -10,6 +10,7 @@ public:
     Transform(GameObject* gameobject);
 
     void Save(QJsonObject &json) const override;
+    void Load(const QJsonObject &json) override;
 
 
 public:

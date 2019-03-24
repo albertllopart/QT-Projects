@@ -20,6 +20,7 @@ public:
     virtual ~Component();
 
     virtual void Save(QJsonObject &json) const;
+    virtual void Load(const QJsonObject &json);
 
 public:
     QString name;

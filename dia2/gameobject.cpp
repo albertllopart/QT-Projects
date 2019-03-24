@@ -54,3 +54,26 @@ void GameObject::Save(QJsonObject &json) const
         json[name] = gObject;
     }
 }
+
+void GameObject::Load(const QJsonObject &json)
+{
+    this->name = json["Name"].toString();
+    this->uuid = json["UUID"].toInt();
+    for(int i = 0; i < components.size(); i++)
+    {
+        QJsonObject gObject;
+        QString name;
+        name = "Component_" + QString::number(i);
+        gObject = json[name].toObject();
+        components.at(i)->Load(gObject);
+    }
+}
+
+
+
+
+
+
+
+
+

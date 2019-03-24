@@ -28,6 +28,7 @@ public:
 
     ShapeRenderer(GameObject* gameobject);
     void Save(QJsonObject &json) const override;
+    void Load(const QJsonObject &json) override;
 
 public:
     ShapeType type = ShapeType::Circle;

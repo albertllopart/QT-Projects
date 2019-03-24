@@ -11,4 +11,11 @@ Component::~Component()
 
 }
 
-void Component::Save(QJsonObject &json) const{}
+void Component::Save(QJsonObject &json) const
+{
+
+}
+void Component::Load(const QJsonObject &json)
+{
+
+}

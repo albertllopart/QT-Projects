@@ -17,6 +17,7 @@ public:
     ShapeRenderer* GetShapeRenderer();
 
     void Save(QJsonObject &json) const;
+    void Load(const QJsonObject &json);
 
 public:
     int uuid;

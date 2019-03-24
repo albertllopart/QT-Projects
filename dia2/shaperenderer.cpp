@@ -12,3 +12,8 @@ void ShapeRenderer::Save(QJsonObject &json) const
 {
 
 }
+
+void ShapeRenderer::Load(const QJsonObject &json)
+{
+
+}

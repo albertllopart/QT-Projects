@@ -34,9 +34,19 @@ void Scene::SaveScene(QJsonObject &json) const
     json["NumberOfGameObjects"] = gameobjects.size();
 }
 
-void Scene::LoadScene()
+void Scene::LoadScene(const QJsonObject &json)
 {
-
+    int numGameObjects = json["NumberOfGameObjects"].toInt();
+    for(int i = 0; i < numGameObjects; i++)
+    {
+        QJsonObject gObject;
+        QString name;
+        name = "GameObject_" + QString::number(i);
+        gObject = json[name].toObject();
+        GameObject* gameObject = CreateGameObject();
+        hierarchy->AddGameObject(gameObject);
+        gameObject->Load(gObject);
+    }
 }
 
 void Scene::GameObjectHierarchyClicked(GameObject* gameobject)

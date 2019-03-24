@@ -21,7 +21,7 @@ public:
     void SyncWindows(Inspector*,Hierarchy*);
 
     void SaveScene(QJsonObject &json) const;
-    void LoadScene();
+    void LoadScene(const QJsonObject &json);
     void GameObjectHierarchyClicked(GameObject* gameobject);
 
     int GetUUID();
