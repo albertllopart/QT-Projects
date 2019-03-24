@@ -117,7 +117,23 @@ void WidgetShapeRenderer::UpdateStrokeColor()
 
 void WidgetShapeRenderer::UpdateShape()
 {
-
+    switch(ui->comboBox_shape->currentIndex())
+    {
+        case Circle:
+        {
+            break;
+        }
+        case Square:
+        {
+            ui->comboBox_shape->setCurrentIndex(1);
+            break;
+        }
+        case Triangle:
+        {
+            ui->comboBox_shape->setCurrentIndex(2);
+            break;
+        }
+    }
 }
 
 void WidgetShapeRenderer::UpdateSize()

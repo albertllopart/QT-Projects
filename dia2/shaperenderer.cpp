@@ -7,3 +7,8 @@ ShapeRenderer::ShapeRenderer(GameObject* gameobject) : Component(gameobject, Typ
     strokeColor= QColor(0,0,0);
     size = 32;
 }
+
+void ShapeRenderer::Save(QJsonObject &json) const
+{
+
+}

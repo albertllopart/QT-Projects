@@ -3,6 +3,7 @@
 
 #include "component.h"
 #include <QColor>
+#include <QJsonObject>
 
 enum ShapeType
 {
@@ -24,8 +25,9 @@ enum StrokeStyle
 class ShapeRenderer : public Component
 {
 public:
+
     ShapeRenderer(GameObject* gameobject);
-    ~ShapeRenderer();
+    void Save(QJsonObject &json) const override;
 
 public:
     ShapeType type = ShapeType::Circle;
