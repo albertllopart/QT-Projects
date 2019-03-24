@@ -124,7 +124,12 @@ void DrawRectWindow::paintEvent(QPaintEvent *)
             }
             case Triangle:
             {
-                painter.drawPolygon(rect);
+                QPolygon poly;
+                poly.setPoint(0, transform->position.x() + renderer->size / 2, transform->position.y());
+                poly.setPoint(1, transform->position.x(), transform->position.y() + renderer->size);
+                poly.setPoint(2, transform->position.x() + renderer->size, transform->position.y() + renderer->size);
+
+                painter.drawPolygon(poly);
                 break;
             }
         }
