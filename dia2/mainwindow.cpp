@@ -66,6 +66,7 @@ void MainWindow::ConnectSignalsSlots()
 
     connect(ui_main_window->actionSave_Scene, SIGNAL(triggered()), this, SLOT(SaveScene()));
     connect(ui_main_window->actionOpen_Scene, SIGNAL(triggered()), this, SLOT(LoadScene()));
+    connect(ui_main_window->actionNew_Scene, SIGNAL(triggered()), this, SLOT(NewScene()));
 }
 
 void MainWindow::OpenColorDialog()
@@ -97,14 +98,9 @@ void MainWindow::RemoveGameObject()
     int index = hierarchy->ui->listWidget_entities->currentRow();
     if(index < 0 || index > scene->gameobjects.size())
         return; // No Remove...
-    qInfo() << "1";
     inspector->DeleteLayout();
-    qInfo() << "2";
     hierarchy->RemoveGameObject();
-    qInfo() << "3";
-        qInfo() << index;
     scene->RemoveGameObject(index);
-    qInfo() << "4";
     ui_main_window->SceneRect->update();
 }
 
@@ -141,6 +137,29 @@ void MainWindow::LoadScene()
         }
     }
 }
+
+void MainWindow::NewScene()
+{
+    inspector->DeleteLayout();
+    hierarchy->RemoveAll();
+    int size = scene->gameobjects.size();
+    for(int i = 0; i < size; i++)
+    {
+        scene->RemoveGameObject(0);
+    }
+    ui_main_window->SceneRect->update();
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -66,4 +66,21 @@ void Hierarchy::Update()
     }
 }
 
+void Hierarchy::RemoveAll()
+{
+    for (int i = 0; i < ui->listWidget_entities->count(); i++)
+    {
+        QListWidgetItem* item = ui->listWidget_entities->takeItem(i);
+        ui->listWidget_entities->removeItemWidget(item);
+        delete item;
+        i = -1;
+    }
+}
+
+
+
+
+
+
+
 

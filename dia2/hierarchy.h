@@ -20,6 +20,7 @@ public:
     ~Hierarchy();
 
     void ConnectSignalsSlots();
+    void RemoveAll();
 
 public slots:
 
