@@ -10,3 +10,5 @@ Component::~Component()
 {
 
 }
+
+void Component::Save(QJsonObject &json) const{}

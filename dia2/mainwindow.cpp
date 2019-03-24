@@ -5,7 +5,12 @@
 #include "inspector.h"
 #include "drawrectwindow.h"
 #include "scene.h"
+
 #include <QDebug>
+#include <qjsonobject.h>
+#include <QFileDialog>
+#include <QJsonDocument>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -59,7 +64,7 @@ void MainWindow::ConnectSignalsSlots()
     connect(color_dialog, SIGNAL(color_dialog->colorSelected(testing)), this, SLOT(ColorTest()));
     connect(inspector, SIGNAL(MainUpdate()), this, SLOT(updateGameObject()));
 
-    connect(ui_main_window->actionSave_Scene, SIGNAL(clicked()), this, SLOT());
+    connect(ui_main_window->actionSave_Scene, SIGNAL(triggered()), this, SLOT(SaveScene()));
 }
 
 void MainWindow::OpenColorDialog()
@@ -75,8 +80,8 @@ void MainWindow::ColorTest()
 
 void MainWindow::updateGameObject()
 {
-     //qInfo() << "C++ Style Info Message";
-     ui_main_window->SceneRect->update();
+    //qInfo() << "C++ Style Info Message";
+    ui_main_window->SceneRect->update();
 }
 
 void MainWindow::AddGameObject()
@@ -101,6 +106,30 @@ void MainWindow::RemoveGameObject()
     qInfo() << "4";
     ui_main_window->SceneRect->update();
 }
+
+void MainWindow::SaveScene()
+{
+    // Open popup to save scene
+    QString path = QFileDialog::getSaveFileName(this, tr("Save Scene"), "", tr("JSon (*.json);;All Files (*)"));
+    if(!path.isEmpty())
+    {
+        QFile file(path);
+        if(file.open(QIODevice::WriteOnly))
+        {
+            // Go to save
+            QJsonObject json;
+            scene->SaveScene(json);
+            QJsonDocument saveDoc(json);
+            file.write(saveDoc.toJson());
+        }
+    }
+}
+
+void MainWindow::LoadScene()
+{
+
+}
+
 
 
 

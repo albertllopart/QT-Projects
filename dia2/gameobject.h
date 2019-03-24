@@ -3,6 +3,7 @@
 
 #include <QList>
 #include "component.h"
+#include <QJsonObject>
 
 class Transform;
 class ShapeRenderer;
@@ -14,6 +15,8 @@ public:
 
     Transform* GetTransform();
     ShapeRenderer* GetShapeRenderer();
+
+    void Save(QJsonObject &json) const;
 
 public:
     int uuid;

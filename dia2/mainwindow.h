@@ -31,8 +31,8 @@ public slots:
     void updateGameObject();
     void AddGameObject();
     void RemoveGameObject();
-    //void SaveScene();
-    //void LoadScene();
+    void SaveScene();
+    void LoadScene();
 
 private:
     Ui::MainWindow *ui_main_window;

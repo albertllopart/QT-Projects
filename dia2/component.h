@@ -2,6 +2,8 @@
 #define COMPONENT_H
 
 #include <qstring.h>
+#include <QJsonObject>
+
 
 class GameObject;
 
@@ -15,7 +17,9 @@ class Component
 {
 public:
     Component(GameObject* gameobject,Type type);
-    ~Component();
+    virtual ~Component();
+
+    virtual void Save(QJsonObject &json) const;
 
 public:
     QString name;

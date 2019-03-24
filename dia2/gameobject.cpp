@@ -40,3 +40,17 @@ ShapeRenderer* GameObject::GetShapeRenderer()
     //
     return nullptr;
 }
+
+void GameObject::Save(QJsonObject &json) const
+{
+    json["Name"] = this->name;
+    json["UUID"] = this->uuid;
+    for(int i = 0; i < components.size(); i++)
+    {
+        QJsonObject gObject;
+        QString name;
+        name = "Component_" + QString::number(i);
+        components.at(i)->Save(gObject);
+        json[name] = gObject;
+    }
+}

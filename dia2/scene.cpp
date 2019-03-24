@@ -20,10 +20,20 @@ void Scene::SyncWindows(Inspector* ins, Hierarchy* hie)
     hierarchy = hie;
 }
 
-void Scene::SaveScene()
+void Scene::SaveScene(QJsonObject &json) const
 {
+    for(int i = 0; i < gameobjects.size(); i++)
+    {
+        QJsonObject gObject;
+        QString name;
+        name = "GameObject_" + QString::number(i);
+        gameobjects.at(i)->Save(gObject);
+        json[name] = gObject;
+    }
 
+    json["NumberOfGameObjects"] = gameobjects.size();
 }
+
 void Scene::LoadScene()
 {
 

@@ -6,6 +6,7 @@
 #include "gameobject.h"
 
 #include <QObject>
+#include <QJsonObject>
 
 class Inspector;
 class Hierarchy;
@@ -19,7 +20,7 @@ public:
     GameObject* CreateGameObject();
     void SyncWindows(Inspector*,Hierarchy*);
 
-    void SaveScene();
+    void SaveScene(QJsonObject &json) const;
     void LoadScene();
     void GameObjectHierarchyClicked(GameObject* gameobject);
 

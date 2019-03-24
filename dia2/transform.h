@@ -8,8 +8,8 @@ class Transform : public Component
 {
 public:
     Transform(GameObject* gameobject);
-    ~Transform();
 
+    void Save(QJsonObject &json) const override;
 
 
 public:
