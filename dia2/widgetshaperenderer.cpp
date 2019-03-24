@@ -11,10 +11,19 @@ WidgetShapeRenderer::WidgetShapeRenderer(ShapeRenderer* rendererGo, QWidget *par
     renderer = rendererGo;
     ui->comboBox_shape->addItem("Circle");
     ui->comboBox_shape->addItem("Square");
+    ui->comboBox_shape->addItem("Triangle");
 
     ui->pushButton_fillColor->setStyleSheet("background-color: green");
 
+    ui->comboBox_strokeStyle->addItem("Solid Line");
+    ui->comboBox_strokeStyle->addItem("Dash Line");
+    ui->comboBox_strokeStyle->addItem("Dot Line");
+    ui->comboBox_strokeStyle->addItem("Dash Dot Line");
+    ui->comboBox_strokeStyle->addItem("Dash Dot Dot Line");
+    ui->comboBox_strokeStyle->addItem("No Stroke");
+
     ConnectSignalsSlots();
+    AdaptWidgetToEntity();
 }
 
 WidgetShapeRenderer::~WidgetShapeRenderer()
@@ -36,6 +45,61 @@ void WidgetShapeRenderer::AdaptWidgetToEntity()
 {
     //TODO: Actualitzar els camps del widget segons el GO al ser clicat
     //aka adaptar el widget perquè mostri les dades del GO
+    switch(renderer->type)
+    {
+        case Circle:
+        {
+            ui->comboBox_shape->setCurrentIndex(0);
+            break;
+        }
+        case Square:
+        {
+            ui->comboBox_shape->setCurrentIndex(1);
+            break;
+        }
+        case Triangle:
+        {
+            ui->comboBox_shape->setCurrentIndex(2);
+            break;
+        }
+    }
+
+    ui->spinBox_size->setValue(renderer->size);
+    ui->spinBox_strokeThickness->setValue(renderer->strokeThickness);
+
+    switch(renderer->strokeStyle)
+    {
+        case SolidLine:
+        {
+            ui->comboBox_strokeStyle->setCurrentIndex(0);
+            break;
+        }
+        case DashLine:
+        {
+            ui->comboBox_strokeStyle->setCurrentIndex(1);
+            break;
+        }
+        case DotLine:
+        {
+            ui->comboBox_strokeStyle->setCurrentIndex(2);
+            break;
+        }
+        case DashDotLine:
+        {
+            ui->comboBox_strokeStyle->setCurrentIndex(3);
+            break;
+        }
+        case DashDotDotLine:
+        {
+            ui->comboBox_strokeStyle->setCurrentIndex(4);
+            break;
+        }
+        case NoStroke:
+        {
+            ui->comboBox_strokeStyle->setCurrentIndex(5);
+            break;
+        }
+    }
 }
 
 void WidgetShapeRenderer::UpdateFillColor()

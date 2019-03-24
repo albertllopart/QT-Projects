@@ -11,6 +11,16 @@ enum ShapeType
     Triangle
 };
 
+enum StrokeStyle
+{
+    SolidLine = 0,
+    DashLine,
+    DotLine,
+    DashDotLine,
+    DashDotDotLine,
+    NoStroke
+};
+
 class ShapeRenderer : public Component
 {
 public:
@@ -19,9 +29,11 @@ public:
 
 public:
     ShapeType type = ShapeType::Circle;
+    StrokeStyle strokeStyle = StrokeStyle::SolidLine;
     QColor fillColor;
     QColor strokeColor;
-    int size; // Only in circle?
+    int size = 1; // Only in circle?
+    int strokeThickness = 1;
 
 };
 

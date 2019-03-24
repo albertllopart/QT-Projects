@@ -14,6 +14,7 @@ Widget2DTransform::Widget2DTransform(Transform* transformGo, QWidget *parent) :
         ui->doubleSpinBox_transform_translation_x->setValue(transform->position.x());
         ui->doubleSpinBox_transform_translation_y->setValue(transform->position.y());
     }
+
     ConnectSignalsSlots();
 }
 
