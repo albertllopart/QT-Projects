@@ -100,7 +100,7 @@ QWidget* Inspector::GetWidget(Component* component)
     case Type::ComponentRenderer:
     {
         WidgetShapeRenderer* widget= new WidgetShapeRenderer((ShapeRenderer*)component);
-        //connect(widget,SIGNAL(InspectorUpdate()),this,SIGNAL(MainUpdate()));
+        connect(widget,SIGNAL(InspectorUpdate()),this,SIGNAL(MainUpdate()));
         return widget;
     }
     default:

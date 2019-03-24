@@ -67,6 +67,9 @@ void MainWindow::ConnectSignalsSlots()
     connect(ui_main_window->actionSave_Scene, SIGNAL(triggered()), this, SLOT(SaveScene()));
     connect(ui_main_window->actionOpen_Scene, SIGNAL(triggered()), this, SLOT(LoadScene()));
     connect(ui_main_window->actionNew_Scene, SIGNAL(triggered()), this, SLOT(NewScene()));
+    connect(ui_main_window->actionactionSave_Scene_Icon, SIGNAL(triggered()), this, SLOT(SaveScene()));
+    connect(ui_main_window->actionactionOpen_Scene_Icon, SIGNAL(triggered()), this, SLOT(LoadScene()));
+    connect(ui_main_window->actionactionNew_Scene_Icon, SIGNAL(triggered()), this, SLOT(NewScene()));
 }
 
 void MainWindow::OpenColorDialog()

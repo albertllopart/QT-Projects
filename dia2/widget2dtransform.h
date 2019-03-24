@@ -21,14 +21,17 @@ public:
     void ConnectSignalsSlots();
 
 public slots:
-
     void UpdateTransform();
+    void UpdateTransformSliderXPosition(int value);
+    void UpdateTransformSliderYPosition(int value);
+    void UpdateTransformSliderXScale(int value);
+    void UpdateTransformSliderYScale(int value);
 
 signals:
     void InspectorUpdate();
 
 private:
-
+    int initialSize = 5;
     Ui::Widget2DTransform *ui;
     Transform* transform;
 };

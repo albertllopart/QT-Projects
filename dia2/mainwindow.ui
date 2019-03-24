@@ -50,7 +50,6 @@
     </property>
     <addaction name="actionNew_Scene"/>
     <addaction name="actionSave_Scene"/>
-    <addaction name="actionSave_As_Scene"/>
     <addaction name="actionOpen_Scene"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -82,6 +81,7 @@
    </attribute>
    <addaction name="actionactionNew_Scene_Icon"/>
    <addaction name="actionactionSave_Scene_Icon"/>
+   <addaction name="actionactionOpen_Scene_Icon"/>
    <addaction name="separator"/>
   </widget>
   <widget class="QDockWidget" name="dock_hierarchy">
@@ -176,6 +176,21 @@
    </property>
    <property name="toolTip">
     <string>Save Scene</string>
+   </property>
+  </action>
+  <action name="actionactionOpen_Scene_Icon">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/Icons/Icons/Folder docs.png</normaloff>:/Icons/Icons/Folder docs.png</iconset>
+   </property>
+   <property name="text">
+    <string>actionOpen_Scene_Icon</string>
+   </property>
+   <property name="iconText">
+    <string>actionSave_Scene_Icon</string>
+   </property>
+   <property name="toolTip">
+    <string>Open Scene</string>
    </property>
   </action>
  </widget>

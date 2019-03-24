@@ -3,6 +3,7 @@
 #include <qpainter.h>
 #include "transform.h"
 #include "shaperenderer.h"
+#include <QDebug>
 
 DrawRectWindow::DrawRectWindow(QWidget *parent) :
     QWidget(parent),
@@ -108,7 +109,7 @@ void DrawRectWindow::paintEvent(QPaintEvent *)
         painter.setBrush(brush);
         painter.setPen(pen);
 
-        QRect rect(transform->position.x(), transform->position.y(), 64, 64);
+        QRect rect(transform->position.x(), transform->position.y(), renderer->size * transform->scale.x(), renderer->size * transform->scale.y());
 
         switch(renderer->type)
         {
@@ -124,11 +125,13 @@ void DrawRectWindow::paintEvent(QPaintEvent *)
             }
             case Triangle:
             {
-                QPolygon poly;
-                poly.setPoint(0, transform->position.x() + renderer->size / 2, transform->position.y());
-                poly.setPoint(1, transform->position.x(), transform->position.y() + renderer->size);
-                poly.setPoint(2, transform->position.x() + renderer->size, transform->position.y() + renderer->size);
-
+                QPolygon poly(3);
+                qInfo() << QString::number(poly.count());
+                //poly.
+                poly.setPoint(0, rect.bottomLeft().x(), rect.bottomLeft().y());
+                poly.setPoint(1, rect.bottomRight().x(), rect.bottomRight().y());
+                poly.setPoint(2, QPoint(rect.left() + renderer->size, rect.top()).x(), QPoint(rect.left() + renderer->size, rect.top()).y());
+                qInfo() << QString::number(poly.count());
                 painter.drawPolygon(poly);
                 break;
             }

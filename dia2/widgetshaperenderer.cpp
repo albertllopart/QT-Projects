@@ -14,7 +14,7 @@ WidgetShapeRenderer::WidgetShapeRenderer(ShapeRenderer* rendererGo, QWidget *par
     ui->comboBox_shape->addItem("Square");
     ui->comboBox_shape->addItem("Triangle");
 
-    ui->pushButton_fillColor->setStyleSheet("background-color: green");
+    ui->pushButton_fillColor->setStyleSheet("background-color: " + renderer->fillColor.name());
 
     ui->comboBox_strokeStyle->addItem("Solid Line");
     ui->comboBox_strokeStyle->addItem("Dash Line");
@@ -108,22 +108,28 @@ void WidgetShapeRenderer::AdaptWidgetToEntity()
 
 void WidgetShapeRenderer::UpdateFillColor()
 {
-    QColor color = QColorDialog::getColor();
+    QColor color = QColorDialog::getColor(renderer->fillColor);
 
-    renderer->fillColor = color;
-    ui->pushButton_fillColor->setStyleSheet(QString("Background-Color: %0;").arg(renderer->fillColor.name()));
+    if(color.isValid())
+    {
+        renderer->fillColor = color;
+        ui->pushButton_fillColor->setStyleSheet(QString("Background-Color: %0;").arg(renderer->fillColor.name()));
 
-    emit InspectorUpdate();
+        emit InspectorUpdate();
+    }
 }
 
 void WidgetShapeRenderer::UpdateStrokeColor()
 {
-    QColor color = QColorDialog::getColor();
+    QColor color = QColorDialog::getColor(renderer->strokeColor);
 
-    renderer->strokeColor = color;
-    ui->pushButton_strokeColor->setStyleSheet(QString("Background-Color: %0;").arg(renderer->strokeColor.name()));
+    if(color.isValid())
+    {
+        renderer->strokeColor = color;
+        ui->pushButton_strokeColor->setStyleSheet(QString("Background-Color: %0;").arg(renderer->strokeColor.name()));
 
-    emit InspectorUpdate();
+        emit InspectorUpdate();
+    }
 }
 
 void WidgetShapeRenderer::UpdateShape()

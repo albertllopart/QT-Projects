@@ -35,7 +35,7 @@ public:
     StrokeStyle strokeStyle = StrokeStyle::SolidLine;
     QColor fillColor;
     QColor strokeColor;
-    int size = 1; // Only in circle?
+    int size = 50;
     int strokeThickness = 1;
 
 };
