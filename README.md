@@ -3,7 +3,7 @@
 - Elliot Jimenez Bosch
 - Albert Llopart Navarra
 
-# Features
+# Features:
 
 ### Menu
 
@@ -28,3 +28,83 @@ The inspector provides information about the currently selected entity from the 
 The central widget is where every entity is rendered based on its own transform and rendering options.
 
 ![](images/renderer.PNG)
+
+# Qt Features:
+
+### Signals
+
+Inspector:
+
+- void MainUpdate();
+
+Widget2DTransform:
+
+- void InspectorUpdate();
+
+WidgetShapeRenderer:
+
+- void InspectorUpdate();
+
+Qt:
+
+- Multiple signals from QObjects in the UI
+
+### Slots
+
+Hierarchy:
+
+- void AddGameObject(GameObject* gameobject);
+- void RemoveGameObject();
+- void GameObjectClicked(QListWidgetItem* item);
+- void Update();
+- void Testing();
+
+Inspector:
+
+- void SetName(QString);
+
+MainWindow:
+
+- void OpenColorDialog();
+- void ColorTest();
+- void updateGameObject();
+- void AddGameObject();
+- void RemoveGameObject();
+- void SaveScene();
+- void LoadScene();
+- void NewScene();
+
+Widget2DTransform:
+
+- void UpdateTransform();
+- void UpdateTransformSliderXPosition(int value);
+- void UpdateTransformSliderYPosition(int value);
+- void UpdateTransformSliderXScale(int value);
+- void UpdateTransformSliderYScale(int value);
+
+WidgetShapeRenderer:
+
+- void UpdateShape();
+- void UpdateSize();
+- void UpdateStrokeThickness();
+- void UpdateStrokeStyle();
+- void UpdateFillColor();
+- void UpdateStrokeColor();
+
+### Resource Files
+
+Various icons for the main menu
+
+### Actions
+
+- New Scene
+- Save Scene
+- Load Scene
+- Exit
+
+### Style Sheets
+
+- Fill color
+- Stroke color
+
+
