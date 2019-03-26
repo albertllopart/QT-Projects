@@ -22,7 +22,7 @@ void Transform::Save(QJsonObject &json) const
 
 void Transform::Load(const QJsonObject &json)
 {
-    position = QPoint(json["Position_X"].toInt(),json["Position_Y"].toInt());
-    rotation = QPoint(json["Rotation_X"].toInt(),json["Rotation_Y"].toInt());
-    scale = QPoint(json["Scale_X"].toInt(),json["Scale_Y"].toInt());
+    position = QPointF(json["Position_X"].toInt(),json["Position_Y"].toDouble());
+    rotation = QPointF(json["Rotation_X"].toDouble(),json["Rotation_Y"].toDouble());
+    scale = QPointF(json["Scale_X"].toDouble(),json["Scale_Y"].toDouble());
 }
