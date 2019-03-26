@@ -6,7 +6,7 @@ ShapeRenderer::ShapeRenderer(GameObject* gameobject) : Component(gameobject, Typ
     type = ShapeType::Circle;
     strokeStyle = StrokeStyle::SolidLine;
     fillColor = QColor(255,255,255);
-    strokeColor= QColor(0,0,0);
+    strokeColor= QColor(255,255,255);
     size = 50;
     strokeThickness = 1;
 }

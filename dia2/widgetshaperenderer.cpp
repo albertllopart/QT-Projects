@@ -15,6 +15,7 @@ WidgetShapeRenderer::WidgetShapeRenderer(ShapeRenderer* rendererGo, QWidget *par
     ui->comboBox_shape->addItem("Triangle");
 
     ui->pushButton_fillColor->setStyleSheet("background-color: " + renderer->fillColor.name());
+    ui->pushButton_strokeColor->setStyleSheet("background-color: " + renderer->strokeColor.name());
 
     ui->comboBox_strokeStyle->addItem("Solid Line");
     ui->comboBox_strokeStyle->addItem("Dash Line");

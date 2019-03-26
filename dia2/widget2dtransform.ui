@@ -174,7 +174,7 @@
          </size>
         </property>
         <property name="title">
-         <string>Size</string>
+         <string>Scale</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">
@@ -218,7 +218,7 @@
          </size>
         </property>
         <property name="title">
-         <string>Transform</string>
+         <string>Translation</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_4">
          <item row="0" column="0">

@@ -63,9 +63,6 @@ void Inspector::ShowGameObject(GameObject* selectedGO)
         layout->addWidget(GetWidget(component));
     }
 
-    QPushButton* add_background_renderer = new QPushButton("Add Background Renderer");
-    layout->addWidget(add_background_renderer);
-
     connect(entity_name, SIGNAL(textChanged(QString)), this, SLOT(SetName(QString)));
     setLayout(layout);
 
