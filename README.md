@@ -93,7 +93,7 @@ WidgetShapeRenderer:
 
 ### Resource Files
 
-Various icons for the main menu
+- Various icons for the main menu
 
 ### Actions
 
@@ -107,4 +107,7 @@ Various icons for the main menu
 - Fill color
 - Stroke color
 
+### Widget Promotion
+
+- Central widget with QPainter
 
