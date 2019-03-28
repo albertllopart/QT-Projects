@@ -28,7 +28,7 @@ void ShapeRenderer::Save(QJsonObject &json) const
 void ShapeRenderer::Load(const QJsonObject &json)
 {
     type = (ShapeType)json["RendererType"].toInt();
-    strokeStyle = (StrokeStyle)json["RendererType"].toInt();
+    strokeStyle = (StrokeStyle)json["StrokeStyle"].toInt();
     fillColor = QColor(json["FillColorR"].toInt(),json["FillColorG"].toInt(),json["FillColorB"].toInt());
     strokeColor= QColor(json["StrokeColorR"].toInt(),json["StrokeColorG"].toInt(),json["StrokeColorB"].toInt());
     size = json["Size"].toInt();
