@@ -24,7 +24,7 @@ public:
 
 public:
     QString name;
-    GameObject* gameobject;
+    GameObject* gameobject = nullptr;
     Type type;
 };
 

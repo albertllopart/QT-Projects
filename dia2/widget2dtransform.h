@@ -33,7 +33,7 @@ signals:
 private:
     int initialSize = 5;
     Ui::Widget2DTransform *ui;
-    Transform* transform;
+    Transform* transform = nullptr;
 };
 
 #endif // WIDGET2DTRANSFORM_H

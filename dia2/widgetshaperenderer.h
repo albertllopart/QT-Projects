@@ -37,7 +37,7 @@ signals:
 private:
 
     Ui::WidgetShapeRenderer *ui;
-    ShapeRenderer* renderer;
+    ShapeRenderer* renderer = nullptr;
 };
 
 #endif // WIDGETSHAPERENDERER_H

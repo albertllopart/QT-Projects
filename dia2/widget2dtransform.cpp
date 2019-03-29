@@ -9,7 +9,7 @@ Widget2DTransform::Widget2DTransform(Transform* transformGo, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    if(transform!=nullptr)
+    if (transform == nullptr)
     {
         transform = transformGo;
         ui->doubleSpinBox_transform_translation_x->setValue(transform->position.x());
@@ -49,6 +49,10 @@ void Widget2DTransform::ConnectSignalsSlots()
 
 void Widget2DTransform::UpdateTransform()
 {
+    if(transform == nullptr)
+    {
+           qInfo() << "JODER";
+    }
     transform->position.setX(ui->doubleSpinBox_transform_translation_x->value());
     transform->position.setY(ui->doubleSpinBox_transform_translation_y->value());
 
