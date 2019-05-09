@@ -5,10 +5,14 @@
 MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
     setMinimumSize(QSize(256, 256));
+
+    setMouseTracking(true);
+    input = new Input();
 }
 
 MyOpenGLWidget::~MyOpenGLWidget()
 {
+    delete input;
     makeCurrent();
     finalizeGL();
 }
@@ -38,7 +42,7 @@ void MyOpenGLWidget::paintGL()
 {
     glClearColor(0.1f, 0.85f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    program.setUniformValue(u_worldToCamera, )
+    //program.setUniformValue(u_worldToCamera, )
     if(program.bind())
     {
         vao.bind();
@@ -92,6 +96,42 @@ void MyOpenGLWidget::createSampleTriangle()
     vao.release();
     vbo.release();
     program.release();
+}
+
+//scene interaction
+void MyOpenGLWidget::keyPressEvent(QKeyEvent *event)
+{
+    input->keyPressEvent(event);
+}
+
+void MyOpenGLWidget::keyReleaseEvent(QKeyEvent *event)
+{
+    input->keyReleaseEvent(event);
+}
+
+void MyOpenGLWidget::mousePressEvent(QMouseEvent *event)
+{
+    input->mousePressEvent(event);
+}
+
+void MyOpenGLWidget::mouseMoveEvent(QMouseEvent *event)
+{
+    input->mouseMoveEvent(event);
+}
+
+void MyOpenGLWidget::mouseReleaseEvent(QMouseEvent *event)
+{
+    input->mouseReleaseEvent(event);
+}
+
+void MyOpenGLWidget::enterEvent(QEvent*)
+{
+    grabKeyboard();
+}
+
+void MyOpenGLWidget::leaveEvent(QEvent*)
+{
+    releaseKeyboard();
 }
 
 

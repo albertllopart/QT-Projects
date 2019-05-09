@@ -9,6 +9,45 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLShaderProgram>
 
+enum class KeyState
+{
+    UP, PRESSED, DOWN
+};
+
+enum class MouseButtonState
+{
+    UP, PRESSED, DOWN
+};
+
+class Input
+{
+public:
+
+    Input();
+    ~Input();
+
+    //Event processing functions
+    void keyPressEvent(QKeyEvent* event);
+    void keyReleaseEvent(QKeyEvent* event);
+    void mousePressEvent(QMouseEvent* event);
+    void mouseMoveEvent(QMouseEvent* event);
+    void mouseReleaseEvent(QMouseEvent* event);
+
+    void postUpdate();
+
+    enum { MAX_BUTTONS = 10, MAX_KEYS = 300 };
+
+    //keyboard state
+    KeyState keys[MAX_KEYS];
+
+    //mouse state
+    MouseButtonState mouseButtons[MAX_BUTTONS];
+    int mouseX = 0;
+    int mouseY = 0;
+    int mouseX_prev = 0;
+    int mouseY_prev = 0;
+};
+
 class MyOpenGLWidget :
         public QOpenGLWidget,
         protected QOpenGLFunctions_3_3_Core
@@ -26,6 +65,15 @@ public:
 
     //sample OpenGL
     void createSampleTriangle();
+
+    //scene interaction
+    void keyPressEvent(QKeyEvent* event) override;
+    void keyReleaseEvent(QKeyEvent* event) override;
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseMoveEvent(QMouseEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent* event) override;
+    void enterEvent(QEvent*) override;
+    void leaveEvent(QEvent*) override;
 
 signals:
 
@@ -75,7 +123,9 @@ private:
         "outColor = vec4(FSIn.color, 1.0);\n"
     "}";
 
+private:
 
+    Input* input;
 };
 
 #endif // MYOPENGLWIDGET_H
