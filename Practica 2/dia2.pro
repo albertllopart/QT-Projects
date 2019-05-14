@@ -37,9 +37,9 @@ SOURCES += \
     widgetshaperenderer.cpp \
     drawrectwindow.cpp \
     shaperenderer.cpp \
-    component.cpp \
     drawrect.cpp \
-    modelloader.cpp
+    modelloader.cpp \
+    submesh.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -57,7 +57,8 @@ HEADERS += \
     drawrect.h \
     drawrectwindow.h \
     shaperenderer.h \
-    modelloader.h
+    modelloader.h \
+    submesh.h
 
 FORMS += \
         mainwindow.ui \
