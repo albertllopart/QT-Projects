@@ -38,7 +38,8 @@ SOURCES += \
     drawrectwindow.cpp \
     shaperenderer.cpp \
     component.cpp \
-    drawrect.cpp
+    drawrect.cpp \
+    modelloader.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -55,7 +56,8 @@ HEADERS += \
     shaperenderer.h \
     drawrect.h \
     drawrectwindow.h \
-    shaperenderer.h
+    shaperenderer.h \
+    modelloader.h
 
 FORMS += \
         mainwindow.ui \
@@ -68,3 +70,10 @@ FORMS += \
 RESOURCES += \
     icons.qrc \
     shaders.qrc
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/Assimp/lib/ -lassimp
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/Assimp/lib/ -lassimpd
+else:unix: LIBS += -L$$PWD/Assimp/lib/ -lassimp
+
+INCLUDEPATH += $$PWD/Assimp/include
+DEPENDPATH += $$PWD/Assimp/include
