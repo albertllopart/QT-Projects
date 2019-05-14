@@ -38,34 +38,7 @@ SOURCES += \
     drawrectwindow.cpp \
     shaperenderer.cpp \
     component.cpp \
-    drawrect.cpp \
-    drawrectwindow.cpp \
-    gameobject.cpp \
-    hierarchy.cpp \
-    inspector.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    myopenglwidget.cpp \
-    scene.cpp \
-    shaperenderer.cpp \
-    transform.cpp \
-    widget2dtransform.cpp \
-    widgetshaperenderer.cpp \
-    component.cpp \
-    drawrect.cpp \
-    drawrectwindow.cpp \
-    gameobject.cpp \
-    hierarchy.cpp \
-    inspector.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    myopenglwidget.cpp \
-    scene.cpp \
-    shaperenderer.cpp \
-    transform.cpp \
-    widget2dtransform.cpp \
-    widgetshaperenderer.cpp \
-    camera3d.cpp
+    drawrect.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -80,33 +53,9 @@ HEADERS += \
     widgetshaperenderer.h \
     drawrectwindow.h \
     shaperenderer.h \
-    component.h \
     drawrect.h \
     drawrectwindow.h \
-    gameobject.h \
-    hierarchy.h \
-    inspector.h \
-    mainwindow.h \
-    myopenglwidget.h \
-    scene.h \
-    shaperenderer.h \
-    transform.h \
-    widget2dtransform.h \
-    widgetshaperenderer.h \
-    component.h \
-    drawrect.h \
-    drawrectwindow.h \
-    gameobject.h \
-    hierarchy.h \
-    inspector.h \
-    mainwindow.h \
-    myopenglwidget.h \
-    scene.h \
-    shaperenderer.h \
-    transform.h \
-    widget2dtransform.h \
-    widgetshaperenderer.h \
-    camera3d.h
+    shaperenderer.h
 
 FORMS += \
         mainwindow.ui \

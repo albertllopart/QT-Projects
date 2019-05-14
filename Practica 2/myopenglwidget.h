@@ -1,7 +1,7 @@
 #ifndef MYOPENGLWIDGET_H
 #define MYOPENGLWIDGET_H
 
-#include "camera3d.h"
+//#include "camera3d.h"
 
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions_3_3_Core>
@@ -106,7 +106,7 @@ private:
     "}";
     int u_worldToCamera;
     int u_cameraToView;
-    Camera3D m_camera;
+    //Camera3D m_camera;
 
     QString default_shader_frag =
     "#version 330 core\n"
