@@ -1,10 +1,10 @@
 #ifndef MODELLOADER_H
 #define MODELLOADER_H
 
-#include "Assimp/include/assimp/Importer.hpp"
-#include "Assimp/include/assimp/postprocess.h"
-#include "Assimp/include/assimp/scene.h"
-#include "Assimp/include/assimp/mesh.h"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <qvector.h>
+#include <assimp/postprocess.h>
 
 class ModelLoader
 {
@@ -19,8 +19,8 @@ public:
 
 private:
 
-    //void processNode(aiNode* node, const aiScene* scene());
-
+    void processNode(aiNode* node, const aiScene* scene);
+    //SubMesh* processNode(aiNode* node, const aiScene* scene);
 };
 
 #endif // MODELLOADER_H
