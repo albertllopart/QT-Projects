@@ -8,6 +8,23 @@ MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
 
     setMouseTracking(true);
     input = new Input();
+    interaction = new Interaction();
+
+    //timer per cridar slot a cada frame
+    connect(&timer, SIGNAL(timeout()), this, SLOT(frame()));
+
+    if (format().swapInterval() == -1)
+    {
+        // V_blank synchronization not available (tearing likely to happen)
+        qDebug("Swap Buffers at V_blank not available: refresh at approx 60 fps.");
+        timer.setInterval(17);
+    }
+    else
+    {
+        qInfo("V_blank synchronization available.");
+        timer.setInterval(0);
+    }
+    timer.start();
 }
 
 MyOpenGLWidget::~MyOpenGLWidget()
@@ -56,6 +73,18 @@ void MyOpenGLWidget::paintGL()
 void MyOpenGLWidget::finalizeGL()
 {
     std::cout << "finalizeGL()" << std::endl;
+}
+
+void MyOpenGLWidget::frame()
+{
+    bool interacted = interaction->update();
+
+    if (interacted)
+    {
+        update();
+    }
+
+    input->postUpdate();
 }
 
 void MyOpenGLWidget::createSampleTriangle()
@@ -132,6 +161,48 @@ void MyOpenGLWidget::enterEvent(QEvent*)
 void MyOpenGLWidget::leaveEvent(QEvent*)
 {
     releaseKeyboard();
+}
+
+//class Interaction
+bool Interaction::update()
+{
+    bool changed = false;
+
+    switch(state)
+    {
+        case State::Idle:
+        {
+            changed = idle();
+            break;
+        }
+        case State::Navigating:
+        {
+            changed = navigate();
+            break;
+        }
+        case State::Focusing:
+        {
+            changed = focus();
+            break;
+        }
+        case State::Translating:
+        {
+            changed = translate();
+            break;
+        }
+        case State::Rotating:
+        {
+            changed = rotate();
+            break;
+        }
+        case State::Scaling:
+        {
+            changed = scale();
+            break;
+        }
+    }
+
+    return changed;
 }
 
 

@@ -8,6 +8,7 @@
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLShaderProgram>
+#include <QTimer>
 
 enum class KeyState
 {
@@ -48,6 +49,27 @@ public:
     int mouseY_prev = 0;
 };
 
+class Interaction
+{
+public:
+
+    bool update();
+
+private:
+
+    bool idle();
+    bool navigate();
+    bool focus();
+    bool translate();
+    bool rotate();
+    bool scale();
+
+    enum State { Idle, Navigating, Focusing, Translating, Rotating, Scaling };
+
+    State state = State::Idle;
+
+};
+
 class MyOpenGLWidget :
         public QOpenGLWidget,
         protected QOpenGLFunctions_3_3_Core
@@ -80,6 +102,7 @@ signals:
 public slots:
     //Not virtual
     void finalizeGL();
+    void frame();
 
 private:
 
@@ -126,6 +149,8 @@ private:
 private:
 
     Input* input;
+    Interaction* interaction;
+    QTimer timer;
 };
 
 #endif // MYOPENGLWIDGET_H
