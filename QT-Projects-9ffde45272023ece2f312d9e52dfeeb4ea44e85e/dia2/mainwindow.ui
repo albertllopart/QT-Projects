@@ -31,7 +31,7 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QOpenGLWidget" name="SceneRect"/>
+     <widget class="MyOpenGLWidget" name="SceneRect"/>
     </item>
    </layout>
   </widget>
@@ -195,6 +195,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyOpenGLWidget</class>
+   <extends>QOpenGLWidget</extends>
+   <header location="global">myopenglwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="icons.qrc"/>
  </resources>

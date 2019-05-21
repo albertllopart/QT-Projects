@@ -8,7 +8,6 @@ Mesh::Mesh()
 
 }
 
-
 void Mesh::Load(const char* path)
 {
     Assimp::Importer import;
