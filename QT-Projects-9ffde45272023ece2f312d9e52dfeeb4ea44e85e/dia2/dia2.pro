@@ -24,6 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    camera.cpp \
         main.cpp \
         mainwindow.cpp \
     inspector.cpp \
@@ -40,6 +41,7 @@ SOURCES += \
     mesh.cpp
 
 HEADERS += \
+    camera.h \
         mainwindow.h \
     inspector.h \
     myopenglwidget.h \
