@@ -163,8 +163,10 @@ void MyOpenGLWidget::leaveEvent(QEvent*)
     releaseKeyboard();
 }
 
+//class Input
+
 //class Interaction
-bool Interaction::update()
+bool MyOpenGLWidget::Interaction::update()
 {
     bool changed = false;
 
@@ -203,5 +205,14 @@ bool Interaction::update()
     }
 
     return changed;
+}
+
+bool MyOpenGLWidget::Interaction::idle()
+{
+    if (input->mouseButtons[Qt::RightButton] == MouseButtonState::DOWN)
+    {
+
+    }
+    return true;
 }
 

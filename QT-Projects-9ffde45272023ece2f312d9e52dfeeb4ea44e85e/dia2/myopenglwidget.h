@@ -71,52 +71,34 @@ public:
     int mouseY_prev = 0;
 };
 
-class Interaction
-{
-public:
-
-    bool update();
-
-private:
-
-    bool idle()
-    {
-        return true;
-    }
-    bool navigate()
-    {
-        return true;
-    }
-    bool focus()
-    {
-        return true;
-    }
-    bool translate()
-    {
-        return true;
-    }
-    bool rotate()
-    {
-        return true;
-    }
-    bool scale()
-    {
-        return true;
-    }
-
-    enum State { Idle, Navigating, Focusing, Translating, Rotating, Scaling };
-
-    State state = State::Idle;
-
-};
-
-
 class MyOpenGLWidget :
         public QOpenGLWidget,
         protected QOpenGLFunctions_3_3_Core
 {
     Q_OBJECT
 public:
+
+    class Interaction
+    {
+    public:
+
+        bool update();
+
+    private:
+
+        bool idle();
+        bool navigate();
+        bool focus();
+        bool translate();
+        bool rotate();
+        bool scale();
+
+        enum State { Idle, Navigating, Focusing, Translating, Rotating, Scaling };
+
+        State state = State::Idle;
+
+    };
+
     explicit MyOpenGLWidget(QWidget* parent = nullptr);
     ~MyOpenGLWidget() override;
 
@@ -189,7 +171,7 @@ private:
 
 private:
 
-    Input* input;
+    static Input* input;
     Interaction* interaction;
     QTimer timer;
 };
