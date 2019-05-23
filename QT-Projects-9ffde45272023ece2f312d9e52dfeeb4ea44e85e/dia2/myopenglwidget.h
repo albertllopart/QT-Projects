@@ -7,6 +7,7 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLShaderProgram>
 #include <QTimer>
+#include <camera.h>
 
 enum class KeyState
 {
@@ -88,10 +89,10 @@ public:
 
         bool idle();
         bool navigate();
-        bool focus();
-        bool translate();
-        bool rotate();
-        bool scale();
+        bool focus() {return true;}
+        bool translate() {return true;}
+        bool rotate() {return true;}
+        bool scale() {return true;}
 
         enum State { Idle, Navigating, Focusing, Translating, Rotating, Scaling };
 
@@ -174,6 +175,8 @@ private:
     static Input* input;
     Interaction* interaction;
     QTimer timer;
+
+    static Camera* camera;
 };
 
 #endif // MYOPENGLWIDGET_H

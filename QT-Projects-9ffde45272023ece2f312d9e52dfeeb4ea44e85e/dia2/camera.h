@@ -15,8 +15,8 @@ public:
     QVector4D getLeftRightBottonTop();
 
     QVector3D screenPointToWorldRay(int x, int y);
-    QVector3D screenDisplacementToWorldVector(int x0, int y0, int x1, int y1);
-    QVector2D worldToScreenPoint(const QVector3D &p);
+    void screenDisplacementToWorldVector(int x0, int y0, int x1, int y1){/*qvector3d*/};
+    void worldToScreenPoint(const QVector3D &p){/*qvector2d*/};
 
     // create the matrices
     void prepareMatrices();
