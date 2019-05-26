@@ -7,7 +7,7 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLShaderProgram>
 #include <QTimer>
-#include <camera.h>
+#include "camera.h"
 
 enum class KeyState
 {
@@ -83,6 +83,9 @@ public:
     {
     public:
 
+        Interaction(MyOpenGLWidget* parent) {this->parent = parent;}
+        ~Interaction();
+
         bool update();
 
     private:
@@ -98,6 +101,7 @@ public:
 
         State state = State::Idle;
 
+        MyOpenGLWidget* parent;
     };
 
     explicit MyOpenGLWidget(QWidget* parent = nullptr);
@@ -172,11 +176,11 @@ private:
 
 private:
 
-    static Input* input;
+    Input* input;
     Interaction* interaction;
     QTimer timer;
 
-    static Camera* camera;
+    Camera* camera;
 };
 
 #endif // MYOPENGLWIDGET_H

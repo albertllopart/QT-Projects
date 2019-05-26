@@ -9,7 +9,7 @@ MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
 
     setMouseTracking(true);
     input = new Input();
-    interaction = new Interaction();
+    interaction = new Interaction(this);
     camera = new Camera();
 
     //timer per cridar slot a cada frame
@@ -216,32 +216,32 @@ bool MyOpenGLWidget::Interaction::update()
 
 bool MyOpenGLWidget::Interaction::idle()
 {
-    if (input->mouseButtons[Qt::RightButton] == MouseButtonState::DOWN)
+    if (parent->input->mouseButtons[Qt::RightButton] == MouseButtonState::DOWN)
     {
         state = State::Navigating;
     }
-    else if (input->mouseButtons[Qt::LeftButton] == MouseButtonState::PRESSED)
+    else if (parent->input->mouseButtons[Qt::LeftButton] == MouseButtonState::PRESSED)
     {
-        QVector3D rayWorldSpace = camera->screenPointToWorldRay(input->mouseX, input->mouseY);
+        QVector3D rayWorldSpace = parent->camera->screenPointToWorldRay(parent->input->mouseX, parent->input->mouseY);
         //todo:
         //crear una entity i fer-la servir per cridar flow de selecció
         return true;
     }
     else if (false /* si hi ha una entity seleccionada*/)
     {
-        if (input->keys[Qt::Key_F] == KeyState::PRESSED)
+        if (parent->input->keys[Qt::Key_F] == KeyState::PRESSED)
         {
             state = State::Focusing;
         }
-        else if (input->keys[Qt::Key_T] == KeyState::PRESSED)
+        else if (parent->input->keys[Qt::Key_T] == KeyState::PRESSED)
         {
             state = State::Translating;
         }
-        else if (input->keys[Qt::Key_R] == KeyState::PRESSED)
+        else if (parent->input->keys[Qt::Key_R] == KeyState::PRESSED)
         {
             state = State::Rotating;
         }
-        else if (input->keys[Qt::Key_S] == KeyState::PRESSED)
+        else if (parent->input->keys[Qt::Key_S] == KeyState::PRESSED)
         {
             state = State::Scaling;
         }
@@ -252,7 +252,7 @@ bool MyOpenGLWidget::Interaction::idle()
 
 bool MyOpenGLWidget::Interaction::navigate()
 {
-    if (input->mouseButtons[Qt::RightButton] != MouseButtonState::DOWN)
+    if (parent->input->mouseButtons[Qt::RightButton] != MouseButtonState::DOWN)
     {
         state = State::Idle;
         return false;
@@ -260,11 +260,11 @@ bool MyOpenGLWidget::Interaction::navigate()
 
     bool cameraChanged = false;
 
-    int mouseX_delta = input->mouseX - input->mouseX_prev;
-    int mouseY_delta = input->mouseY - input->mouseY_prev;
+    int mouseX_delta = parent->input->mouseX - parent->input->mouseX_prev;
+    int mouseY_delta = parent->input->mouseY - parent->input->mouseY_prev;
 
-    float &yaw = camera->yaw;
-    float &pitch = camera->pitch;
+    float &yaw = parent->camera->yaw;
+    float &pitch = parent->camera->pitch;
 
     //camera navigation
     if (mouseX_delta != 0 || mouseY_delta != 0)
@@ -280,7 +280,7 @@ bool MyOpenGLWidget::Interaction::navigate()
 
     QVector3D displacementVector;
 
-    if (input->keys[Qt::Key_W] == KeyState::DOWN)
+    if (parent->input->keys[Qt::Key_W] == KeyState::DOWN)
     {
         cameraChanged = true;
         displacementVector += QVector3D(-sinf(qDegreesToRadians(yaw)) * cosf(qDegreesToRadians(pitch)),
@@ -289,21 +289,21 @@ bool MyOpenGLWidget::Interaction::navigate()
     }
     //todo
     //aquesta part de baix és un copia i enganxa de la de dalt, falta canviar alguns signes i cosf/sinf
-    if (input->keys[Qt::Key_A] == KeyState::DOWN)
+    if (parent->input->keys[Qt::Key_A] == KeyState::DOWN)
     {
         cameraChanged = true;
         displacementVector += QVector3D(-sinf(qDegreesToRadians(yaw)) * cosf(qDegreesToRadians(pitch)),
                                         sinf(qDegreesToRadians(pitch)),
                                         -cosf(qDegreesToRadians(yaw)) * cosf(qDegreesToRadians(pitch)));
     }
-    if (input->keys[Qt::Key_S] == KeyState::DOWN)
+    if (parent->input->keys[Qt::Key_S] == KeyState::DOWN)
     {
         cameraChanged = true;
         displacementVector += QVector3D(-sinf(qDegreesToRadians(yaw)) * cosf(qDegreesToRadians(pitch)),
                                         sinf(qDegreesToRadians(pitch)),
                                         -cosf(qDegreesToRadians(yaw)) * cosf(qDegreesToRadians(pitch)));
     }
-    if (input->keys[Qt::Key_D] == KeyState::DOWN)
+    if (parent->input->keys[Qt::Key_D] == KeyState::DOWN)
     {
         cameraChanged = true;
         displacementVector += QVector3D(-sinf(qDegreesToRadians(yaw)) * cosf(qDegreesToRadians(pitch)),
@@ -311,9 +311,9 @@ bool MyOpenGLWidget::Interaction::navigate()
                                         -cosf(qDegreesToRadians(yaw)) * cosf(qDegreesToRadians(pitch)));
     }
 
-    displacementVector *= camera->speed / 60.0f; //fake delta time
+    displacementVector *= parent->camera->speed / 60.0f; //fake delta time
 
-    camera->position += displacementVector;
+    parent->camera->position += displacementVector;
 
     return cameraChanged;
 }

@@ -3,7 +3,9 @@
 
 Camera::Camera()
 {
-
+    worldMatrix = QMatrix4x4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);
+    viewMatrix = QMatrix4x4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);
+    projectionMatrix = QMatrix4x4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);
 }
 
 void Camera::prepareMatrices()
