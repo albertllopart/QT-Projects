@@ -5,6 +5,7 @@
 #include "inspector.h"
 #include "drawrectwindow.h"
 #include "scene.h"
+#include "resourcemanager.h"
 
 #include <QDebug>
 #include <qjsonobject.h>
@@ -40,6 +41,14 @@ MainWindow::MainWindow(QWidget *parent) :
     //drawRect = ui_main_window->SceneRect;
     //drawRect->setScene(scene);
     //ui_main_window->SceneRect->setScene(scene);
+
+    qInfo() << "C++ Style Info Message";
+    QDockWidget* resource_dock = new QDockWidget();
+    resource_dock->setWindowTitle("Resources");
+    resourceManager = new ResourceManager();
+    resource_dock->setWidget(resourceManager);
+    addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, resource_dock);
+    tabifyDockWidget(ui_main_window->dock_inspector, resource_dock);
 
     //Create the color dialog
     color_dialog = new QColorDialog(this);

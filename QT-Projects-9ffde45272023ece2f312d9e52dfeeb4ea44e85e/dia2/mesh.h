@@ -3,22 +3,37 @@
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
+#include "assimp/mesh.h"
 #include <qvector.h>
 #include <assimp/postprocess.h>
+#include <queue>
+#include "resourcemanager.h"
 
-class Mesh
+class Material;
+class SubMesh;
+
+class Mesh : public Resource
 {
 public:
     Mesh();
+    ~Mesh() override;
+
+    void Draw(Material* material);
+    void Draw() override;
+    void Destroy() override;
 
     void Load(const char* pathToFile);
+    std::vector<SubMesh*> meshes;
 
     //QVector<SubMesh*> submeshes;
 
 private:
 
-    void processNode(aiNode* node, const aiScene* scene);
-    //SubMesh* processNode(aiNode* node, const aiScene* scene);
+    void ProcessNodes(const aiScene* scene);
+    void ProcessNode(aiNode* node, const aiScene* scene);
+    SubMesh* ProcessSubMeshNode(aiMesh* node, const aiScene* scene);
+
+    std::queue<aiNode*> nodes;
 };
 
 #endif // MESH_H

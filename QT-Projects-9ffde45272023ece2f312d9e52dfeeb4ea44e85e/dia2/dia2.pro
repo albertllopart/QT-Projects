@@ -38,7 +38,9 @@ SOURCES += \
     widgetshaperenderer.cpp \
     drawrectwindow.cpp \
     shaperenderer.cpp \
-    mesh.cpp
+    mesh.cpp \
+    resourcemanager.cpp \
+    submesh.cpp
 
 HEADERS += \
     camera.h \
@@ -54,7 +56,9 @@ HEADERS += \
     widgetshaperenderer.h \
     drawrectwindow.h \
     shaperenderer.h \
-    mesh.h
+    mesh.h \
+    resourcemanager.h \
+    submesh.h
 
 FORMS += \
         mainwindow.ui \

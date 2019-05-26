@@ -12,6 +12,7 @@ class MainWindow;
 class Hierarchy;
 class Inspector;
 class DrawRectWindow;
+class ResourceManager;
 class Scene;
 
 class MainWindow : public QMainWindow
@@ -40,6 +41,7 @@ private:
 
     Hierarchy *hierarchy;
     Inspector *inspector;
+    ResourceManager *resourceManager;
     DrawRectWindow  *drawRect;
     Scene     *scene;
 
