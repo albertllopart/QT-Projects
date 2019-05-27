@@ -26,9 +26,9 @@ public:
     int viewportHeight = 128;
 
     // projection
-    float fovy = 1;
-    float znear = 1;
-    float zfar = 300;
+    float fovy = 90.0f;
+    float znear = 0.1f;
+    float zfar = 300.0f;
 
     // world navigation
     float yaw = 0.0f;

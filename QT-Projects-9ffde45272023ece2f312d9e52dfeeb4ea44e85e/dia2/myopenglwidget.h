@@ -8,69 +8,7 @@
 #include <QOpenGLShaderProgram>
 #include <QTimer>
 #include "camera.h"
-
-enum class KeyState
-{
-    UP, PRESSED, DOWN
-};
-
-enum class MouseButtonState
-{
-    UP, PRESSED, DOWN
-};
-
-class Input
-{
-public:
-
-    Input()
-    {
-
-    }
-    ~Input()
-    {
-
-    }
-
-    //Event processing functions
-    void keyPressEvent(QKeyEvent* event)
-    {
-
-    }
-    void keyReleaseEvent(QKeyEvent* event)
-    {
-
-    }
-    void mousePressEvent(QMouseEvent* event)
-    {
-
-    }
-    void mouseMoveEvent(QMouseEvent* event)
-    {
-
-    }
-    void mouseReleaseEvent(QMouseEvent* event)
-    {
-
-    }
-
-    void postUpdate()
-    {
-
-    }
-
-    enum { MAX_BUTTONS = 10, MAX_KEYS = 300 };
-
-    //keyboard state
-    KeyState keys[MAX_KEYS];
-
-    //mouse state
-    MouseButtonState mouseButtons[MAX_BUTTONS];
-    int mouseX = 0;
-    int mouseY = 0;
-    int mouseX_prev = 0;
-    int mouseY_prev = 0;
-};
+#include "input.h"
 
 class MyOpenGLWidget :
         public QOpenGLWidget,
@@ -78,31 +16,6 @@ class MyOpenGLWidget :
 {
     Q_OBJECT
 public:
-
-    class Interaction
-    {
-    public:
-
-        Interaction(MyOpenGLWidget* parent) {this->parent = parent;}
-        ~Interaction();
-
-        bool update();
-
-    private:
-
-        bool idle();
-        bool navigate();
-        bool focus() {return true;}
-        bool translate() {return true;}
-        bool rotate() {return true;}
-        bool scale() {return true;}
-
-        enum State { Idle, Navigating, Focusing, Translating, Rotating, Scaling };
-
-        State state = State::Idle;
-
-        MyOpenGLWidget* parent;
-    };
 
     explicit MyOpenGLWidget(QWidget* parent = nullptr);
     ~MyOpenGLWidget() override;
@@ -174,12 +87,11 @@ private:
         "outColor = vec4(FSIn.color, 1.0);\n"
     "}";
 
-private:
+public:
 
-    Input* input;
-    Interaction* interaction;
     QTimer timer;
 
+    Input* input;
     Camera* camera;
 };
 
