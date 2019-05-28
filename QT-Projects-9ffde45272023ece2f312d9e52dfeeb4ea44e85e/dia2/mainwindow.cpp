@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui_main_window(new Ui::MainWindow)
 {
     ui_main_window->setupUi(this);
-    setMinimumSize(QSize(1200, 600));
+    setMinimumSize(QSize(1200, 660));
     //All tab positions on top of the docking area
     setTabPosition(Qt::AllDockWidgetAreas, QTabWidget::TabPosition::North);
 

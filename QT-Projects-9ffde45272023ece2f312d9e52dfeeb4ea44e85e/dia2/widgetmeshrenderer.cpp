@@ -35,7 +35,7 @@ WidgetMeshRenderer::~WidgetMeshRenderer()
 void WidgetMeshRenderer::ConnectSignalsSlots()
 {
     connect(ui->ComboMesh,               SIGNAL(currentIndexChanged(int)), this,    SLOT(UpdateMeshRenderer()));
-    connect(ui->ComboMaterial,           SIGNAL(valueChanged(int)),        this,    SLOT(UpdateMaterial()));
+    connect(ui->ComboMaterial,           SIGNAL(currentIndexChanged(int)), this,    SLOT(UpdateMaterial()));
 }
 
 void WidgetMeshRenderer::UpdateMeshRenderer()

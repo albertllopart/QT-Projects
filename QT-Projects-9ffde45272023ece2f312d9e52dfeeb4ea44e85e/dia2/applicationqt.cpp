@@ -26,3 +26,8 @@ void ApplicationQt::SetScene(Scene* scene)
 {
     this->scene = scene;
 }
+
+MainWindow* ApplicationQt::Window()
+{
+    return window;
+}

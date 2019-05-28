@@ -46,7 +46,8 @@ SOURCES += \
     material.cpp \
     light.cpp \
     widgetmeshrenderer.cpp \
-    applicationqt.cpp
+    applicationqt.cpp \
+    widgetlight.cpp
 
 HEADERS += \
     camera.h \
@@ -70,7 +71,8 @@ HEADERS += \
     material.h \
     light.h \
     widgetmeshrenderer.h \
-    applicationqt.h
+    applicationqt.h \
+    widgetlight.h
 
 FORMS += \
         mainwindow.ui \
@@ -79,7 +81,8 @@ FORMS += \
     widget2dtransform.ui \
     widgetshaperenderer.ui \
     drawrectwindow.ui \
-    widgetmeshrenderer.ui
+    widgetmeshrenderer.ui \
+    widgetlight.ui
 
 RESOURCES += \
     icons.qrc \

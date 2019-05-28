@@ -19,6 +19,8 @@ public:
     Scene* GetScene();
     void SetScene(Scene* scene);
 
+    MainWindow* Window();
+
 private:
 
     Scene* scene = nullptr;

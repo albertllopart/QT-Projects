@@ -8,6 +8,9 @@
 #include "hierarchy.h"
 #include "widgetshaperenderer.h"
 #include "widgetmeshrenderer.h"
+#include "widgetlight.h"
+#include "applicationqt.h"
+#include "mainwindow.h"
 #include <QDebug>
 
 Inspector::Inspector(Scene* sceneA, QWidget *parent) :
@@ -58,6 +61,7 @@ void Inspector::AddMeshRenderer()
     {
         qInfo() << "Add Mesh Renderer";
         selected->AddMeshRenderer();
+        App->GetScene()->GameObjectHierarchyClicked(selected);
         emit MainUpdate();
     }
 }
@@ -67,6 +71,7 @@ void Inspector::AddLight()
     if (selected != nullptr)
     {
         selected->AddLight();
+        App->GetScene()->GameObjectHierarchyClicked(selected);
         emit MainUpdate();
     }
 }
@@ -91,13 +96,18 @@ void Inspector::ShowGameObject(GameObject* selectedGO)
         layout->addWidget(GetWidget(component));
     }
 
-    QPushButton* meshButton = new QPushButton("Add Mesh Renderer");
-    layout->addWidget(meshButton);
-    QPushButton* lightButton = new QPushButton("Add Light");
-    layout->addWidget(lightButton);
-
-    connect(meshButton, SIGNAL(clicked()), this, SLOT(AddMeshRenderer()));
-    connect(lightButton, SIGNAL(clicked()), this, SLOT(AddLight()));
+    if(selected->GetMeshRenderer() == nullptr)
+    {
+        QPushButton* meshButton = new QPushButton("Add Mesh Renderer");
+        layout->addWidget(meshButton);
+        connect(meshButton, SIGNAL(clicked()), this, SLOT(AddMeshRenderer()));
+    }
+    if (selected->GetLight() == nullptr)
+    {
+        QPushButton* lightButton = new QPushButton("Add Light");
+        layout->addWidget(lightButton);
+        connect(lightButton, SIGNAL(clicked()), this, SLOT(AddLight()));
+    }
 
     connect(entity_name, SIGNAL(textChanged(QString)), this, SLOT(SetName(QString)));
 
@@ -140,6 +150,12 @@ QWidget* Inspector::GetWidget(Component* component)
     case Type::ComponentMeshRenderer:
     {
         WidgetMeshRenderer* widget = new WidgetMeshRenderer(scene, (MeshRenderer*)component);
+        connect(widget, SIGNAL(InspectorUpdate()), this, SIGNAL(MainUpdate()));
+        return widget;
+    }
+    case Type::ComponentLight:
+    {
+        WidgetLight* widget = new WidgetLight(scene, (Light*)component);
         connect(widget, SIGNAL(InspectorUpdate()), this, SIGNAL(MainUpdate()));
         return widget;
     }

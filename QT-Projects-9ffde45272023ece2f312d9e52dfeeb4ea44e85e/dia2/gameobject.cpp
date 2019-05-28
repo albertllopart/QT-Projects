@@ -44,7 +44,7 @@ void GameObject::AddLight()
     }
     if (!hasLight)
     {
-        //components.push_back(new (this));
+        components.push_back(new Light(this));
     }
 }
 

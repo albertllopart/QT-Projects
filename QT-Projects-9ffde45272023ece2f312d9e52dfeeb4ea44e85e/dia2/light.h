@@ -2,6 +2,7 @@
 #define LIGHT_H
 
 #include "component.h"
+#include <QColor>
 
 enum LightType
 {
@@ -16,17 +17,22 @@ public:
     void Draw();
 
     void SetType(int type);
-    void SetColor();
     void SetIntensity(int intensity);
-    void SetRadius(int raius);
+    void SetRange(int range);
 
+    QColor GetColor();
+    void SetColor(QColor color);
+    int GetIntensity();
+    int GetRange();
+    LightType GetType();
 
 
 private:
 
     LightType type = LightType::Directional;
     int intensity = 10;
-    int radius = 0.0f;
+    int range = 0.0f;
+    QColor color;
 };
 
 #endif // LIGHT_H
