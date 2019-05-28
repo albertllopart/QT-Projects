@@ -1,10 +1,11 @@
-#include "mainwindow.h"
 #include <QApplication>
 #include <QSurface>
+#include "applicationqt.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    ApplicationQt app(argc, argv);
+    app.Init();
 
     QSurfaceFormat format = QSurfaceFormat::defaultFormat();
     format.setMinorVersion(3);
@@ -18,8 +19,5 @@ int main(int argc, char *argv[])
     format.setSwapBehavior(QSurfaceFormat::SwapBehavior::DoubleBuffer);
     QSurfaceFormat::setDefaultFormat(format);
 
-    MainWindow w;
-    w.show();
-
-    return a.exec();
+    return app.exec();
 }

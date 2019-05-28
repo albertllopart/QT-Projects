@@ -7,14 +7,23 @@
 
 class Transform;
 class ShapeRenderer;
+class MeshRenderer;
+class Light;
 
 class GameObject
 {
 public:
     GameObject(int uid, QString nameGameObject);
 
+
+    void AddMeshRenderer();
+    void AddLight();
+
     Transform* GetTransform();
     ShapeRenderer* GetShapeRenderer();
+    MeshRenderer* GetMeshRenderer();
+    Light* GetLight();
+
 
     void Save(QJsonObject &json) const;
     void Load(const QJsonObject &json);

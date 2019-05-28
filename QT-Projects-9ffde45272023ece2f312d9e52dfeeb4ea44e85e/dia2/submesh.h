@@ -46,6 +46,7 @@ public:
     ~SubMesh() { }
 
     void Draw();
+    void Update();
     void Destroy();
     void SetInfo(uint size, uint indexSize, void* data = nullptr, void* index = nullptr);
 
@@ -60,6 +61,8 @@ private:
     uint* index = nullptr;
     size_t indexCount = 0;
 
+    QOpenGLBuffer vertexbo;
+    QOpenGLBuffer indexbo;
     QOpenGLVertexArrayObject vertexArray;
 
 

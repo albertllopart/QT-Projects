@@ -2,6 +2,8 @@
 #include <iostream>
 #include <QDir>
 #include <QtMath>
+#include "scene.h"
+#include "applicationqt.h"
 
 MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
@@ -59,21 +61,23 @@ void MyOpenGLWidget::resizeGL(int width, int height)
 
 void MyOpenGLWidget::paintGL()
 {
-    glClearColor(0.1f, 0.85f, 1.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    //glClearColor(0.1f, 0.85f, 1.0f, 1.0f);
+    //glClear(GL_COLOR_BUFFER_BIT);
     //program.setUniformValue(u_worldToCamera, )
-    if(program.bind())
-    {
-        vao.bind();
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        vao.release();
-        program.release();
-    }
+    //if(program.bind())
+    //{
+    //    vao.bind();
+    //    glDrawArrays(GL_TRIANGLES, 0, 3);
+    //    vao.release();
+    //    program.release();
+    //}
 
-    //resourceManager->updateResources();
+    makeCurrent();
 
     camera->prepareMatrices();
-
+    //App->GetScene()->Draw();
+    //scene->Draw();
+    //resourceManager->updateResources();
     //renderer->render(camera);
 }
 

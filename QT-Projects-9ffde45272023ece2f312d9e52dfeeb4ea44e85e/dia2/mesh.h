@@ -18,6 +18,7 @@ public:
     Mesh();
     ~Mesh() override;
 
+    void Update() override;
     void Draw(Material* material);
     void Draw() override;
     void Destroy() override;

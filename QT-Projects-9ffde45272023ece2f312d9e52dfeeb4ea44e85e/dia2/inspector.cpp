@@ -7,6 +7,8 @@
 #include "widget2dtransform.h"
 #include "hierarchy.h"
 #include "widgetshaperenderer.h"
+#include "widgetmeshrenderer.h"
+#include <QDebug>
 
 Inspector::Inspector(Scene* sceneA, QWidget *parent) :
     QWidget(parent),
@@ -36,12 +38,37 @@ Inspector::Inspector(Scene* sceneA, QWidget *parent) :
 
     //set the layout for this widget
     //this->setLayout(layout);
+    //connect(ui->AddMeshRenderer, SIGNAL(clicked()), this, SLOT(AddMeshRenderer()));
+    //connect(ui->AddMaterial, SIGNAL(clicked()), this, SLOT(AddMaterial()));
 
+    //QPushButton* meshButton = new QPushButton();
+    //meshButton->
+    //connect(ui->AddMeshRenderer, SIGNAL(clicked()), this, SLOT(AddMeshRenderer()));
+    //connect(ui->AddMaterial, SIGNAL(clicked()), this, SLOT(AddMaterial()));
 }
 
 Inspector::~Inspector()
 {
     delete ui;
+}
+
+void Inspector::AddMeshRenderer()
+{
+    if (selected != nullptr)
+    {
+        qInfo() << "Add Mesh Renderer";
+        selected->AddMeshRenderer();
+        emit MainUpdate();
+    }
+}
+
+void Inspector::AddLight()
+{
+    if (selected != nullptr)
+    {
+        selected->AddLight();
+        emit MainUpdate();
+    }
 }
 
 void Inspector::ShowGameObject(GameObject* selectedGO)
@@ -51,19 +78,29 @@ void Inspector::ShowGameObject(GameObject* selectedGO)
     layout = new QVBoxLayout();
 
     //QWidget* widget = new QWidget();
-
     //connect(widget,SIGNAL(InspectorUpdate()),this,SIGNAL(MainUpdate()));
 
     QLineEdit* entity_name = new QLineEdit(selected->name);
     layout->addWidget(entity_name);
 
+    qInfo() << "Nº Components" << selected->components.size();
     for(int i =0;i<selected->components.size();i++)
     {
         Component* component = selected->components[i];
+        qInfo() << "Comp: " << component->name;
         layout->addWidget(GetWidget(component));
     }
 
+    QPushButton* meshButton = new QPushButton("Add Mesh Renderer");
+    layout->addWidget(meshButton);
+    QPushButton* lightButton = new QPushButton("Add Light");
+    layout->addWidget(lightButton);
+
+    connect(meshButton, SIGNAL(clicked()), this, SLOT(AddMeshRenderer()));
+    connect(lightButton, SIGNAL(clicked()), this, SLOT(AddLight()));
+
     connect(entity_name, SIGNAL(textChanged(QString)), this, SLOT(SetName(QString)));
+
     setLayout(layout);
 
 }
@@ -98,6 +135,12 @@ QWidget* Inspector::GetWidget(Component* component)
     {
         WidgetShapeRenderer* widget= new WidgetShapeRenderer((ShapeRenderer*)component);
         connect(widget,SIGNAL(InspectorUpdate()),this,SIGNAL(MainUpdate()));
+        return widget;
+    }
+    case Type::ComponentMeshRenderer:
+    {
+        WidgetMeshRenderer* widget = new WidgetMeshRenderer(scene, (MeshRenderer*)component);
+        connect(widget, SIGNAL(InspectorUpdate()), this, SIGNAL(MainUpdate()));
         return widget;
     }
     default:

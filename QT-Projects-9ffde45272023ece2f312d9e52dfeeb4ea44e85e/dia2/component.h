@@ -9,8 +9,10 @@ class GameObject;
 
 enum Type
 {
-    ComponentTransform,
-    ComponentRenderer
+    ComponentTransform = 0,
+    ComponentRenderer,
+    ComponentMeshRenderer,
+    ComponentLight
 };
 
 class Component

@@ -21,9 +21,30 @@ Mesh::~Mesh()
     meshes.clear();
 }
 
+void Mesh::Update()
+{
+    foreach (SubMesh* subMesh, meshes)
+        subMesh->Update();
+}
+
 void Mesh::Draw(Material* material)
 {
+    int material_index = 0;
+    foreach (SubMesh* subMesh, meshes)
+    {
+        if(material)
+        {
+            //material->Draw(material_index);
+            material_index++;
 
+        }
+        subMesh->Draw();
+
+        //if(material)
+        //{
+        //    material->UnBind();
+        //}
+    }
 }
 
 void Mesh::Draw()

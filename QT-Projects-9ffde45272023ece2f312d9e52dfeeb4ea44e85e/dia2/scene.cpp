@@ -1,6 +1,7 @@
 #include "scene.h"
 #include "hierarchy.h"
 #include "inspector.h"
+#include "meshrenderer.h"
 
 Scene::Scene()
 {
@@ -14,10 +15,11 @@ GameObject* Scene::CreateGameObject()
     return gameobject;
 }
 
-void Scene::SyncWindows(Inspector* ins, Hierarchy* hie)
+void Scene::SyncWindows(Inspector* ins, Hierarchy* hie, ResourceManager* reM)
 {
     inspector = ins;
     hierarchy = hie;
+    resourceManager = reM;
 }
 
 void Scene::SaveScene(QJsonObject &json) const
@@ -79,5 +81,13 @@ QString Scene::GetCountUUID()
         ret += ")";
     }
     return ret;
+}
+
+void Scene::Draw()
+{
+    for(int i = 0; i < gameobjects.size(); i++)
+    {
+        gameobjects.at(i)->GetMeshRenderer()->Draw();
+    }
 }
 

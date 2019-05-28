@@ -21,6 +21,7 @@ public:
     virtual ~Resource() {}
 
     virtual void Draw() {}
+    virtual void Update() {}
     virtual void Destroy(){}
 
     void SetName(const char* name)
@@ -54,7 +55,9 @@ public:
     void Import(std::string path);
     void AddResource(const Resource* resource);
 
-    Resource* GetResource();
+    int GetCountResources(ResourceType type);
+
+    Resource* GetResource(int i, ResourceType type);
     Resource* GetResourceByName(std::string name, ResourceType type);
 
     void ImportMesh(std::string path);

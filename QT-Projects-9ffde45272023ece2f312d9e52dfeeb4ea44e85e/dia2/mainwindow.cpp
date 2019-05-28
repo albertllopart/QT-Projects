@@ -6,6 +6,7 @@
 #include "drawrectwindow.h"
 #include "scene.h"
 #include "resourcemanager.h"
+#include "applicationqt.h"
 
 #include <QDebug>
 #include <qjsonobject.h>
@@ -23,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setTabPosition(Qt::AllDockWidgetAreas, QTabWidget::TabPosition::North);
 
     scene = new Scene();
+    App->SetScene(scene);
 
     //Create the hierarchy widget and add it to the hierarchy
     hierarchy = new Hierarchy(scene);
@@ -34,7 +36,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui_main_window->dock_inspector->setMinimumWidth(300);
 
     //
-    scene->SyncWindows(inspector, hierarchy);
     //drawRect = new DrawRectWindow(scene);
     //ui_main_window->centralWidget->setLayout(new QVBoxLayout);
     //ui_main_window->centralWidget->layout()->addWidget(drawRect);
@@ -50,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, resource_dock);
     tabifyDockWidget(ui_main_window->dock_inspector, resource_dock);
 
+    scene->SyncWindows(inspector, hierarchy, resourceManager);
     //Create the color dialog
     color_dialog = new QColorDialog(this);
 

@@ -41,7 +41,12 @@ SOURCES += \
     shaperenderer.cpp \
     mesh.cpp \
     resourcemanager.cpp \
-    submesh.cpp
+    submesh.cpp \
+    meshrenderer.cpp \
+    material.cpp \
+    light.cpp \
+    widgetmeshrenderer.cpp \
+    applicationqt.cpp
 
 HEADERS += \
     camera.h \
@@ -60,7 +65,12 @@ HEADERS += \
     shaperenderer.h \
     mesh.h \
     resourcemanager.h \
-    submesh.h
+    submesh.h \
+    meshrenderer.h \
+    material.h \
+    light.h \
+    widgetmeshrenderer.h \
+    applicationqt.h
 
 FORMS += \
         mainwindow.ui \
@@ -68,7 +78,8 @@ FORMS += \
     hierarchy.ui \
     widget2dtransform.ui \
     widgetshaperenderer.ui \
-    drawrectwindow.ui
+    drawrectwindow.ui \
+    widgetmeshrenderer.ui
 
 RESOURCES += \
     icons.qrc \

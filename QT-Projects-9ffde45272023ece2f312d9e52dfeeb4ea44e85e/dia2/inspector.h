@@ -30,6 +30,8 @@ private:
 
 public slots:
     void SetName(QString);
+    void AddMeshRenderer();
+    void AddLight();
 
 public:
     GameObject* selected;

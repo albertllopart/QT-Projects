@@ -65,3 +65,29 @@ void ResourceManager::ImportTexture(std::string path)
 {
 
 }
+
+int ResourceManager::GetCountResources(ResourceType type)
+{
+    int index = 0;
+    foreach(Resource* resource, resources)
+    {
+        if(resource->GetType() == type)
+        {
+            index++;
+        }
+    }
+    return index;
+}
+
+Resource* ResourceManager::GetResource(int i, ResourceType type)
+{
+    int index = 0;
+    foreach(Resource* resource, resources)
+    {
+        if(resource->GetType() == type && index == i)
+        {
+            return resource;
+        }
+        index++;
+    }
+}
