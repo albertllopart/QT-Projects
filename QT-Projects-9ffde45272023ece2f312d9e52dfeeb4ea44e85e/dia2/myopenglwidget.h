@@ -9,6 +9,9 @@
 #include <QTimer>
 #include "camera.h"
 #include "input.h"
+#include "deferredrenderer.h"
+
+extern QOpenGLFunctions_3_3_Core *GL;
 
 class MyOpenGLWidget :
         public QOpenGLWidget,
@@ -93,6 +96,8 @@ public:
 
     Input* input;
     Camera* camera;
+    DeferredRenderer* deferredRenderer;
+
 };
 
 #endif // MYOPENGLWIDGET_H

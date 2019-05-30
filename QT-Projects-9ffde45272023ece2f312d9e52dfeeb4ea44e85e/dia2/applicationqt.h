@@ -7,6 +7,8 @@
 
 class Scene;
 class MainWindow;
+class DeferredRenderer;
+class MyOpenGLWidget;
 
 class ApplicationQt : public QApplication
 {
@@ -19,13 +21,19 @@ public:
     Scene* GetScene();
     void SetScene(Scene* scene);
 
+    DeferredRenderer* GetDeferredRenderer();
+
+    MyOpenGLWidget* GetMyOpenGLWidget();
+    void SetMyOpenGLWidget(MyOpenGLWidget* widget);
+
     MainWindow* Window();
 
 private:
 
     Scene* scene = nullptr;
     MainWindow* window = nullptr;
-
+    DeferredRenderer* deferredRenderer = nullptr;
+    MyOpenGLWidget* myOpenGLWidget = nullptr;
 
 };
 

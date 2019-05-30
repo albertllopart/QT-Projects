@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     camera.cpp \
+    deferredrenderer.cpp \
     input.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -52,6 +53,7 @@ SOURCES += \
 
 HEADERS += \
     camera.h \
+    deferredrenderer.h \
     input.h \
         mainwindow.h \
     inspector.h \

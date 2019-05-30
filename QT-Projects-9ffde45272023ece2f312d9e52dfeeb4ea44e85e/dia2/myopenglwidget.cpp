@@ -4,6 +4,9 @@
 #include <QtMath>
 #include "scene.h"
 #include "applicationqt.h"
+#include "deferredrenderer.h"
+
+QOpenGLFunctions_3_3_Core *GL;
 
 MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
@@ -29,6 +32,8 @@ MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
         timer.setInterval(0);
     }
     timer.start();
+
+    App->SetMyOpenGLWidget(this);
 }
 
 MyOpenGLWidget::~MyOpenGLWidget()
@@ -40,8 +45,14 @@ MyOpenGLWidget::~MyOpenGLWidget()
 
 void MyOpenGLWidget::initializeGL()
 {
-    initializeOpenGLFunctions();
+    deferredRenderer = new DeferredRenderer();
 
+    camera->viewportWidth = this->width();
+    camera->viewportHeight = this->height();
+
+    GL = this;
+
+    initializeOpenGLFunctions();
 
     u_worldToCamera = program.uniformLocation("worldToCamera");
     u_cameraToView = program.uniformLocation("cameraToView");
@@ -78,7 +89,7 @@ void MyOpenGLWidget::paintGL()
     //App->GetScene()->Draw();
     //scene->Draw();
     //resourceManager->updateResources();
-    //renderer->render(camera);
+    deferredRenderer->Render(camera);
 }
 
 void MyOpenGLWidget::finalizeGL()
