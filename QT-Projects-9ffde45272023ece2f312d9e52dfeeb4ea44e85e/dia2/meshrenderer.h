@@ -18,6 +18,8 @@ public:
     void SetMesh(Mesh* mesh);
     void SetMaterial(Material* material);
 
+    Mesh* GetMesh() const;
+
 
 private:
     Mesh* mesh = nullptr;

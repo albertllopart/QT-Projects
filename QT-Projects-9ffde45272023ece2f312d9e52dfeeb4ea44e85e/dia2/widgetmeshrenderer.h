@@ -9,6 +9,7 @@ class WidgetMeshRenderer;
 
 class MeshRenderer;
 class Scene;
+class Mesh;
 
 class WidgetMeshRenderer : public QWidget
 {
@@ -19,17 +20,19 @@ public:
     ~WidgetMeshRenderer();
 
     void ConnectSignalsSlots();
+    void ChangeMesh(QLayout* layout);
+    void AddTexturesLayout(Mesh* mesh);
 
 public slots:
     void UpdateMeshRenderer();
-    void UpdateMaterial();
+    void UpdateTexture();
 
 signals:
     void InspectorUpdate();
 
 private:
     Ui::WidgetMeshRenderer *ui;
-    MeshRenderer* mesh;
+    MeshRenderer* meshRenderer;
     Scene* scene;
 };
 

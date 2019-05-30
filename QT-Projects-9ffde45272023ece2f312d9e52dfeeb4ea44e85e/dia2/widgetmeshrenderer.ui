@@ -19,6 +19,12 @@
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0" colspan="2">
     <widget class="QGroupBox" name="groupBox">
+     <property name="maximumSize">
+      <size>
+       <width>500</width>
+       <height>500</height>
+      </size>
+     </property>
      <property name="title">
       <string>Mesh Renderer</string>
      </property>
@@ -47,19 +53,8 @@
         </item>
        </layout>
       </item>
-      <item row="1" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QLabel" name="label_Material">
-          <property name="text">
-           <string>Material</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="ComboMaterial"/>
-        </item>
-       </layout>
+      <item row="3" column="0">
+       <layout class="QVBoxLayout" name="Textures"/>
       </item>
      </layout>
     </widget>

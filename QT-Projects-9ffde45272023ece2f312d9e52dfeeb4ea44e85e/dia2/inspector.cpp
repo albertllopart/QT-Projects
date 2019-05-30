@@ -12,6 +12,7 @@
 #include "applicationqt.h"
 #include "mainwindow.h"
 #include <QDebug>
+#include <QScrollArea>
 
 Inspector::Inspector(Scene* sceneA, QWidget *parent) :
     QWidget(parent),
@@ -80,8 +81,9 @@ void Inspector::ShowGameObject(GameObject* selectedGO)
 {
     DeleteLayout();
     selected = selectedGO;
-    layout = new QVBoxLayout();
 
+    layout = new QVBoxLayout();
+    //layout.
     //QWidget* widget = new QWidget();
     //connect(widget,SIGNAL(InspectorUpdate()),this,SIGNAL(MainUpdate()));
 
@@ -110,9 +112,10 @@ void Inspector::ShowGameObject(GameObject* selectedGO)
     }
 
     connect(entity_name, SIGNAL(textChanged(QString)), this, SLOT(SetName(QString)));
-
+    QSpacerItem* isstem = new QSpacerItem(0,1, QSizePolicy::Expanding, QSizePolicy::Expanding);
+    layout->addSpacerItem(isstem);
+    //ui->InCom->addLayout(layout);
     setLayout(layout);
-
 }
 
 void Inspector::DeleteLayout()

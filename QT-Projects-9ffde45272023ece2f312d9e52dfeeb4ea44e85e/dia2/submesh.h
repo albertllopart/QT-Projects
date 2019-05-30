@@ -5,6 +5,9 @@
 #include <QOpenGLBuffer>
 #include <QOpenGLFunctions_3_3_Core>
 
+class Texture;
+class Material;
+
 struct VertexAttribute
 {
     bool enabled = false;
@@ -52,6 +55,10 @@ public:
 
 public:
     VertexFormat vertexFormat;
+    std::string textureName = "";
+    std::string meshName = "";
+    Material* material = nullptr;
+    Texture* texture = nullptr;
 
 private:
 

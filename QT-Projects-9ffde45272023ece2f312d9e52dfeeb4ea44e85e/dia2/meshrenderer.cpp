@@ -23,3 +23,10 @@ void MeshRenderer::SetMaterial(Material *material)
 {
     this->material = material;
 }
+
+Mesh* MeshRenderer::GetMesh() const
+{
+    return mesh;
+}
+
+

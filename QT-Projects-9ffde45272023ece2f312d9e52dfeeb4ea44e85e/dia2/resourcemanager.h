@@ -40,7 +40,7 @@ public:
 
 private:
 
-    std::string name;
+    std::string name = "";
     ResourceType type;
 };
 

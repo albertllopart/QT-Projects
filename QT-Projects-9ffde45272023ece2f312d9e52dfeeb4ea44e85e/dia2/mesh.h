@@ -26,15 +26,11 @@ public:
     void Load(const char* pathToFile);
     std::vector<SubMesh*> meshes;
 
-    //QVector<SubMesh*> submeshes;
-
 private:
 
-    void ProcessNodes(const aiScene* scene);
+    void ProcessNodes(aiNode *node, const aiScene* scene);
     void ProcessNode(aiNode* node, const aiScene* scene);
     SubMesh* ProcessSubMeshNode(aiMesh* node, const aiScene* scene);
-
-    std::queue<aiNode*> nodes;
 };
 
 #endif // MESH_H

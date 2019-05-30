@@ -6,6 +6,8 @@
 #include <QVBoxLayout>
 #include <QApplication>
 #include "mesh.h"
+#include "material.h"
+#include "texture.h"
 #include <QDebug>
 
 ResourceManager::ResourceManager(QWidget* parent) : QWidget(parent)
@@ -18,7 +20,7 @@ ResourceManager::ResourceManager(QWidget* parent) : QWidget(parent)
     setLayout(layout);
     //
     // Get Path Resources :D
-    QDir dir(QApplication::applicationDirPath() + "/../../dia2/");
+    QDir dir(QApplication::applicationDirPath() + "/../../dia2/Models/");
     QDirIterator searcher(dir, QDirIterator::Subdirectories);
 
     while(searcher.hasNext())
@@ -44,7 +46,7 @@ void ResourceManager::Import(std::string path)
     // Texture
     if(fileType == ".png" || fileType == ".jpg" || fileType == ".JPG" || fileType == ".PNG")
     {
-        //ImportTexture(path);
+        ImportTexture(path);
     }
 }
 
@@ -56,14 +58,19 @@ void ResourceManager::ImportMesh(std::string path)
     qInfo() << "LOADED MESH: " << mesh->GetName();
     resources.push_back(mesh);
     resourcesList->addItem(mesh->GetName());
-
-    //Material* material = mesh->GetMaterial();
-
 }
 
 void ResourceManager::ImportTexture(std::string path)
 {
+    Texture* texture = new Texture();
+    texture->SetName(path.substr(path.find_last_of("/") + 1).c_str());
 
+    texture->SetType(TextureType::Albedo);
+    texture->SetPath(path);
+
+    texture->Load();
+    resources.push_back(texture);
+    resourcesList->addItem(texture->GetName());
 }
 
 int ResourceManager::GetCountResources(ResourceType type)
@@ -84,10 +91,12 @@ Resource* ResourceManager::GetResource(int i, ResourceType type)
     int index = 0;
     foreach(Resource* resource, resources)
     {
-        if(resource->GetType() == type && index == i)
+        if (resource->GetType() == type)
         {
-            return resource;
+            if(index == i)
+                return resource;
+            index++;
         }
-        index++;
     }
+    return nullptr;
 }

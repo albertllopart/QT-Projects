@@ -1,5 +1,6 @@
 #include "mesh.h"
 #include "submesh.h"
+#include "material.h"
 #include <qfile.h>
 #include <QOpenGLFunctions>
 #include <QFileInfo>
@@ -91,46 +92,30 @@ void Mesh::Load(const char* path)
         return;
     }
 
-    ProcessNodes(scene);
+    ProcessNodes(scene->mRootNode, scene);
 }
 
-void Mesh::ProcessNodes(const aiScene *scene)
+void Mesh::ProcessNodes(aiNode *node, const aiScene *scene)
 {
-    // Mesh has Material ?
-    if (scene->HasMaterials())
-    {
-        //materialMesh = new Material();
-        qInfo() << "Mesh has Material";
-    }
+    // ProcessNode
+    ProcessNode(node, scene);
 
-    //Read all nodes iterative!
-    nodes.push(scene->mRootNode);
-    while (!nodes.empty())
+    for (uint i = 0; i < node->mNumChildren; i++)
     {
-        ProcessNode(nodes.front(), scene);
-        for (uint i = 0; i < nodes.front()->mNumChildren; i++)
-            nodes.push(nodes.front()->mChildren[i]);
-        nodes.pop();
+        ProcessNodes(node->mChildren[i], scene);
     }
 }
 void Mesh::ProcessNode(aiNode* node, const aiScene* scene)
 {
-    QVector<float> vertices;
-    QVector<unsigned int> indices;
-
-    bool hasTexCoords = false;
-
+    // Heee
     for (uint i = 0; i < node->mNumMeshes; i++)
     {
         aiMesh* aiMesh = scene->mMeshes[node->mMeshes[i]];
         SubMesh* sub = ProcessSubMeshNode(aiMesh, scene);
-        //if (sub != nullptr)
-        //    meshes.push_back(sub);
 
-        //Process Material
-        if(scene->HasMaterials())
+        if (sub != nullptr)
         {
-
+            meshes.push_back(sub);
         }
     }
 }
@@ -186,5 +171,7 @@ SubMesh* Mesh::ProcessSubMeshNode(aiMesh *mesh, const aiScene *scene)
     // Now adding info...
     sub->SetInfo(vertices.size() * sizeof(float), indices.size(), &vertices[0], &indices[0]);
 
+    sub->textureName = "NoN";
+    sub->meshName = mesh->mName.C_Str();
     return sub;
 }
