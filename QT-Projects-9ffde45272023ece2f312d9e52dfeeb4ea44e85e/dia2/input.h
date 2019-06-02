@@ -30,10 +30,16 @@ public:
     void mouseReleaseEvent(QMouseEvent* event);
     void mouseWheelEvent(QWheelEvent* event);
 
-    void postUpdate()
-    {
+    void postUpdate();
+    void updateParameters(QMouseEvent* event);
 
-    }
+    //translation
+    QVector3D xLeft(float yaw, float pitch);
+    QVector3D xRight(float yaw, float pitch);
+    QVector3D yUp(float yaw, float pitch);
+    QVector3D yDown(float yaw, float pitch);
+    QVector3D zOnward(float yaw, float pitch);
+    QVector3D zBackward(float yaw, float pitch);
 
     enum { MAX_BUTTONS = 10, MAX_KEYS = 300 };
 
