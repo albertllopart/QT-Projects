@@ -10,6 +10,7 @@ void MeshRenderer::Draw()
 {
     if(mesh != nullptr)
     {
+        mesh->Update();
         mesh->Draw(material);
     }
 }

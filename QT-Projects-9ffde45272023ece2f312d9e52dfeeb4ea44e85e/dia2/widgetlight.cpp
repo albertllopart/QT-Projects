@@ -13,7 +13,8 @@ WidgetLight::WidgetLight(Scene* scene, Light* light, QWidget *parent) :
     this->light = light;
 
     ui->LightType->addItem("Directional");
-    ui->LightType->addItem(".");
+    ui->LightType->addItem("Point");
+    ui->LightType->addItem("More?");
     ui->LightType->setCurrentIndex((int)light->GetType());
     ui->ColorButton->setStyleSheet("background-color: " + light->GetColor().name());
     ui->SliderIntensity->setValue(light->GetIntensity());
@@ -39,7 +40,13 @@ void WidgetLight::ConnectSignalsSlots()
 
 void WidgetLight::UpdateLightType()
 {
-    light->SetType(ui->LightType->currentIndex());
+    if(ui->LightType->currentIndex() <= 1)
+        light->SetType(ui->LightType->currentIndex());
+    else
+    {
+        ui->LightType->setCurrentIndex(1);
+        light->SetType(1);
+    }
     emit InspectorUpdate();
 }
 

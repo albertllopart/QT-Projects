@@ -20,6 +20,7 @@ public:
     void SetIntensity(int intensity);
     void SetRange(int range);
 
+public:
     QColor GetColor();
     void SetColor(QColor color);
     int GetIntensity();

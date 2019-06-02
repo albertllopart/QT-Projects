@@ -43,7 +43,7 @@ void Texture::SetPath(std::string path)
     this->path = path;
 }
 
-uint Texture::GetIndex()
+unsigned int Texture::GetIndex()
 {
     return id;
 }

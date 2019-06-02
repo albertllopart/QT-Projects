@@ -23,12 +23,12 @@ public:
 
     void SetType(TextureType type);
     void SetPath(std::string path);
-    uint GetIndex();
+    unsigned int GetIndex();
     TextureType GetTextureType();
 
 private:
 
-    uint id = 0;
+    unsigned int id = 0;
     TextureType type = TextureType::Albedo;
     std::string path = "";
 

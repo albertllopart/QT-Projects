@@ -3,10 +3,13 @@
 
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLBuffer>
-#include <QOpenGLFunctions_3_3_Core>
+#include "myopenglwidget.h"
 
-class Texture;
+//class Texture;
 class Material;
+class QOpenGLTexture;
+
+#define MAX_VERTEX_ATTRIBUTES 3
 
 struct VertexAttribute
 {
@@ -19,58 +22,51 @@ class VertexFormat
 {
 public:
 
-    void SetVertexAttribute(int index, int offset, int numComponents)
+    void SetVertexAttribute(int location, int offset, int numComponents)
     {
-        if(index < 3)
+        if(location < MAX_VERTEX_ATTRIBUTES)
         {
-            attributes[index].enabled = true;
-            attributes[index].offset = offset;
-            attributes[index].numComponents = numComponents;
+            attribute[location].enabled = true;
+            attribute[location].offset = offset;
+            attribute[location].numComponents = numComponents;
             size += (numComponents * sizeof(float));
         }
     }
 
-   VertexFormat& operator=(const VertexFormat& other)
-   {
-       memcpy(attributes, other.attributes, sizeof(VertexAttribute) * 3);
-       size = other.size;
-
-       return *this;
-   }
-
-    VertexAttribute attributes[3];
+    VertexAttribute attribute[MAX_VERTEX_ATTRIBUTES];
     int size = 0;
 };
 
 class SubMesh
 {
 public:
-    SubMesh(VertexFormat format);
+    SubMesh(VertexFormat vertexFormat, void *data, int size);
+    SubMesh(VertexFormat vertexFormat, void *data, int size, unsigned int *indices, int indicesCount);
+
     ~SubMesh() { }
 
     void Draw();
     void Update();
     void Destroy();
-    void SetInfo(uint size, uint indexSize, void* data = nullptr, void* index = nullptr);
-
 public:
     VertexFormat vertexFormat;
     std::string textureName = "";
     std::string meshName = "";
     Material* material = nullptr;
-    Texture* texture = nullptr;
+    //Texture* texture = nullptr;
+    QOpenGLTexture* texture = nullptr;
 
 private:
 
-    uchar* dfile = nullptr;
-    size_t dfileSize = 0;
+    unsigned char* data = nullptr;
+    size_t dataSize = 0;
 
-    uint* index = nullptr;
-    size_t indexCount = 0;
+    unsigned int* indice = nullptr;
+    size_t indicesCount = 0;
 
-    QOpenGLBuffer vertexbo;
-    QOpenGLBuffer indexbo;
-    QOpenGLVertexArrayObject vertexArray;
+    QOpenGLBuffer vbo;
+    QOpenGLBuffer ibo;
+    QOpenGLVertexArrayObject vao;
 
 
 };

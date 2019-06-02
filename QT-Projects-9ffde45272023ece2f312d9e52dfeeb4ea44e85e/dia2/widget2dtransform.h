@@ -22,10 +22,6 @@ public:
 
 public slots:
     void UpdateTransform();
-    void UpdateTransformSliderXPosition(int value);
-    void UpdateTransformSliderYPosition(int value);
-    void UpdateTransformSliderXScale(int value);
-    void UpdateTransformSliderYScale(int value);
 
 signals:
     void InspectorUpdate();
@@ -33,7 +29,7 @@ signals:
 private:
     int initialSize = 5;
     Ui::Widget2DTransform *ui;
-    Transform* transform;
+    Transform* transform = nullptr;
 };
 
 #endif // WIDGET2DTRANSFORM_H

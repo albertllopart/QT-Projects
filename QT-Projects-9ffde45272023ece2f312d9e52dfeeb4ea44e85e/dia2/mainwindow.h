@@ -36,6 +36,9 @@ public slots:
     void LoadScene();
     void NewScene();
 
+public:
+    bool showLightScene = true;
+
 private:
     Ui::MainWindow *ui_main_window;
 

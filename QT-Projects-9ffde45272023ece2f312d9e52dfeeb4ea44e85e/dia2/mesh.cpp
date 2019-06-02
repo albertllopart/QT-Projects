@@ -30,21 +30,9 @@ void Mesh::Update()
 
 void Mesh::Draw(Material* material)
 {
-    int material_index = 0;
     foreach (SubMesh* subMesh, meshes)
     {
-        if(material)
-        {
-            //material->Draw(material_index);
-            material_index++;
-
-        }
         subMesh->Draw();
-
-        //if(material)
-        //{
-        //    material->UnBind();
-        //}
     }
 }
 
@@ -77,7 +65,8 @@ void Mesh::Load(const char* path)
     QByteArray data = file.readAll();
 
     const aiScene* scene = import.ReadFileFromMemory(
-                data.data(), data.size(),
+                data.data(),
+                data.size(),
                 aiProcess_Triangulate |
                 aiProcess_FlipUVs |
                 aiProcess_GenSmoothNormals |
@@ -100,7 +89,7 @@ void Mesh::ProcessNodes(aiNode *node, const aiScene *scene)
     // ProcessNode
     ProcessNode(node, scene);
 
-    for (uint i = 0; i < node->mNumChildren; i++)
+    for (unsigned int i = 0; i < node->mNumChildren; i++)
     {
         ProcessNodes(node->mChildren[i], scene);
     }
@@ -108,7 +97,7 @@ void Mesh::ProcessNodes(aiNode *node, const aiScene *scene)
 void Mesh::ProcessNode(aiNode* node, const aiScene* scene)
 {
     // Heee
-    for (uint i = 0; i < node->mNumMeshes; i++)
+    for (unsigned int i = 0; i < node->mNumMeshes; i++)
     {
         aiMesh* aiMesh = scene->mMeshes[node->mMeshes[i]];
         SubMesh* sub = ProcessSubMeshNode(aiMesh, scene);
@@ -129,7 +118,7 @@ SubMesh* Mesh::ProcessSubMeshNode(aiMesh *mesh, const aiScene *scene)
 
     bool hasTexCoords = false;
 
-    for(uint i = 0; i < mesh->mNumVertices; i++)
+    for(unsigned int i = 0; i < mesh->mNumVertices; i++)
     {
         // Vertices
         vertices.push_back(mesh->mVertices[i].x);
@@ -151,7 +140,7 @@ SubMesh* Mesh::ProcessSubMeshNode(aiMesh *mesh, const aiScene *scene)
     }
 
     //Proces Indicess
-    for(uint i = 0; i < mesh->mNumFaces; i++)
+    for(unsigned int i = 0; i < mesh->mNumFaces; i++)
     {
         aiFace face = mesh->mFaces[i];
 
@@ -166,10 +155,11 @@ SubMesh* Mesh::ProcessSubMeshNode(aiMesh *mesh, const aiScene *scene)
     if (hasTexCoords)
         format.SetVertexAttribute(2, 6 * sizeof(float), 2);
 
-    sub = new SubMesh(format);
-
-    // Now adding info...
-    sub->SetInfo(vertices.size() * sizeof(float), indices.size(), &vertices[0], &indices[0]);
+    sub = new SubMesh(format,
+                       &vertices[0],
+                       vertices.size() * sizeof(float),
+                       &indices[0],
+                       indices.size());
 
     sub->textureName = "NoN";
     sub->meshName = mesh->mName.C_Str();

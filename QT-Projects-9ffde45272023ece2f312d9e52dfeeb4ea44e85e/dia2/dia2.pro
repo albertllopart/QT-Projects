@@ -89,8 +89,13 @@ FORMS += \
     widgetlight.ui
 
 RESOURCES += \
-    icons.qrc \
-    shaders.qrc
+    icons.qrc
+
+DISTFILES += \
+    shaders/LightShader.frag \
+    shaders/LightShader.vert \
+    shaders/GeometryShader.frag \
+    shaders/GeometryShader.vert
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/Assimp/lib/ -lassimp
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/Assimp/lib/ -lassimpd

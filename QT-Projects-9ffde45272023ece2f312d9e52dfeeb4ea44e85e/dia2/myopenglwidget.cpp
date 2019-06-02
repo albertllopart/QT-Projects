@@ -2,6 +2,7 @@
 #include <iostream>
 #include <QDir>
 #include <QtMath>
+#include <QOpenGLShader>
 #include "scene.h"
 #include "applicationqt.h"
 #include "deferredrenderer.h"
@@ -13,9 +14,7 @@ MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
     setMinimumSize(QSize(256, 256));
 
     setMouseTracking(true);
-    input = new Input(this);
-    //interaction = new Interaction(this);
-    camera = new Camera();
+
 
     //timer per cridar slot a cada frame
     connect(&timer, SIGNAL(timeout()), this, SLOT(frame()));
@@ -45,8 +44,10 @@ MyOpenGLWidget::~MyOpenGLWidget()
 
 void MyOpenGLWidget::initializeGL()
 {
+    makeCurrent();
     deferredRenderer = new DeferredRenderer();
-
+    input = new Input(this);
+    camera = new Camera();
     camera->viewportWidth = this->width();
     camera->viewportHeight = this->height();
 
@@ -54,47 +55,41 @@ void MyOpenGLWidget::initializeGL()
 
     initializeOpenGLFunctions();
 
-    u_worldToCamera = program.uniformLocation("worldToCamera");
-    u_cameraToView = program.uniformLocation("cameraToView");
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+
+    deferredRenderer->InitDeferredRenderer();
+    deferredRenderer->Resize(this->width(),this->height());
 
     //Handle context destructions
     connect(context(), SIGNAL(aboutToBeDestroyed()), this, SLOT(finalizeGL()));
 
-    createSampleTriangle();
+    //createSampleTriangle();
 }
 
 void MyOpenGLWidget::resizeGL(int width, int height)
 {
-    //TODO: resize textures
-    // Set the viewport to window dimensions
-    glViewport( 0, 0, width, qMax( height, 1 ) );
+    glViewport(0,0,width,height);
+    camera->viewportWidth = this->width();
+    camera->viewportHeight = this->height();
+    // Resize textures;
+    deferredRenderer->DeleteBuffers();
+    deferredRenderer->Resize(width, height);
 }
 
 void MyOpenGLWidget::paintGL()
 {
-    //glClearColor(0.1f, 0.85f, 1.0f, 1.0f);
-    //glClear(GL_COLOR_BUFFER_BIT);
-    //program.setUniformValue(u_worldToCamera, )
-    //if(program.bind())
-    //{
-    //    vao.bind();
-    //    glDrawArrays(GL_TRIANGLES, 0, 3);
-    //    vao.release();
-    //    program.release();
-    //}
-
-    makeCurrent();
-
     camera->prepareMatrices();
-    //App->GetScene()->Draw();
-    //scene->Draw();
-    //resourceManager->updateResources();
     deferredRenderer->Render(camera);
 }
 
 void MyOpenGLWidget::finalizeGL()
 {
     std::cout << "finalizeGL()" << std::endl;
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void MyOpenGLWidget::frame()

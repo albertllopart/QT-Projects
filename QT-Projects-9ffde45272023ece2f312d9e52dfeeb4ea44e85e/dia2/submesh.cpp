@@ -1,93 +1,115 @@
 #include "submesh.h"
 #include <iostream>
 #include <QOpenGLFunctions>
+#include <stdio.h>
+#include <QOpenGLTexture>
+#include "texture.h"
+#include "QImage"
 
-SubMesh::SubMesh(VertexFormat format)
+SubMesh::SubMesh(VertexFormat vertexFormat, void *data, int size) : ibo(QOpenGLBuffer::IndexBuffer)
 {
-    vertexFormat = format;
+    this->vertexFormat = vertexFormat;
+    memcpy(this->data, data, size);
+    dataSize = size;
 }
 
-
-void SubMesh::SetInfo(uint size, uint indexSize, void *dfile, void *index)
+SubMesh::SubMesh(VertexFormat vertexFormat, void *data, int size, unsigned int *indices, int indicesCountP):
+    ibo(QOpenGLBuffer::IndexBuffer)
 {
-    this->dfile = new uchar[size];
-    memcpy(this->dfile, dfile, size);
-    dfileSize = size;
-    //
-    this->index = new uint[indexSize];
-    memcpy(this->index, index, indexSize * sizeof(uint));
-    indexCount = indexSize;
+    this->vertexFormat = vertexFormat;
+    this->data = new uchar[size];
+    memcpy(this->data, data, size);
+    dataSize = size;
+
+    indice = new unsigned int[(indicesCountP * sizeof(uint))];
+    memcpy(indice, indices, (indicesCountP * sizeof(uint)));
+    indicesCount = indicesCountP;
 }
 
 void SubMesh::Update()
 {
-    QOpenGLFunctions* gl_functions = QOpenGLContext::currentContext()->functions();
+    if(!vao.isCreated())
+        vao.create();
+    vao.bind();
 
-    vertexbo.create();
-    vertexbo.bind();
+    if(!vbo.isCreated())
+        vbo.create();
+    vbo.bind();
+    vbo.setUsagePattern(QOpenGLBuffer::UsagePattern::StaticDraw);
+    vbo.allocate(data,int(dataSize));
+    delete[] data;
+    data = nullptr;
 
-    if(dfile != nullptr)
+    if (indice != nullptr)
     {
-        vertexbo.create();
-        vertexbo.bind();
-        vertexbo.setUsagePattern(QOpenGLBuffer::UsagePattern::StaticDraw);
-        vertexbo.allocate(dfile, int(dfileSize));
-        delete[] dfile;
-        dfile = nullptr;
+        if(!ibo.isCreated())
+           ibo.create();
+        ibo.bind();
+        ibo.setUsagePattern(QOpenGLBuffer::UsagePattern::StaticDraw);
+        ibo.allocate(indice, int(indicesCount * sizeof ( unsigned int)));
+        delete[] indice;
+        indice = nullptr;
     }
-
-    // IBO: buffer with index
-    if(indexCount > 0)
+    for (int location = 0; location < MAX_VERTEX_ATTRIBUTES; ++location)
     {
-        indexbo.create();
-        indexbo.bind();
-        indexbo.setUsagePattern(QOpenGLBuffer::UsagePattern::StaticDraw);
-        indexbo.allocate(index, int(indexCount * sizeof(unsigned int)));
-        delete[] index;
-        index = nullptr;
-    }
-
-    for (int i = 0; i < 3; i++)
-    {
-        VertexAttribute& attribute = vertexFormat.attributes[i];
-
-        if(attribute.enabled)
+        VertexAttribute &attr = vertexFormat.attribute[location];
+        if(attr.enabled)
         {
-            gl_functions->glEnableVertexAttribArray(GLuint(i));
-            gl_functions->glVertexAttribPointer(GLuint(i), attribute.numComponents, GL_FLOAT, GL_FALSE, vertexFormat.size, (void*)(attribute.offset));
+            //printf("%i ", location);
+            GL->glEnableVertexAttribArray(GLuint(location));
+            GL->glVertexAttribPointer(GLuint(location), attr.numComponents,
+                                      GL_FLOAT, GL_FALSE,
+                                      vertexFormat.size,
+                                      (void*) (attr.offset));
         }
     }
-
-    vertexbo.release();
-    vertexbo.release();
-    if(indexbo.isCreated())
-        indexbo.release();
-
+    vao.release();
+    vbo.release();
+    if(ibo.isCreated())
+        ibo.release();
 }
 
 void SubMesh::Draw()
 {
-    int numVertices = dfileSize / vertexFormat.size;
-    QOpenGLFunctions* glFunctions = QOpenGLContext::currentContext()->functions();
+    if(texture == nullptr) // Testing... Need Change
+    {
+        texture = new QOpenGLTexture(QImage("Texture/Checker.jpg"));
+    }
+    if(texture != nullptr)
+    {
+        qInfo() << "Draw Texture";
+        GL->glBindTexture(GL_TEXTURE_2D, texture->textureId());
+    }
 
-    vertexArray.bind();
-    if (indexCount > 0)
+    int numVertices = dataSize / vertexFormat.size;
+
+    if(vao.isCreated())
     {
-        glFunctions->glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
+
+        vao.bind();
+        if (indicesCount > 0)
+        {
+            qInfo() << "Incex: " << indicesCount;
+            GL->glDrawElements(GL_TRIANGLES, indicesCount, GL_UNSIGNED_INT, nullptr);
+        }
+        else
+            GL->glDrawArrays(GL_TRIANGLES, 0, numVertices);
     }
-    else
+    qInfo() << "glDrawElements";
+    vao.release();
+    qInfo() << "release";
+    if(texture != nullptr)
     {
-        glFunctions->glDrawArrays(GL_TRIANGLES, 0, numVertices);
+        GL->glBindTexture(GL_TEXTURE_2D, 0);
     }
-    vertexArray.release();
 }
 
 void SubMesh::Destroy()
 {
-    if (vertexArray.isCreated())
-        vertexArray.destroy();
-    if (vertexbo.isCreated())
-        vertexbo.destroy();
-    if (indexbo.isCreated())
-        indexbo.destroy();
+    if(vbo.isCreated())
+        vbo.destroy();
+    if(ibo.isCreated())
+        vbo.destroy();
+    if(vao.isCreated())
+        vbo.destroy();
 }
