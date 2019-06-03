@@ -30,6 +30,7 @@ public:
     void PassLight(Camera* camera);
     void PassLight2(Camera* camera);
     void RenderQuad();
+    void DrawGrid();
 
 
 public:
@@ -43,6 +44,7 @@ public:
 
     QOpenGLShaderProgram program;
     QOpenGLShaderProgram programLight;
+    //QOpenGLShaderProgram programGrid;
     unsigned int attachments[3];
 
     unsigned int quadVAO = 0;

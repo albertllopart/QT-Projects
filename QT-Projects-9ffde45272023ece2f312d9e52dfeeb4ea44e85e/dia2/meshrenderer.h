@@ -12,8 +12,8 @@ public:
 
     void Draw();
 
-    //void Save(QJsonObject &json) const override;
-    //void Load(const QJsonObject &json) override;
+    void Save(QJsonObject &json) const override;
+    void Load(const QJsonObject &json) override;
 
     void SetMesh(Mesh* mesh);
     void SetMaterial(Material* material);

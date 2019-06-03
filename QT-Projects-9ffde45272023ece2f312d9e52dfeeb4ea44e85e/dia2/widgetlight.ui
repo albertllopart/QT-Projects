@@ -66,7 +66,7 @@
         <item>
          <widget class="QSlider" name="SliderRange">
           <property name="maximum">
-           <number>50</number>
+           <number>500</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -151,7 +151,7 @@
         <item>
          <widget class="QSlider" name="SliderIntensity">
           <property name="maximum">
-           <number>100</number>
+           <number>120</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>

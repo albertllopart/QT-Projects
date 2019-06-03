@@ -6,7 +6,8 @@
 
 enum LightType
 {
-    Directional = 0
+    Directional = 0,
+    Point = 1
 };
 
 class Light : public Component
@@ -19,6 +20,9 @@ public:
     void SetType(int type);
     void SetIntensity(int intensity);
     void SetRange(int range);
+
+    void Save(QJsonObject &json) const override;
+    void Load(const QJsonObject &json) override;
 
 public:
     QColor GetColor();

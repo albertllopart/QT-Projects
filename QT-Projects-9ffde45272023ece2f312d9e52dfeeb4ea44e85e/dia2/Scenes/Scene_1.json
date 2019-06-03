@@ -1,0 +1,98 @@
+{
+    "GameObject_0": {
+        "Component_0": {
+            "Position_X": -3,
+            "Position_Y": 0,
+            "Position_Z": 4,
+            "Rotation_X": 0,
+            "Rotation_Y": 0,
+            "Rotation_Z": 0,
+            "Scale_X": 1,
+            "Scale_Y": 1,
+            "Scale_Z": 1
+        },
+        "Component_1": {
+            "Color_B": 255,
+            "Color_G": 255,
+            "Color_R": 255,
+            "Intensity": 48,
+            "Range": 206,
+            "Type": 1
+        },
+        "Light": true,
+        "MeshRenderer": false,
+        "Name": "GameObject",
+        "UUID": 0
+    },
+    "GameObject_1": {
+        "Component_0": {
+            "Position_X": 0,
+            "Position_Y": 0,
+            "Position_Z": 0,
+            "Rotation_X": 0,
+            "Rotation_Y": 0,
+            "Rotation_Z": 0,
+            "Scale_X": 1,
+            "Scale_Y": 1,
+            "Scale_Z": 1
+        },
+        "Component_1": {
+            "HasMesh": true,
+            "MeshName": "PalmTree.obj",
+            "Texture_0": "ENV_MP_Iraq_palm_tree_01_D.png",
+            "Texture_1": "ENV_MP_Iraq_PlantsSansTrans_D.png"
+        },
+        "Light": false,
+        "MeshRenderer": true,
+        "Name": "GameObject (1)",
+        "UUID": 1
+    },
+    "GameObject_2": {
+        "Component_0": {
+            "Position_X": 5,
+            "Position_Y": 0,
+            "Position_Z": 0,
+            "Rotation_X": 0,
+            "Rotation_Y": 0,
+            "Rotation_Z": 0,
+            "Scale_X": 1,
+            "Scale_Y": 1,
+            "Scale_Z": 1
+        },
+        "Component_1": {
+            "Color_B": 255,
+            "Color_G": 255,
+            "Color_R": 255,
+            "Intensity": 29,
+            "Range": 276,
+            "Type": 1
+        },
+        "Light": true,
+        "MeshRenderer": false,
+        "Name": "GameObject (2)",
+        "UUID": 2
+    },
+    "GameObject_3": {
+        "Component_0": {
+            "Position_X": 0,
+            "Position_Y": 0,
+            "Position_Z": 0,
+            "Rotation_X": 0,
+            "Rotation_Y": 0,
+            "Rotation_Z": 0,
+            "Scale_X": 2.200000047683716,
+            "Scale_Y": 1,
+            "Scale_Z": 2.200000047683716
+        },
+        "Component_1": {
+            "HasMesh": true,
+            "MeshName": "StoneFloor.obj",
+            "Texture_0": "StoneFloorDiffuse.png"
+        },
+        "Light": false,
+        "MeshRenderer": true,
+        "Name": "GameObject (3)",
+        "UUID": 3
+    },
+    "NumberOfGameObjects": 4
+}

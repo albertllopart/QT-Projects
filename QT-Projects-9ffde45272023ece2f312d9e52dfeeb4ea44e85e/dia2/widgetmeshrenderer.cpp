@@ -164,7 +164,7 @@ void WidgetMeshRenderer::UpdateTexture(const QString& nameSubmesh)
     }
     else
     {
-            meshRenderer->GetMesh()->meshes[index]->texture = newTexture;
+        meshRenderer->GetMesh()->meshes[index]->texture = newTexture;
     }
     //meshRenderer->SetMaterial((Material*)scene->resourceManager->GetResource(ui->ComboMesh->currentIndex() - 1, ResourceType::RMaterial));
     emit InspectorUpdate();

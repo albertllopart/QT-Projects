@@ -25,6 +25,7 @@ const int MaxLight = 32;
 uniform Light lights[MaxLight];
 uniform vec3 viewPos;
 
+//uniform vec3 vertex;
 uniform int renderView;
 
 vec3 PointLight(int index, vec3 FragPos, vec3 Normal, vec3 Diffuse, float Specular, vec3 lighting, vec3 viewDir)
@@ -102,7 +103,7 @@ void main(void)
         }
         else
         {
-            FragColor = vec4(1.0,0.0,1.0,1.0);
+            FragColor = vec4(lighting, 1.0);
         }
     }
     else

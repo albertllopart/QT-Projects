@@ -73,6 +73,7 @@ public:
     Resource* GetResource(std::string name);
     Resource* GetResourceCopy(Resource* copy, ResourceType type);
     Resource* GetResourceObject(int i, ResourceType type);
+    Resource* GetResourceObject(std::string name, ResourceType type);
 
     void ImportMesh(std::string path);
     void ImportTexture(std::string path);

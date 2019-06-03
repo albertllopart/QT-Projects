@@ -46,6 +46,11 @@ void DeferredRenderer::InitDeferredRenderer()
     programLight.addShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/LightShader.vert");
     programLight.addShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/LightShader.frag");
     programLight.link();
+
+    //programGrid.create();
+    //programGrid.addShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/GridShader.vert");
+    //programGrid.addShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/GridShader.frag");
+    //programGrid.link();
 }
 
 void DeferredRenderer::DeleteBuffers()

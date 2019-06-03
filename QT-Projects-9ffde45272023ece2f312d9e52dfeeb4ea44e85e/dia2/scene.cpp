@@ -30,9 +30,10 @@ void Scene::SaveScene(QJsonObject &json) const
         QString name;
         name = "GameObject_" + QString::number(i);
         gameobjects.at(i)->Save(gObject);
+        gObject["MeshRenderer"] = gameobjects[i]->GetMeshRenderer() != nullptr;
+        gObject["Light"] = gameobjects[i]->GetLight() != nullptr;
         json[name] = gObject;
     }
-
     json["NumberOfGameObjects"] = gameobjects.size();
 }
 
@@ -47,6 +48,10 @@ void Scene::LoadScene(const QJsonObject &json)
         gObject = json[name].toObject();
         GameObject* gameObject = CreateGameObject();
         hierarchy->AddGameObject(gameObject);
+        if(gObject["MeshRenderer"].toBool())
+            gameObject->AddMeshRenderer();
+        if(gObject["Light"].toBool())
+            gameObject->AddLight();
         gameObject->Load(gObject);
     }
 }

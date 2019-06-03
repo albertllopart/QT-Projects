@@ -144,6 +144,16 @@ Resource* ResourceManager::GetResourceObject(int i, ResourceType type)
     return nullptr;
 }
 
+Resource* ResourceManager::GetResourceObject(std::string name, ResourceType type)
+{
+    foreach(Resource* resource, resources)
+    {
+        if (resource->GetName() == name)
+            return GetResourceCopy(resource, type);
+    }
+    return nullptr;
+}
+
 Resource* ResourceManager::GetResource(std::string name)
 {
     foreach(Resource* resource, resources)
