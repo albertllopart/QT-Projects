@@ -70,7 +70,7 @@ vec3 DirectionalLight(int index, vec3 FragPos, vec3 Normal, vec3 Diffuse, float 
     //float attenuation = lights[index].Intensity / (1,0 + lights[index].Linear * distance + lights[index].Quadratic * distance * distance);
     //diffuse *= attenuation;
     //specular *= attenuation;
-    lightRet = diffuse + specular;
+    lightRet = (diffuse * lights[index].Intensity) + (specular * lights[index].Intensity);
     return lightRet;
 }
 

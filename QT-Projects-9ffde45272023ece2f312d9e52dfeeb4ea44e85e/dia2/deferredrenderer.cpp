@@ -160,10 +160,10 @@ void DeferredRenderer::PassMeshes(Camera* camera)
                                        1,
                                        GL_FALSE,
                                        (camera->viewMatrix * go->GetTransform()->GetTransformMatrix()).data());
-                //GL->glUniformMatrix4fv(program.uniformLocation("modelWorldMatrix"),
-                //                       1,
-                //                       GL_FALSE,
-                //                       go->GetTransform()->GetTransformMatrix().data());
+                GL->glUniformMatrix4fv(program.uniformLocation("modelWorldMatrix"),
+                                       1,
+                                       GL_FALSE,
+                                       go->GetTransform()->GetTransformMatrix().data());
 
                 GL->glActiveTexture(GL_TEXTURE0);
                 go->GetMeshRenderer()->Draw();
@@ -208,7 +208,7 @@ void DeferredRenderer::PassLight(Camera* camera)
             sceneLight.Position = QVector3D(10, 10, 10);
             sceneLight.Color = QVector3D(0.75, 0.75, 0.75);
             sceneLight.TypeLight = 0;
-            sceneLight.Intensity = 10.0;
+            sceneLight.Intensity = 5.0;
             sceneLight.Radius = 100.0;
             lights.push_back(sceneLight);
             NumberLightsInScene++;
@@ -273,7 +273,7 @@ void DeferredRenderer::PassLight(Camera* camera)
                                                      ("lights["+QString::number(i)+"].Linear").toStdString().c_str()),
                                                         linear);
             GL->glUniform1f(GL->glGetUniformLocation(programLight.programId(),
-                                                     ("lights["+QString::number(i)+"].Linear").toStdString().c_str()),
+                                                     ("lights["+QString::number(i)+"].Quadratic").toStdString().c_str()),
                                                         quadratic);
 
         }
