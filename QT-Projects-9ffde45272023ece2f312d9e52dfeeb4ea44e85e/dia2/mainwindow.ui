@@ -68,9 +68,22 @@
     <addaction name="actionReUndo"/>
     <addaction name="separator"/>
    </widget>
+   <widget class="QMenu" name="menuRenderView">
+    <property name="title">
+     <string>Render</string>
+    </property>
+    <addaction name="actionDeffered"/>
+    <addaction name="actionNormal"/>
+    <addaction name="actionDiffuse"/>
+    <addaction name="actionFragg"/>
+    <addaction name="actionelse"/>
+    <addaction name="separator"/>
+    <addaction name="actionLightScene"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuEntities"/>
+   <addaction name="menuRenderView"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -191,6 +204,36 @@
    </property>
    <property name="toolTip">
     <string>Open Scene</string>
+   </property>
+  </action>
+  <action name="actionDeffered">
+   <property name="text">
+    <string>Deffered</string>
+   </property>
+  </action>
+  <action name="actionNormal">
+   <property name="text">
+    <string>Normal</string>
+   </property>
+  </action>
+  <action name="actionDiffuse">
+   <property name="text">
+    <string>Albedo</string>
+   </property>
+  </action>
+  <action name="actionFragg">
+   <property name="text">
+    <string>Position</string>
+   </property>
+  </action>
+  <action name="actionelse">
+   <property name="text">
+    <string>Color</string>
+   </property>
+  </action>
+  <action name="actionLightScene">
+   <property name="text">
+    <string>LightScene</string>
    </property>
   </action>
  </widget>

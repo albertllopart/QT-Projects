@@ -91,6 +91,20 @@ void MainWindow::ConnectSignalsSlots()
     connect(ui_main_window->actionactionSave_Scene_Icon, SIGNAL(triggered()), this, SLOT(SaveScene()));
     connect(ui_main_window->actionactionOpen_Scene_Icon, SIGNAL(triggered()), this, SLOT(LoadScene()));
     connect(ui_main_window->actionactionNew_Scene_Icon, SIGNAL(triggered()), this, SLOT(NewScene()));
+
+    // Render
+    connect(ui_main_window->actionDeffered, SIGNAL(triggered()), this, SLOT(ChangeRenderMode()));
+    ui_main_window->actionDeffered->setObjectName(QString::number(0));
+    connect(ui_main_window->actionNormal, SIGNAL(triggered()), this, SLOT(ChangeRenderMode()));
+    ui_main_window->actionNormal->setObjectName(QString::number(1));
+    connect(ui_main_window->actionDiffuse, SIGNAL(triggered()), this, SLOT(ChangeRenderMode()));
+    ui_main_window->actionDiffuse->setObjectName(QString::number(2));
+    connect(ui_main_window->actionFragg, SIGNAL(triggered()), this, SLOT(ChangeRenderMode()));
+    ui_main_window->actionFragg->setObjectName(QString::number(3));
+    connect(ui_main_window->actionelse, SIGNAL(triggered()), this, SLOT(ChangeRenderMode()));
+    ui_main_window->actionelse->setObjectName(QString::number(4));
+
+    connect(ui_main_window->actionLightScene, SIGNAL(triggered()), this, SLOT(ShowLightScene()));
 }
 
 void MainWindow::OpenColorDialog()
@@ -175,7 +189,18 @@ void MainWindow::NewScene()
     ui_main_window->SceneRect->update();
 }
 
+void MainWindow::ChangeRenderMode()
+{
+    int index = std::stoi(sender()->objectName().toStdString());
+    App->GetMyOpenGLWidget()->deferredRenderer->renderView = index;
+    updateGameObject();
+}
 
+void MainWindow::ShowLightScene()
+{
+    showLightScene = !showLightScene;
+    updateGameObject();
+}
 
 
 

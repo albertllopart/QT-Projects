@@ -90,11 +90,11 @@ void main(void)
     {
         if (renderView == 1)
         {
-            FragColor = vec4(Diffuse, 1.0);
+            FragColor = vec4(Normal, 1.0);
         }
         else if (renderView == 2)
         {
-            FragColor = vec4(Normal, 1.0);
+            FragColor = vec4(Diffuse, 1.0);
         }
         else if (renderView == 3)
         {

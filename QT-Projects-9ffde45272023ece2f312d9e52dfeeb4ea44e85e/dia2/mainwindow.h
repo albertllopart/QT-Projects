@@ -38,6 +38,10 @@ public slots:
     void NewScene();
     void WindowsOp();
 
+    // Render
+    void ChangeRenderMode();
+    void ShowLightScene();
+
 public:
     bool showLightScene = true;
 
