@@ -38,9 +38,20 @@ public:
         return type;
     }
 
+    void SetPath(const char* path)
+    {
+        this->path = path;
+    }
+
+    const char* GetPath() const
+    {
+        return path.c_str();
+    }
+
 private:
 
     std::string name = "";
+    std::string path = "";
     ResourceType type;
 };
 
@@ -51,7 +62,7 @@ class ResourceManager: public QWidget
 public:
     ResourceManager(QWidget* parent = nullptr);
 
-
+    void ImportAssets();
     void Import(std::string path);
     void AddResource(const Resource* resource);
 
@@ -59,9 +70,13 @@ public:
 
     Resource* GetResource(int i, ResourceType type);
     Resource* GetResourceByName(std::string name, ResourceType type);
+    Resource* GetResource(std::string name);
+    Resource* GetResourceCopy(Resource* copy, ResourceType type);
+    Resource* GetResourceObject(int i, ResourceType type);
 
     void ImportMesh(std::string path);
     void ImportTexture(std::string path);
+    void FixedResources();
 
 
 private:

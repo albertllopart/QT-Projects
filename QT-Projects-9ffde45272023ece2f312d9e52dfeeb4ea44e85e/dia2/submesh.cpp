@@ -2,9 +2,11 @@
 #include <iostream>
 #include <QOpenGLFunctions>
 #include <stdio.h>
-#include <QOpenGLTexture>
 #include "texture.h"
 #include "QImage"
+#include "applicationqt.h"
+#include "mainwindow.h"
+#include "resourcemanager.h"
 
 SubMesh::SubMesh(VertexFormat vertexFormat, void *data, int size) : ibo(QOpenGLBuffer::IndexBuffer)
 {
@@ -71,37 +73,24 @@ void SubMesh::Update()
 
 void SubMesh::Draw()
 {
-    if(texture == nullptr) // Testing... Need Change
-    {
-        texture = new QOpenGLTexture(QImage("Texture/Checker.jpg"));
-    }
-    if(texture != nullptr)
-    {
-        qInfo() << "Draw Texture";
-        GL->glBindTexture(GL_TEXTURE_2D, texture->textureId());
-    }
-
+    qInfo() << "Draw";
+    qInfo() << "Draw1 " << texture;
+    qInfo() << "Draw2 " << dataSize;
+    qInfo() << "Draw3 " << vertexFormat.size;
+    qInfo() << "Draw4 " << indicesCount;
+    qInfo() << "Draw5 " << texture->GetIndex();
+    texture->Draw();
     int numVertices = dataSize / vertexFormat.size;
-
     if(vao.isCreated())
     {
-
         vao.bind();
         if (indicesCount > 0)
-        {
-            qInfo() << "Incex: " << indicesCount;
             GL->glDrawElements(GL_TRIANGLES, indicesCount, GL_UNSIGNED_INT, nullptr);
-        }
         else
             GL->glDrawArrays(GL_TRIANGLES, 0, numVertices);
     }
-    qInfo() << "glDrawElements";
     vao.release();
-    qInfo() << "release";
-    if(texture != nullptr)
-    {
-        GL->glBindTexture(GL_TEXTURE_2D, 0);
-    }
+    texture->UnBind();
 }
 
 void SubMesh::Destroy()

@@ -132,7 +132,7 @@ void DeferredRenderer::Resize(int width,int height)
 
 void DeferredRenderer::Render(Camera *camera)
 {
-    qInfo() << "Render";
+    //qInfo() << "Render";
     GL->glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
     GL->glClearDepth(1.0f);
@@ -160,13 +160,17 @@ void DeferredRenderer::PassMeshes(Camera* camera)
                                        1,
                                        GL_FALSE,
                                        (camera->viewMatrix * go->GetTransform()->GetTransformMatrix()).data());
+                //GL->glUniformMatrix4fv(program.uniformLocation("modelWorldMatrix"),
+                //                       1,
+                //                       GL_FALSE,
+                //                       go->GetTransform()->GetTransformMatrix().data());
 
                 GL->glActiveTexture(GL_TEXTURE0);
                 go->GetMeshRenderer()->Draw();
             }
         }
-        program.release();
     }
+    program.release();
 }
 
 void DeferredRenderer::PassGrid(Camera* camera)
@@ -176,6 +180,8 @@ void DeferredRenderer::PassGrid(Camera* camera)
 
 void DeferredRenderer::PassLight(Camera* camera)
 {
+    //->glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    //GL->glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     QOpenGLFramebufferObject::bindDefault();
 
     if(programLight.bind())
@@ -201,7 +207,7 @@ void DeferredRenderer::PassLight(Camera* camera)
             LightScene sceneLight;
             sceneLight.Position = QVector3D(10, 10, 10);
             sceneLight.Color = QVector3D(0.75, 0.75, 0.75);
-            sceneLight.TypeLight = 1;
+            sceneLight.TypeLight = 0;
             sceneLight.Intensity = 10.0;
             sceneLight.Radius = 100.0;
             lights.push_back(sceneLight);
@@ -214,7 +220,7 @@ void DeferredRenderer::PassLight(Camera* camera)
                 NumberLightsInScene++;
             }
         }
-        qInfo() << "NumberLight: " << NumberLightsInScene;
+        //qInfo() << "NumberLight: " << NumberLightsInScene;
         foreach (GameObject* go, App->GetScene()->gameobjects)
         {
             if(go->GetLight() != nullptr)
@@ -225,8 +231,9 @@ void DeferredRenderer::PassLight(Camera* camera)
                 sceneLight.Color = QVector3D((float)go->GetLight()->GetColor().red() / 255.0f,
                                              (float)go->GetLight()->GetColor().green() / 255.0f,
                                              (float)go->GetLight()->GetColor().blue() / 255.0f);
-                sceneLight.TypeLight = 0;
+                sceneLight.TypeLight = go->GetLight()->GetType();
                 sceneLight.Intensity = go->GetLight()->GetIntensity();
+                sceneLight.Radius = go->GetLight()->GetRange();
                 lights.push_back(sceneLight);
             }
         }
@@ -234,12 +241,12 @@ void DeferredRenderer::PassLight(Camera* camera)
 
         for(int i = 0; i < lights.size(); i++)
         {
-            qInfo() << "Light: " << i;
-            qInfo() << "Light Pos: " << lights[i].Position;
-            qInfo() << "Light Col: " << lights[i].Color;
-            qInfo() << "Light Int: " << lights[i].Intensity;
-            qInfo() << "Light Rad: " << lights[i].Radius;
-            qInfo() << "Light Typ: " << lights[i].TypeLight;
+            //qInfo() << "Light: " << i;
+            //qInfo() << "Light Pos: " << lights[i].Position;
+            //qInfo() << "Light Col: " << lights[i].Color;
+            //qInfo() << "Light Int: " << lights[i].Intensity;
+            //qInfo() << "Light Rad: " << lights[i].Radius;
+            //qInfo() << "Light Typ: " << lights[i].TypeLight;
             GL->glUniform3fv(GL->glGetUniformLocation(programLight.programId(),
                                                       ("lights["+QString::number(i)+"].Position").toStdString().c_str()),
                                                         1,

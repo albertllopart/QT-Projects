@@ -8,12 +8,14 @@ layout(location = 2) in vec2 texCoord;
 
 uniform mat4 projectionMatrix;
 uniform mat4 modelViewMatrix;
+//uniform mat4 modelWorldMatrix;
 
 out Data
 {
     vec3 positionViewspace;
     vec3 normalWorldspace;
     vec2 texCoord;
+    //vec3 positionWorldspace;
     //vec3 diffuse;
     //vec4 specular;
 
@@ -25,6 +27,7 @@ void main(void)
     VSOut.positionViewspace = (modelViewMatrix * vec4(position, 1)).xyz;
     VSOut.normalWorldspace = normal;
     VSOut.texCoord = texCoord;
+    //VSOut.positionWorldspace = (modelWorldMatrix * vec4(position, 1)).xyz;
 
     gl_Position = projectionMatrix * vec4(VSOut.positionViewspace, 1.0);
 }

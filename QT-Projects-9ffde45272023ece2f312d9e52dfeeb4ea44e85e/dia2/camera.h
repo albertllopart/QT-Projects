@@ -36,7 +36,7 @@ public:
     QVector3D position = {0.0f, 0.0f, 10.0f};
 
     // speed
-    float speed = 1;
+    float speed = 10;
 
     // derived matrices
     QMatrix4x4 worldMatrix; // from camera space to world space

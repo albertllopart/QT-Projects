@@ -33,9 +33,9 @@ public:
 
 public:
     QList<GameObject*> gameobjects;
-    Inspector* inspector;
-    Hierarchy* hierarchy;
-    ResourceManager* resourceManager;
+    Inspector* inspector = nullptr;
+    Hierarchy* hierarchy = nullptr;
+    ResourceManager* resourceManager = nullptr;
 };
 
 #endif // SCENE_H

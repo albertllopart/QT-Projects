@@ -65,11 +65,11 @@ vec3 DirectionalLight(int index, vec3 FragPos, vec3 Normal, vec3 Diffuse, float 
     vec3 specular = lights[index].Color * spec * Specular;
 
     // Attenuation
-    float distance = length(lights[index].Position - FragPos);
+    //float distance = length(lights[index].Position - FragPos);
     //lights[index].Intensity
-    float attenuation = lights[index].Intensity / (1,0 + lights[index].Linear * distance + lights[index].Quadratic * distance * distance);
-    diffuse *= attenuation;
-    specular *= attenuation;
+    //float attenuation = lights[index].Intensity / (1,0 + lights[index].Linear * distance + lights[index].Quadratic * distance * distance);
+    //diffuse *= attenuation;
+    //specular *= attenuation;
     lightRet = diffuse + specular;
     return lightRet;
 }

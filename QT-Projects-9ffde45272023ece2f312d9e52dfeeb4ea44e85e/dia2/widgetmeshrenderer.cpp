@@ -6,6 +6,7 @@
 #include <QDebug>
 #include "mesh.h"
 #include "submesh.h"
+#include "texture.h"
 
 WidgetMeshRenderer::WidgetMeshRenderer(Scene* scene, MeshRenderer* mesh, QWidget *parent) :
     QWidget(parent),
@@ -62,9 +63,12 @@ void WidgetMeshRenderer::ConnectSignalsSlots()
 
 void WidgetMeshRenderer::UpdateMeshRenderer()
 {
-    Mesh* mesh = (Mesh*)scene->resourceManager->GetResource(ui->ComboMesh->currentIndex() - 1, ResourceType::RMesh);
+    Mesh* mesh = (Mesh*)scene->resourceManager->GetResourceObject(ui->ComboMesh->currentIndex() - 1, ResourceType::RMesh);
     if(mesh != nullptr)
+    {
+        qInfo() << "okey........................";
         meshRenderer->SetMesh(mesh);
+    }
 
 
     if (ui->Textures->itemAt(0) != nullptr)
@@ -84,6 +88,7 @@ void WidgetMeshRenderer::UpdateMeshRenderer()
 
 void WidgetMeshRenderer::AddTexturesLayout(Mesh* mesh)
 {
+    int index = 0;
     foreach (SubMesh* sub, mesh->meshes)
     {
         qInfo() << "UPDATEEEEEEE";
@@ -94,16 +99,19 @@ void WidgetMeshRenderer::AddTexturesLayout(Mesh* mesh)
         la->setStyleSheet("font-style: normal");
 
         QComboBox* combo = new QComboBox();
+        combo->setObjectName(QString::number(index));
         combo->addItem("Select Texture...");
         for (int i = 0; i < scene->resourceManager->GetCountResources(ResourceType::RTexture); i++)
         {
             Resource* r = scene->resourceManager->GetResource(i, ResourceType::RTexture);
             combo->addItem(r->GetName());
         }
-        connect(combo, SIGNAL(currentIndexChanged(int)), this, SLOT(UpdateTexture()));
+        std::string temp = name;
         box->addWidget(la);
         box->addWidget(combo);
+        connect(combo, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(UpdateTexture(const QString&)));
         ui->Textures->addLayout(box);
+        index++;
     }
 }
 
@@ -125,9 +133,20 @@ void WidgetMeshRenderer::ChangeMesh(QLayout* layout)
     }
 }
 
-void WidgetMeshRenderer::UpdateTexture()
+void WidgetMeshRenderer::UpdateTexture(const QString& nameSubmesh)
 {
-    //mesh->SetMaterial((Material*)scene->resourceManager->GetResource(ui->ComboMesh->currentIndex() - 1, ResourceType::RMaterial));
+    //qInfo() << "Texture NULL" <<sender();
+    //qInfo() << "Texture NULL" << sender()->objectName().toStdString();
+    //qInfo() << "Texture NULL" <<;
+
+    int index = std::stoi(sender()->objectName().toStdString());
+    Texture* newTexture = (Texture*)scene->resourceManager->GetResource(nameSubmesh.toStdString());
+    if(newTexture == nullptr)
+    {
+        qInfo() << "Texture NULL";
+    }
+    meshRenderer->GetMesh()->meshes[index]->texture = newTexture;
+    //meshRenderer->SetMaterial((Material*)scene->resourceManager->GetResource(ui->ComboMesh->currentIndex() - 1, ResourceType::RMaterial));
     emit InspectorUpdate();
 }
 

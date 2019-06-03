@@ -47,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QDockWidget* resource_dock = new QDockWidget();
     resource_dock->setWindowTitle("Resources");
     resourceManager = new ResourceManager();
+    resourceManager->ImportAssets();
     resource_dock->setWidget(resourceManager);
     addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, resource_dock);
     tabifyDockWidget(ui_main_window->dock_inspector, resource_dock);
@@ -55,6 +56,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //Create the color dialog
     color_dialog = new QColorDialog(this);
 
+    //QMainWindow::showEvent(event);
+    QTimer::singleShot(10, this, SLOT(WindowsOp()));
+
     //Connect Signals and Slots
     ConnectSignalsSlots();
 }
@@ -62,6 +66,12 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui_main_window;
+}
+
+void MainWindow::WindowsOp()
+{
+    resourceManager->FixedResources();
+    return;
 }
 
 void MainWindow::ConnectSignalsSlots()

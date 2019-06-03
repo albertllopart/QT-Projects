@@ -93,6 +93,7 @@ void Mesh::ProcessNodes(aiNode *node, const aiScene *scene)
     {
         ProcessNodes(node->mChildren[i], scene);
     }
+    //scene->mMaterials[0]->mProperties[0]->
 }
 void Mesh::ProcessNode(aiNode* node, const aiScene* scene)
 {

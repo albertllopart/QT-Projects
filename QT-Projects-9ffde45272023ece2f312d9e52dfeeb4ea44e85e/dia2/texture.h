@@ -3,6 +3,7 @@
 
 #include "resourcemanager.h"
 
+class QOpenGLTexture;
 enum TextureType
 {
     Albedo = 0,
@@ -17,6 +18,7 @@ public:
 
     void Update() override;
     void Draw() override;
+    void UnBind();
     void Destroy() override;
 
     void Load();
@@ -31,6 +33,7 @@ private:
     unsigned int id = 0;
     TextureType type = TextureType::Albedo;
     std::string path = "";
+    QOpenGLTexture* texture = nullptr;
 
 
 };

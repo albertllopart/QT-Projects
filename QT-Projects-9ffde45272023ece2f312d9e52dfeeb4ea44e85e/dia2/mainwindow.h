@@ -24,6 +24,7 @@ public:
     ~MainWindow();
 
     void ConnectSignalsSlots();
+    ResourceManager* GetResourceManager(){return resourceManager;}
 
 public slots:
 
@@ -35,6 +36,7 @@ public slots:
     void SaveScene();
     void LoadScene();
     void NewScene();
+    void WindowsOp();
 
 public:
     bool showLightScene = true;
@@ -42,11 +44,11 @@ public:
 private:
     Ui::MainWindow *ui_main_window;
 
-    Hierarchy *hierarchy;
-    Inspector *inspector;
-    ResourceManager *resourceManager;
-    DrawRectWindow  *drawRect;
-    Scene     *scene;
+    Hierarchy *hierarchy = nullptr;
+    Inspector *inspector = nullptr;
+    ResourceManager *resourceManager = nullptr;
+    DrawRectWindow  *drawRect = nullptr;
+    Scene     *scene = nullptr;
 
     QColorDialog *color_dialog;
     QColor testing;

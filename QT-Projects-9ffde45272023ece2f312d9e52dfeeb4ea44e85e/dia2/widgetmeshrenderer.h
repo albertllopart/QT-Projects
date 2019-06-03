@@ -25,7 +25,7 @@ public:
 
 public slots:
     void UpdateMeshRenderer();
-    void UpdateTexture();
+    void UpdateTexture(const QString&);
 
 signals:
     void InspectorUpdate();

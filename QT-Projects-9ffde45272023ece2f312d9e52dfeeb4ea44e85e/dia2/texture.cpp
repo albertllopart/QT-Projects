@@ -2,6 +2,7 @@
 #include <QOpenGLFunctions>
 #include <QImage>
 #include <QOpenGLTexture>
+#include "myopenglwidget.h"
 
 Texture::Texture() : Resource(RTexture)
 {
@@ -20,12 +21,27 @@ void Texture::Update()
 
 void Texture::Load()
 {
-
+    if (texture != nullptr)
+    {
+        delete texture;
+    }
+    texture = new QOpenGLTexture(QImage(path.c_str()));
 }
 
 void Texture::Draw()
 {
+    if (texture != nullptr)
+    {
+        GL->glBindTexture(GL_TEXTURE_2D, texture->textureId());
+    }
+}
 
+void Texture::UnBind()
+{
+    if (texture != nullptr)
+    {
+        GL->glBindTexture(GL_TEXTURE_2D, 0);
+    }
 }
 
 void Texture::Destroy()
@@ -45,7 +61,7 @@ void Texture::SetPath(std::string path)
 
 unsigned int Texture::GetIndex()
 {
-    return id;
+    return texture->textureId();
 }
 
 TextureType Texture::GetTextureType()

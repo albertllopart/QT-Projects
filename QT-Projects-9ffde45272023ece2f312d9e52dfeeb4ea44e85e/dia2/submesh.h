@@ -5,9 +5,8 @@
 #include <QOpenGLBuffer>
 #include "myopenglwidget.h"
 
-//class Texture;
+class Texture;
 class Material;
-class QOpenGLTexture;
 
 #define MAX_VERTEX_ATTRIBUTES 3
 
@@ -53,8 +52,7 @@ public:
     std::string textureName = "";
     std::string meshName = "";
     Material* material = nullptr;
-    //Texture* texture = nullptr;
-    QOpenGLTexture* texture = nullptr;
+    Texture* texture = nullptr;
 
 private:
 
