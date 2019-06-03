@@ -205,20 +205,13 @@ void DeferredRenderer::PassLight(Camera* camera)
         if (App->Window()->showLightScene)
         {
             LightScene sceneLight;
-            sceneLight.Position = QVector3D(10, 10, 10);
+            sceneLight.Position = QVector3D(100, 100, 100);
             sceneLight.Color = QVector3D(0.75, 0.75, 0.75);
             sceneLight.TypeLight = 0;
-            sceneLight.Intensity = 5.0;
-            sceneLight.Radius = 100.0;
+            sceneLight.Intensity = 2.0;
+            sceneLight.Radius = 0.0;
             lights.push_back(sceneLight);
             NumberLightsInScene++;
-        }
-        foreach (GameObject* go, App->GetScene()->gameobjects)
-        {
-            if(go->GetLight() != nullptr)
-            {
-                NumberLightsInScene++;
-            }
         }
         //qInfo() << "NumberLight: " << NumberLightsInScene;
         foreach (GameObject* go, App->GetScene()->gameobjects)
@@ -235,6 +228,7 @@ void DeferredRenderer::PassLight(Camera* camera)
                 sceneLight.Intensity = go->GetLight()->GetIntensity();
                 sceneLight.Radius = go->GetLight()->GetRange();
                 lights.push_back(sceneLight);
+                NumberLightsInScene++;
             }
         }
         programLight.setUniformValue(programLight.uniformLocation("NumberLightsInScene"), NumberLightsInScene);

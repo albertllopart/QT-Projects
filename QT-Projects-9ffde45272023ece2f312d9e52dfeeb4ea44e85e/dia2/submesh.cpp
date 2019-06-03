@@ -73,12 +73,7 @@ void SubMesh::Update()
 
 void SubMesh::Draw()
 {
-    qInfo() << "Draw";
-    qInfo() << "Draw1 " << texture;
-    qInfo() << "Draw2 " << dataSize;
-    qInfo() << "Draw3 " << vertexFormat.size;
-    qInfo() << "Draw4 " << indicesCount;
-    qInfo() << "Draw5 " << texture->GetIndex();
+    qInfo() << "Draw...";
     texture->Draw();
     int numVertices = dataSize / vertexFormat.size;
     if(vao.isCreated())

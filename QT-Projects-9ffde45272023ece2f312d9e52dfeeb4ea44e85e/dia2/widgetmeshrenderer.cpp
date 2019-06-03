@@ -24,10 +24,15 @@ WidgetMeshRenderer::WidgetMeshRenderer(Scene* scene, MeshRenderer* mesh, QWidget
     {
         Resource* r = scene->resourceManager->GetResource(i, ResourceType::RMesh);
         ui->ComboMesh->addItem(r->GetName());
-        if (this->meshRenderer->GetMesh() != nullptr && r->GetName() == this->meshRenderer->GetMesh()->GetName())
+        if (this->meshRenderer->GetMesh() != nullptr)
         {
-            indexToSelect = i + 1;
-            hasMesh = true;
+            std::string name1 = r->GetName();
+            std::string name2 = this->meshRenderer->GetMesh()->GetName();
+            if(name1 == name2)
+            {
+                indexToSelect = i + 1;
+                hasMesh = true;
+            }
         }
     }
     if(hasMesh)
@@ -89,6 +94,8 @@ void WidgetMeshRenderer::UpdateMeshRenderer()
 void WidgetMeshRenderer::AddTexturesLayout(Mesh* mesh)
 {
     int index = 0;
+    bool hasMesh = false;
+    int indexToSelect = 0;
     foreach (SubMesh* sub, mesh->meshes)
     {
         qInfo() << "UPDATEEEEEEE";
@@ -105,7 +112,16 @@ void WidgetMeshRenderer::AddTexturesLayout(Mesh* mesh)
         {
             Resource* r = scene->resourceManager->GetResource(i, ResourceType::RTexture);
             combo->addItem(r->GetName());
+            std::string name1 = r->GetName();
+            std::string name2 = sub->texture->GetName();
+            if(name1 == name2)
+            {
+                hasMesh = true;
+                indexToSelect = i + 1;
+            }
         }
+        if(hasMesh)
+            combo->setCurrentIndex(indexToSelect);
         std::string temp = name;
         box->addWidget(la);
         box->addWidget(combo);
@@ -144,8 +160,12 @@ void WidgetMeshRenderer::UpdateTexture(const QString& nameSubmesh)
     if(newTexture == nullptr)
     {
         qInfo() << "Texture NULL";
+        meshRenderer->GetMesh()->meshes[index]->texture = (Texture*)scene->resourceManager->GetResource(0, ResourceType::RTexture);
     }
-    meshRenderer->GetMesh()->meshes[index]->texture = newTexture;
+    else
+    {
+            meshRenderer->GetMesh()->meshes[index]->texture = newTexture;
+    }
     //meshRenderer->SetMaterial((Material*)scene->resourceManager->GetResource(ui->ComboMesh->currentIndex() - 1, ResourceType::RMaterial));
     emit InspectorUpdate();
 }
