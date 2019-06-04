@@ -29,6 +29,7 @@ public:
     void PassGrid(Camera* camera);
     void PassLight(Camera* camera);
     void PassLight2(Camera* camera);
+    void PassBloom(Camera* camera);
     void RenderQuad();
     void DrawGrid();
 
@@ -44,6 +45,8 @@ public:
 
     QOpenGLShaderProgram program;
     QOpenGLShaderProgram programLight;
+    QOpenGLShaderProgram programBloom;
+    QOpenGLShaderProgram programBlur;
     //QOpenGLShaderProgram programGrid;
     unsigned int attachments[3];
 

@@ -51,6 +51,16 @@ void DeferredRenderer::InitDeferredRenderer()
     //programGrid.addShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/GridShader.vert");
     //programGrid.addShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/GridShader.frag");
     //programGrid.link();
+
+    programBloom.create();
+    programBloom.addShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/BloomShader.vert");
+    programBloom.addShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/BloomShader.frag");
+    programBloom.link();
+
+    programBlur.create();
+    programBlur.addShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/GaussianBlurrShader.vert");
+    programBlur.addShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/GaussianBlurrShader.frag");
+    programBlur.link();
 }
 
 void DeferredRenderer::DeleteBuffers()
@@ -281,6 +291,72 @@ void DeferredRenderer::PassLight(Camera* camera)
     }
 
     programLight.release();
+}
+
+void DeferredRenderer::PassBloom(Camera *camera)
+{
+    //setting up floating point framebuffer to render the scene to
+    unsigned int hdrFBO;
+    GL->glGenFramebuffers(1, &hdrFBO);
+    GL->glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
+    unsigned int colorBuffers[2];
+    GL->glGenTextures(2, colorBuffers);
+    for (unsigned int i = 0; i < 2; i++)
+    {
+        GL->glBindTexture(GL_TEXTURE_2D, colorBuffers[i]);
+        GL->glTexImage2D(
+            GL_TEXTURE_2D, 0, GL_RGB16F, camera->viewportWidth, camera->viewportHeight, 0, GL_RGB, GL_FLOAT, NULL
+        );
+        GL->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        GL->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        GL->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        GL->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        //attatch texture to framebuffer
+        GL->glFramebufferTexture2D(
+            GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, colorBuffers[i], 0
+        );
+    }
+
+    unsigned int attatchments[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
+    GL->glDrawBuffers(2, attatchments);
+
+    //gaussian blurr
+    unsigned int pingpongFBO[2];
+    unsigned int pingpongBuffer[2];
+    GL->glGenFramebuffers(2, pingpongFBO);
+    GL->glGenTextures(2, pingpongBuffer);
+    for (unsigned int i = 0; i < 2; i++)
+    {
+        GL->glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[i]);
+        GL->glBindTexture(GL_TEXTURE_2D, pingpongBuffer[i]);
+        GL->glTexImage2D(
+            GL_TEXTURE_2D, 0, GL_RGB16F, camera->viewportWidth, camera->viewportHeight, 0, GL_RGB, GL_FLOAT, NULL
+        );
+        GL->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        GL->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        GL->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        GL->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        GL->glFramebufferTexture2D(
+            GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pingpongBuffer[i], 0
+        );
+    }
+
+    bool horizontal = true, first_iteration = true;
+    int amount = 10;
+    programBlur.bind();
+    for (unsigned int i = 0; i < amount; i++)
+    {
+        GL->glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[horizontal]);
+        programBlur.setUniformValue("horizontal", horizontal);
+        glBindTexture(
+            GL_TEXTURE_2D, first_iteration ? colorBuffers[1] : pingpongBuffer[!horizontal]
+        );
+        RenderQuad();
+        horizontal = !horizontal;
+        if (first_iteration)
+            first_iteration = false;
+    }
+    GL->glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void DeferredRenderer::RenderQuad()
