@@ -22,6 +22,7 @@ ResourceManager::ResourceManager(QWidget* parent) : QWidget(parent)
 
 void ResourceManager::ImportAssets()
 {
+    // Fix
     QDir dir(QApplication::applicationDirPath() + "/../../dia2/Models/");
     QDirIterator searcher(dir, QDirIterator::Subdirectories);
 

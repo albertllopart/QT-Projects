@@ -48,8 +48,12 @@ public slots:
     // LightSphere
     void AddLightSphere();
 
+    // Effects
+    void SwitchEffect();
+
 public:
     bool showLightScene = true;
+    int showEffect = 0;
 
 private:
     Ui::MainWindow *ui_main_window;

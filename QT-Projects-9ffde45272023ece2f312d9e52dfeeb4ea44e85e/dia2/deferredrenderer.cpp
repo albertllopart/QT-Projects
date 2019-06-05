@@ -56,11 +56,11 @@ void DeferredRenderer::InitDeferredRenderer()
     //programBloom.addShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/BloomShader.vert");
     //programBloom.addShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/BloomShader.frag");
     //programBloom.link();
-    //
-    //programBlur.create();
-    //programBlur.addShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/GaussianBlurrShader.vert");
-    //programBlur.addShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/GaussianBlurrShader.frag");
-    //programBlur.link();
+
+    programBlur.create();
+    programBlur.addShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/GaussianBlurrShader.vert");
+    programBlur.addShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/GaussianBlurrShader.frag");
+    programBlur.link();
 }
 
 void DeferredRenderer::DeleteBuffers()
@@ -156,7 +156,10 @@ void DeferredRenderer::Render(Camera *camera)
 
 
     PassMeshes(camera);
-    PassLight(camera);
+    if(App->Window()->showEffect == 0)
+        PassLight(camera);
+    if(App->Window()->showEffect == 1)
+        PassGaussianBlur(camera);
 }
 
 void DeferredRenderer::PassMeshes(Camera* camera)
@@ -223,7 +226,7 @@ void DeferredRenderer::PassLight(Camera* camera)
             sceneLight.Position = QVector3D(100, 100, 100);
             sceneLight.Color = QVector3D(0.75, 0.75, 0.75);
             sceneLight.TypeLight = 0;
-            sceneLight.Intensity = 2.0;
+            sceneLight.Intensity = 10.0;
             sceneLight.Radius = 0.0;
             lights.push_back(sceneLight);
             NumberLightsInScene++;
@@ -250,12 +253,6 @@ void DeferredRenderer::PassLight(Camera* camera)
 
         for(int i = 0; i < lights.size(); i++)
         {
-            //qInfo() << "Light: " << i;
-            //qInfo() << "Light Pos: " << lights[i].Position;
-            //qInfo() << "Light Col: " << lights[i].Color;
-            //qInfo() << "Light Int: " << lights[i].Intensity;
-            //qInfo() << "Light Rad: " << lights[i].Radius;
-            //qInfo() << "Light Typ: " << lights[i].TypeLight;
             GL->glUniform3fv(GL->glGetUniformLocation(programLight.programId(),
                                                       ("lights["+QString::number(i)+"].Position").toStdString().c_str()),
                                                         1,
@@ -357,6 +354,28 @@ void DeferredRenderer::PassBloom(Camera *camera)
    //        first_iteration = false;
    //}
    //GL->glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void DeferredRenderer::PassGaussianBlur(Camera* camera)
+{
+    QOpenGLFramebufferObject::bindDefault();
+
+    if(programBlur.bind())
+    {
+        programBlur.setUniformValue(programLight.uniformLocation("image"), 0);
+        GL->glActiveTexture(GL_TEXTURE0);
+        GL->glBindTexture(GL_TEXTURE_2D, colorTexture);
+
+        GLint horizontal = 0;
+        for(int i = 0; i < 2; i++)
+        {
+            GL->glUniform1i(GL->glGetUniformLocation(programBlur.programId(), "horizontal"), horizontal);
+            RenderQuad();
+            horizontal = 1;
+        }
+    }
+
+    programBlur.release();
 }
 
 void DeferredRenderer::RenderQuad()

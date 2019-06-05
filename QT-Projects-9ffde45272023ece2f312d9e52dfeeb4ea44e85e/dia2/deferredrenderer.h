@@ -30,6 +30,7 @@ public:
     void PassLight(Camera* camera);
     void PassLight2(Camera* camera);
     void PassBloom(Camera* camera);
+    void PassGaussianBlur(Camera* camera);
     void RenderQuad();
     void DrawGrid();
 
@@ -42,6 +43,13 @@ public:
     unsigned int normalTexture;
     unsigned int depthTexture;
     unsigned int positionTexture;
+
+    // Bloom
+    //unsigned int colorTexture;
+
+    // Gaussian Blur
+    //unsigned int blurfbo;
+    //unsigned int blur;
 
     QOpenGLShaderProgram program;
     QOpenGLShaderProgram programLight;

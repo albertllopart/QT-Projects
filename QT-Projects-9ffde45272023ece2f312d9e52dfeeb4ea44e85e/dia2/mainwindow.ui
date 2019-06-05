@@ -72,6 +72,13 @@
     <property name="title">
      <string>Render</string>
     </property>
+    <widget class="QMenu" name="menuEffect">
+     <property name="title">
+      <string>Effect</string>
+     </property>
+     <addaction name="actionNormal_2"/>
+     <addaction name="actionBlur"/>
+    </widget>
     <addaction name="actionDeffered"/>
     <addaction name="actionNormal"/>
     <addaction name="actionDiffuse"/>
@@ -79,6 +86,8 @@
     <addaction name="actionelse"/>
     <addaction name="separator"/>
     <addaction name="actionLightScene"/>
+    <addaction name="separator"/>
+    <addaction name="menuEffect"/>
    </widget>
    <widget class="QMenu" name="menuCreate">
     <property name="title">
@@ -289,6 +298,16 @@
   <action name="actionPointLight_shpere">
    <property name="text">
     <string>PointLight (shpere)</string>
+   </property>
+  </action>
+  <action name="actionNormal_2">
+   <property name="text">
+    <string>Normal</string>
+   </property>
+  </action>
+  <action name="actionBlur">
+   <property name="text">
+    <string>Blur</string>
    </property>
   </action>
  </widget>

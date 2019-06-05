@@ -124,6 +124,12 @@ void MainWindow::ConnectSignalsSlots()
     connect(ui_main_window->actionPointLight_shpere, SIGNAL(triggered()), this, SLOT(AddLightSphere()));
 
     connect(ui_main_window->actionLightScene, SIGNAL(triggered()), this, SLOT(ShowLightScene()));
+
+    // Effects
+    connect(ui_main_window->actionNormal_2, SIGNAL(triggered()), this, SLOT(SwitchEffect()));
+        ui_main_window->actionNormal_2->setObjectName("Normal");
+    connect(ui_main_window->actionBlur, SIGNAL(triggered()), this, SLOT(SwitchEffect()));
+        ui_main_window->actionBlur->setObjectName("Blur");
 }
 
 void MainWindow::OpenColorDialog()
@@ -231,6 +237,20 @@ void MainWindow::AddPrimitive()
 void MainWindow::AddLightSphere()
 {
     scene->AddLightSphere();
+    updateGameObject();
+}
+
+void MainWindow::SwitchEffect()
+{
+    std::string effect = sender()->objectName().toStdString();
+    if (effect == "Normal")
+    {
+        showEffect = 0;
+    }
+    else if (effect == "Blur")
+    {
+        showEffect = 1;
+    }
     updateGameObject();
 }
 
