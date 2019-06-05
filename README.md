@@ -58,6 +58,6 @@ To enable or disable techniques click on "Renderer" in the main menu and extend 
 
 ![](images/scene2blur.PNG)
 
-## Bloom first step (brightness selection)
+## Bloom first + second step (brightness selection + gaussian blur)
 
 ![](images/scene2bloom.PNG)
