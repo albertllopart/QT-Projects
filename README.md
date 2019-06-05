@@ -23,91 +23,41 @@ The inspector provides information about the currently selected entity from the 
 
 ![](images/inspector.PNG)
 
-### Renderer
+### Resources
 
-The central widget is where every entity is rendered based on its own transform and rendering options.
+Here you can check any resources that are contained in the directory, meshes and textures.
 
-![](images/renderer.PNG)
+![](images/resources.PNG)
 
-# Qt Features:
+# Models and techniques
 
-### Signals
+### Loading models
 
-Inspector:
+To load a single model simply press "Add Entity" in the hierarchy and then select that entity and press "Add mesh renderer" in the inspector. After that you just need to select whatever model that its loaded as a resource.
 
-- void MainUpdate();
+### Enabling/disabling techniques
 
-Widget2DTransform:
+To enable or disable techniques click on "Renderer" in the main menu and extend the "effects" option. Then click on whatever technique you want to activate. To disable such technique simply activate any other option from the effects.
 
-- void InspectorUpdate();
+### Camera movement
 
-WidgetShapeRenderer:
+- Move around by pressing right click + WASD
+- Change camera angles by pressing right click + moving the mouse
+- Zoom in or out with the mouse wheel
+- Drag your camera around by clicking the mouse wheel and moving your mouse
 
-- void InspectorUpdate();
+![](images/scene1.PNG)
 
-Qt:
+# Samples
 
-- Multiple signals from QObjects in the UI
+## Default
 
-### Slots
+![](images/scene2.PNG)
 
-Hierarchy:
+## Blurr
 
-- void AddGameObject(GameObject* gameobject);
-- void RemoveGameObject();
-- void GameObjectClicked(QListWidgetItem* item);
-- void Update();
-- void Testing();
+![](images/scene2blur.PNG)
 
-Inspector:
+## Bloom first step (brightness selection)
 
-- void SetName(QString);
-
-MainWindow:
-
-- void OpenColorDialog();
-- void ColorTest();
-- void updateGameObject();
-- void AddGameObject();
-- void RemoveGameObject();
-- void SaveScene();
-- void LoadScene();
-- void NewScene();
-
-Widget2DTransform:
-
-- void UpdateTransform();
-- void UpdateTransformSliderXPosition(int value);
-- void UpdateTransformSliderYPosition(int value);
-- void UpdateTransformSliderXScale(int value);
-- void UpdateTransformSliderYScale(int value);
-
-WidgetShapeRenderer:
-
-- void UpdateShape();
-- void UpdateSize();
-- void UpdateStrokeThickness();
-- void UpdateStrokeStyle();
-- void UpdateFillColor();
-- void UpdateStrokeColor();
-
-### Resource Files
-
-- Various icons for the main menu
-
-### Actions
-
-- New Scene
-- Save Scene
-- Load Scene
-- Exit
-
-### Style Sheets
-
-- Fill color
-- Stroke color
-
-### Widget Promotion
-
-- Central widget with QPainter
-
+![](images/scene2bloom.PNG)
