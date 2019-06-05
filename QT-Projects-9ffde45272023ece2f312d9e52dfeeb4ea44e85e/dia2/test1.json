@@ -1,0 +1,55 @@
+{
+    "GameObject_0": {
+        "Component_0": {
+            "Position_X": 0,
+            "Position_Y": 0,
+            "Position_Z": 0,
+            "Rotation_X": 0,
+            "Rotation_Y": 0,
+            "Rotation_Z": 0,
+            "Scale_X": 1,
+            "Scale_Y": 1,
+            "Scale_Z": 1
+        },
+        "Component_1": {
+            "HasMesh": true,
+            "MeshName": "Cone.obj",
+            "Texture_0": "Checker.jpg"
+        },
+        "Light": false,
+        "MeshRenderer": true,
+        "Name": "Cone",
+        "UUID": 0
+    },
+    "GameObject_1": {
+        "Component_0": {
+            "Position_X": 5,
+            "Position_Y": 0,
+            "Position_Z": 0,
+            "Rotation_X": 0,
+            "Rotation_Y": 0,
+            "Rotation_Z": 0,
+            "Scale_X": 1,
+            "Scale_Y": 1,
+            "Scale_Z": 1
+        },
+        "Component_1": {
+            "HasMesh": true,
+            "MeshName": "Sphere.obj",
+            "Texture_0": "Checker.jpg"
+        },
+        "Component_2": {
+            "Color_B": 255,
+            "Color_G": 255,
+            "Color_R": 255,
+            "Intensity": 48,
+            "Range": 174,
+            "Type": 1
+        },
+        "Light": true,
+        "MeshRenderer": true,
+        "Name": "GameObject (1)",
+        "UUID": 1
+    },
+    "NumberOfGameObjects": 2
+}

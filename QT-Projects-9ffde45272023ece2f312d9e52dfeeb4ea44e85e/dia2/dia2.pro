@@ -98,6 +98,8 @@ DISTFILES += \
     shaders/GeometryShader.vert \
     shaders/BloomShader.frag \
     shaders/BloomShader.vert \
+    shaders/BloomFinalShader.frag \
+    shaders/BloomFinalShader.vert \
     shaders/GaussianBlurrShader.frag \
     shaders/GaussianBlurrShader.vert
 

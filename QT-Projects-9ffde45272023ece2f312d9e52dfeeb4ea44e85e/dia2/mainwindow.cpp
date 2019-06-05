@@ -130,6 +130,8 @@ void MainWindow::ConnectSignalsSlots()
         ui_main_window->actionNormal_2->setObjectName("Normal");
     connect(ui_main_window->actionBlur, SIGNAL(triggered()), this, SLOT(SwitchEffect()));
         ui_main_window->actionBlur->setObjectName("Blur");
+    connect(ui_main_window->actionBloom, SIGNAL(triggered()), this, SLOT(SwitchEffect()));
+        ui_main_window->actionBloom->setObjectName("Bloom");
 }
 
 void MainWindow::OpenColorDialog()
@@ -250,6 +252,10 @@ void MainWindow::SwitchEffect()
     else if (effect == "Blur")
     {
         showEffect = 1;
+    }
+    else if (effect == "Bloom")
+    {
+        showEffect = 2;
     }
     updateGameObject();
 }

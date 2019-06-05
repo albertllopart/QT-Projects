@@ -44,18 +44,24 @@ public:
     unsigned int depthTexture;
     unsigned int positionTexture;
 
-    // Bloom
-    //unsigned int colorTexture;
+    unsigned int lightingfbo;
+    unsigned int lighting;
 
-    // Gaussian Blur
-    //unsigned int blurfbo;
-    //unsigned int blur;
+    // Blur
+    unsigned int blurfbo;
+    unsigned int blurHV;
+    // Bloom
+    unsigned int bloomfbo;
+    unsigned int bloom;
+    // Final Bloom
+    unsigned int finalBloomfbo;
+    unsigned int finalBloom;
 
     QOpenGLShaderProgram program;
     QOpenGLShaderProgram programLight;
     QOpenGLShaderProgram programBloom;
     QOpenGLShaderProgram programBlur;
-    //QOpenGLShaderProgram programGrid;
+    QOpenGLShaderProgram programFinalBloom;
     unsigned int attachments[3];
 
     unsigned int quadVAO = 0;
