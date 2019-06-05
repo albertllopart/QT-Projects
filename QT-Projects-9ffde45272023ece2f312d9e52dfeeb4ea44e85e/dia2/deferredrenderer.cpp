@@ -76,6 +76,15 @@ void DeferredRenderer::DeleteBuffers()
     GL->glDeleteTextures(1, &depthTexture);
     GL->glDeleteTextures(1, &positionTexture);
     GL->glDeleteFramebuffers(1, &fbo);
+
+    GL->glDeleteTextures(1, &lighting);
+    GL->glDeleteFramebuffers(1, &lightingfbo);
+    GL->glDeleteTextures(1, &blurHV);
+    GL->glDeleteFramebuffers(1, &blurfbo);
+    GL->glDeleteTextures(1, &bloomfbo);
+    GL->glDeleteFramebuffers(1, &bloom);
+    GL->glDeleteTextures(1, &finalBloom);
+    GL->glDeleteFramebuffers(1, &finalBloomfbo);
 }
 
 void DeferredRenderer::Resize(int width,int height)
