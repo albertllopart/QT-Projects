@@ -18,6 +18,7 @@ MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
 
     //timer per cridar slot a cada frame
     connect(&timer, SIGNAL(timeout()), this, SLOT(frame()));
+    connect(&timer, SIGNAL(timeout()), this, SLOT(updateDT()));
 
     if (format().swapInterval() == -1)
     {
@@ -144,6 +145,11 @@ void MyOpenGLWidget::createSampleTriangle()
     program.release();
 }
 
+void MyOpenGLWidget::updateDT()
+{
+
+}
+
 void MyOpenGLWidget::keyPressEvent(QKeyEvent *event)
 {
     input->keyPressEvent(event);
@@ -167,6 +173,11 @@ void MyOpenGLWidget::mouseMoveEvent(QMouseEvent *event)
 void MyOpenGLWidget::mouseReleaseEvent(QMouseEvent *event)
 {
     input->mouseReleaseEvent(event);
+}
+
+void MyOpenGLWidget::wheelEvent(QWheelEvent *event)
+{
+    input->mouseWheelEvent(event);
 }
 
 void MyOpenGLWidget::enterEvent(QEvent*)

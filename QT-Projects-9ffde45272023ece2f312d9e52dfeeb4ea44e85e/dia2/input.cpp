@@ -138,26 +138,26 @@ void Input::mouseMoveEvent(QMouseEvent *event)
         if (mouseX - mouseX_prev > 0)
         {
             displacementVector += xLeft(yaw, pitch);
-            displacementVector *= parent->camera->speed / 60.0f; //fake delta time
+            displacementVector *= parent->camera->speed / 30.0f; //fake delta time
             parent->camera->position += displacementVector;
         }
         else if (mouseX - mouseX_prev < 0)
         {
             displacementVector += xRight(yaw, pitch);
-            displacementVector *= parent->camera->speed / 60.0f; //fake delta time
+            displacementVector *= parent->camera->speed / 30.0f; //fake delta time
             parent->camera->position += displacementVector;
         }
 
         if (mouseY - mouseY_prev > 0)
         {
             displacementVector += yDown(yaw, pitch);
-            displacementVector *= parent->camera->speed / 60.0f; //fake delta time
+            displacementVector *= parent->camera->speed / 30.0f; //fake delta time
             parent->camera->position += displacementVector;
         }
         else if (mouseY - mouseY_prev < 0)
         {
             displacementVector += yUp(yaw, pitch);
-            displacementVector *= parent->camera->speed / 60.0f; //fake delta time
+            displacementVector *= parent->camera->speed / 30.0f; //fake delta time
             parent->camera->position += displacementVector;
         }
     }

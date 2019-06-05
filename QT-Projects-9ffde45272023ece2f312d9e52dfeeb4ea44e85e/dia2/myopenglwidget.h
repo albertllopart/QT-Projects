@@ -7,6 +7,7 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLShaderProgram>
 #include <QTimer>
+#include <QElapsedTimer>
 #include "camera.h"
 #include "input.h"
 #include "deferredrenderer.h"
@@ -38,6 +39,7 @@ public:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
+    void wheelEvent(QWheelEvent* event) override;
     void enterEvent(QEvent*) override;
     void leaveEvent(QEvent*) override;
 
@@ -47,6 +49,7 @@ public slots:
     //Not virtual
     void finalizeGL();
     void frame();
+    void updateDT();
 
 private:
 
