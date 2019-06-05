@@ -31,6 +31,9 @@ public:
     QString GetCountUUID();
     void RemoveGameObject(int uid);
 
+    void AddPrimitive(std::string primitive);
+    void AddLightSphere();
+
 public:
     QList<GameObject*> gameobjects;
     Inspector* inspector = nullptr;

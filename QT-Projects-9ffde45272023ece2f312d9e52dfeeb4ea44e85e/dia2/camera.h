@@ -33,7 +33,7 @@ public:
     // world navigation
     float yaw = 0.0f;
     float pitch = 0.0f;
-    QVector3D position = {0.0f, 10.0f, 10.0f};
+    QVector3D position = {0.0f, 8.0f, 20.0f};
 
     // speed
     float speed = 10;

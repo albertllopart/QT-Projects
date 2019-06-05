@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui_main_window(new Ui::MainWindow)
 {
     ui_main_window->setupUi(this);
-    setMinimumSize(QSize(1200, 660));
+    setMinimumSize(QSize(1600, 920));
     //All tab positions on top of the docking area
     setTabPosition(Qt::AllDockWidgetAreas, QTabWidget::TabPosition::North);
 
@@ -103,6 +103,25 @@ void MainWindow::ConnectSignalsSlots()
     ui_main_window->actionFragg->setObjectName(QString::number(3));
     connect(ui_main_window->actionelse, SIGNAL(triggered()), this, SLOT(ChangeRenderMode()));
     ui_main_window->actionelse->setObjectName(QString::number(4));
+
+    // BasicPrimitive
+    connect(ui_main_window->actionSphere, SIGNAL(triggered()), this, SLOT(AddPrimitive()));
+    ui_main_window->actionSphere->setObjectName("Sphere");
+    connect(ui_main_window->actionCube, SIGNAL(triggered()), this, SLOT(AddPrimitive()));
+    ui_main_window->actionCube->setObjectName("Cube");
+    connect(ui_main_window->actionCone, SIGNAL(triggered()), this, SLOT(AddPrimitive()));
+    ui_main_window->actionCone->setObjectName("Cone");
+    connect(ui_main_window->actionPlane, SIGNAL(triggered()), this, SLOT(AddPrimitive()));
+    ui_main_window->actionPlane->setObjectName("Plane");
+    connect(ui_main_window->actionTorus, SIGNAL(triggered()), this, SLOT(AddPrimitive()));
+    ui_main_window->actionTorus->setObjectName("Torus");
+    connect(ui_main_window->actionCylinder, SIGNAL(triggered()), this, SLOT(AddPrimitive()));
+    ui_main_window->actionCylinder->setObjectName("Cylinder");
+    connect(ui_main_window->actionPyramid, SIGNAL(triggered()), this, SLOT(AddPrimitive()));
+    ui_main_window->actionPyramid->setObjectName("Pyramid");
+
+    // LightSphere
+    connect(ui_main_window->actionPointLight_shpere, SIGNAL(triggered()), this, SLOT(AddLightSphere()));
 
     connect(ui_main_window->actionLightScene, SIGNAL(triggered()), this, SLOT(ShowLightScene()));
 }
@@ -199,6 +218,19 @@ void MainWindow::ChangeRenderMode()
 void MainWindow::ShowLightScene()
 {
     showLightScene = !showLightScene;
+    updateGameObject();
+}
+
+void MainWindow::AddPrimitive()
+{
+    std::string primitive = sender()->objectName().toStdString();
+    scene->AddPrimitive(primitive);
+    updateGameObject();
+}
+
+void MainWindow::AddLightSphere()
+{
+    scene->AddLightSphere();
     updateGameObject();
 }
 

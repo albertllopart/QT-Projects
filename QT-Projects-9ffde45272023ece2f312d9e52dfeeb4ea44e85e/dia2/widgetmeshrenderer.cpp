@@ -74,6 +74,10 @@ void WidgetMeshRenderer::UpdateMeshRenderer()
         qInfo() << "okey........................";
         meshRenderer->SetMesh(mesh);
     }
+    else
+    {
+        meshRenderer->SetMesh(nullptr);
+    }
 
 
     if (ui->Textures->itemAt(0) != nullptr)

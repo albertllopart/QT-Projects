@@ -95,7 +95,11 @@ DISTFILES += \
     shaders/LightShader.frag \
     shaders/LightShader.vert \
     shaders/GeometryShader.frag \
-    shaders/GeometryShader.vert
+    shaders/GeometryShader.vert \
+    shaders/BloomShader.frag \
+    shaders/BloomShader.vert \
+    shaders/GaussianBlurrShader.frag \
+    shaders/GaussianBlurrShader.vert
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/Assimp/lib/ -lassimp
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/Assimp/lib/ -lassimpd

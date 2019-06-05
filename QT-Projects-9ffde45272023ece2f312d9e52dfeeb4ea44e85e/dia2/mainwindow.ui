@@ -80,9 +80,24 @@
     <addaction name="separator"/>
     <addaction name="actionLightScene"/>
    </widget>
+   <widget class="QMenu" name="menuCreate">
+    <property name="title">
+     <string>Create</string>
+    </property>
+    <addaction name="actionSphere"/>
+    <addaction name="actionCube"/>
+    <addaction name="actionCone"/>
+    <addaction name="actionCylinder"/>
+    <addaction name="actionPlane"/>
+    <addaction name="actionPyramid"/>
+    <addaction name="actionTorus"/>
+    <addaction name="separator"/>
+    <addaction name="actionPointLight_shpere"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuEntities"/>
+   <addaction name="menuCreate"/>
    <addaction name="menuRenderView"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -234,6 +249,46 @@
   <action name="actionLightScene">
    <property name="text">
     <string>LightScene</string>
+   </property>
+  </action>
+  <action name="actionSphere">
+   <property name="text">
+    <string>Sphere</string>
+   </property>
+  </action>
+  <action name="actionCube">
+   <property name="text">
+    <string>Cube</string>
+   </property>
+  </action>
+  <action name="actionCone">
+   <property name="text">
+    <string>Cone</string>
+   </property>
+  </action>
+  <action name="actionCylinder">
+   <property name="text">
+    <string>Cylinder</string>
+   </property>
+  </action>
+  <action name="actionPlane">
+   <property name="text">
+    <string>Plane</string>
+   </property>
+  </action>
+  <action name="actionPyramid">
+   <property name="text">
+    <string>Pyramid</string>
+   </property>
+  </action>
+  <action name="actionTorus">
+   <property name="text">
+    <string>Torus</string>
+   </property>
+  </action>
+  <action name="actionPointLight_shpere">
+   <property name="text">
+    <string>PointLight (shpere)</string>
    </property>
   </action>
  </widget>

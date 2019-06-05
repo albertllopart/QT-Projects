@@ -1,0 +1,100 @@
+{
+    "GameObject_0": {
+        "Component_0": {
+            "Position_X": 0,
+            "Position_Y": 0,
+            "Position_Z": 0,
+            "Rotation_X": 0,
+            "Rotation_Y": 0,
+            "Rotation_Z": 0,
+            "Scale_X": 1,
+            "Scale_Y": 1,
+            "Scale_Z": 1
+        },
+        "Component_1": {
+            "HasMesh": true,
+            "MeshName": "Plane.obj",
+            "Texture_0": "KAMEN-stup.png"
+        },
+        "Light": false,
+        "MeshRenderer": true,
+        "Name": "Plane",
+        "UUID": 0
+    },
+    "GameObject_1": {
+        "Component_0": {
+            "Position_X": -4,
+            "Position_Y": 0,
+            "Position_Z": 0,
+            "Rotation_X": 0,
+            "Rotation_Y": 0,
+            "Rotation_Z": 0,
+            "Scale_X": 1,
+            "Scale_Y": 1,
+            "Scale_Z": 1
+        },
+        "Component_1": {
+            "HasMesh": true,
+            "MeshName": "Pyramid.obj",
+            "Texture_0": "kamen-bump.png"
+        },
+        "Light": false,
+        "MeshRenderer": true,
+        "Name": "Pyramid (1)",
+        "UUID": 1
+    },
+    "GameObject_2": {
+        "Component_0": {
+            "Position_X": 0,
+            "Position_Y": 0,
+            "Position_Z": -3,
+            "Rotation_X": 0,
+            "Rotation_Y": 0,
+            "Rotation_Z": 0,
+            "Scale_X": 1,
+            "Scale_Y": 1,
+            "Scale_Z": 1
+        },
+        "Component_1": {
+            "HasMesh": true,
+            "MeshName": "PalmTree.obj",
+            "Texture_0": "ENV_MP_Iraq_palm_tree_01_D.png",
+            "Texture_1": "ENV_MP_Iraq_PlantsSansTrans_D.png"
+        },
+        "Light": false,
+        "MeshRenderer": true,
+        "Name": "GameObject (2)",
+        "UUID": 2
+    },
+    "GameObject_3": {
+        "Component_0": {
+            "Position_X": 7,
+            "Position_Y": 10,
+            "Position_Z": 6,
+            "Rotation_X": 0,
+            "Rotation_Y": 0,
+            "Rotation_Z": 0,
+            "Scale_X": 0.30000001192092896,
+            "Scale_Y": 0.30000001192092896,
+            "Scale_Z": 0.30000001192092896
+        },
+        "Component_1": {
+            "HasMesh": true,
+            "MeshName": "Sphere.obj",
+            "Texture_0": "LightTImg.jpg"
+        },
+        "Component_2": {
+            "Color_B": 255,
+            "Color_G": 255,
+            "Color_R": 255,
+            "Intensity": 30,
+            "Range": 30,
+            "Type": 1
+        },
+        "Light": true,
+        "MeshRenderer": true,
+        "Name": "PointLight  (3)",
+        "UUID": 3
+    },
+    "NumberOfGameObjects": 4
+}

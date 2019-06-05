@@ -42,6 +42,12 @@ public slots:
     void ChangeRenderMode();
     void ShowLightScene();
 
+    // Basic Primitive
+    void AddPrimitive();
+
+    // LightSphere
+    void AddLightSphere();
+
 public:
     bool showLightScene = true;
 
