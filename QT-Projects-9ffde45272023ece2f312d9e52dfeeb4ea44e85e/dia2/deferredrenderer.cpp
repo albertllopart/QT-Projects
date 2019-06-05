@@ -19,7 +19,11 @@
 
 DeferredRenderer::DeferredRenderer()
 {
-
+    sceneLightInit.Position = QVector3D(100, 100, 100);
+    sceneLightInit.Color = QVector3D(0.75, 0.75, 0.75);
+    sceneLightInit.TypeLight = 0;
+    sceneLightInit.Intensity = 10.0;
+    sceneLightInit.Radius = 0.0;
 }
 
 /*void DeferredRenderer::passGrid(Camera *camera)
@@ -303,13 +307,7 @@ void DeferredRenderer::PassLight(Camera* camera)
         lights.clear();
         if (App->Window()->showLightScene)
         {
-            LightScene sceneLight;
-            sceneLight.Position = QVector3D(100, 100, 100);
-            sceneLight.Color = QVector3D(0.75, 0.75, 0.75);
-            sceneLight.TypeLight = 0;
-            sceneLight.Intensity = 10.0;
-            sceneLight.Radius = 0.0;
-            lights.push_back(sceneLight);
+            lights.push_back(sceneLightInit);
             NumberLightsInScene++;
         }
         //qInfo() << "NumberLight: " << NumberLightsInScene;
@@ -334,6 +332,7 @@ void DeferredRenderer::PassLight(Camera* camera)
 
         for(int i = 0; i < lights.size(); i++)
         {
+            //qInfo() << "Inte" << lights[i].Intensity;
             GL->glUniform3fv(GL->glGetUniformLocation(programLight.programId(),
                                                       ("lights["+QString::number(i)+"].Position").toStdString().c_str()),
                                                         1,
@@ -387,12 +386,14 @@ void DeferredRenderer::PassBloom(Camera *camera)
     //QOpenGLFramebufferObject::bindDefault();
 
     //PassMeshes(camera);¡
+    //qInfo() << "Accept: " << acceptBloom;
     if(programBloom.bind())
     {
         programBloom.setUniformValue(programBloom.uniformLocation("cTexture"), 0);
         GL->glActiveTexture(GL_TEXTURE0);
         GL->glBindTexture(GL_TEXTURE_2D, lighting);
-        GLfloat accept = 0.7;
+        //qInfo() << "Accept: " << acceptBloom;
+        GLfloat accept = acceptBloom;
         GL->glUniform1f(GL->glGetUniformLocation(programBloom.programId(), "accept"), accept);
         RenderQuad();
     }
@@ -415,36 +416,35 @@ void DeferredRenderer::PassBloom(Camera *camera)
         for(int i = 0; i < 2; i++)
         {
             GL->glUniform1i(GL->glGetUniformLocation(programBlur.programId(), "horizontal"), horizontal);
-            GLfloat intensityBlur = 1;
+            //qInfo() << "Blur: " << this->intensityBlur;
+            GLfloat intensityBlur = this->intensityBlur;
             GL->glUniform1f(GL->glGetUniformLocation(programBlur.programId(), "intensity"), intensityBlur);
             RenderQuad();
             horizontal = 1;
         }
     }
     programBlur.release();
-    //GL->glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    //GL->glBindFramebuffer(GL_FRAMEBUFFER, finalBloomfbo);
-    //GL->glClearDepth(1.0f);
-    //GL->glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-    //GL->glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    //QOpenGLFramebufferObject::bindDefault();
-    //
-    //if(programFinalBloom.bind())
-    //{
-    //    programFinalBloom.setUniformValue(programFinalBloom.uniformLocation("scene"), 0);
-    //    GL->glActiveTexture(GL_TEXTURE0);
-    //    GL->glBindTexture(GL_TEXTURE_2D, lighting);
-    //    programFinalBloom.setUniformValue(programFinalBloom.uniformLocation("bloomBlur"), 1);
-    //    GL->glActiveTexture(GL_TEXTURE1);
-    //    GL->glBindTexture(GL_TEXTURE_2D, blurHV);
-    //
-    //    GLint doBloom = 0;
-    //    GL->glUniform1i(GL->glGetUniformLocation(programFinalBloom.programId(), "bloom"), doBloom);
-    //    GLfloat exposure = 1;
-    //    GL->glUniform1f(GL->glGetUniformLocation(programFinalBloom.programId(), "exposure"), exposure);
-    //    RenderQuad();
-    //}
-    //programFinalBloom.release();
+    GL->glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    GL->glBindFramebuffer(GL_FRAMEBUFFER, finalBloomfbo);
+    GL->glClearDepth(1.0f);
+    GL->glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    GL->glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    QOpenGLFramebufferObject::bindDefault();
+
+    if(programFinalBloom.bind())
+    {
+        programFinalBloom.setUniformValue(programFinalBloom.uniformLocation("scene"), 0);
+        GL->glActiveTexture(GL_TEXTURE0);
+        GL->glBindTexture(GL_TEXTURE_2D, lighting);
+        programFinalBloom.setUniformValue(programFinalBloom.uniformLocation("bloomBlur"), 1);
+        GL->glActiveTexture(GL_TEXTURE1);
+        GL->glBindTexture(GL_TEXTURE_2D, blurHV);
+
+        GLfloat exposure = 1.0f;
+        GL->glUniform1f(GL->glGetUniformLocation(programFinalBloom.programId(), "exposure"), exposure);
+        RenderQuad();
+    }
+    programFinalBloom.release();
 
 }
 
@@ -473,7 +473,7 @@ void DeferredRenderer::PassGaussianBlur(Camera* camera)
         for(int i = 0; i < 2; i++)
         {
             GL->glUniform1i(GL->glGetUniformLocation(programBlur.programId(), "horizontal"), horizontal);
-            GLfloat intensityBlur = 1;
+            GLfloat intensityBlur = this->intensityBlur;
             GL->glUniform1f(GL->glGetUniformLocation(programBlur.programId(), "intensity"), intensityBlur);
             RenderQuad();
             horizontal = 1;

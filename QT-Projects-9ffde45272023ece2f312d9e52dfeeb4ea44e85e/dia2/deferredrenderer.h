@@ -67,6 +67,10 @@ public:
     unsigned int quadVAO = 0;
     unsigned int quadVBO;
 
+    LightScene sceneLightInit;
+
+    float intensityBlur = 1.0f;
+    float acceptBloom = 0.7f;
 private:
     QList<LightScene> lights;
 

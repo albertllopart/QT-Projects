@@ -7,6 +7,7 @@
 #include "scene.h"
 #include "resourcemanager.h"
 #include "applicationqt.h"
+#include "widgeteffect.h"
 
 #include <QDebug>
 #include <qjsonobject.h>
@@ -56,6 +57,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //Create the color dialog
     color_dialog = new QColorDialog(this);
 
+    effect = new WidgetEffect();
+    ui_main_window->LightSceneEffects->setWidget(effect);
+    //addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, effect->ui);
+
     //QMainWindow::showEvent(event);
     QTimer::singleShot(10, this, SLOT(WindowsOp()));
 
@@ -71,6 +76,7 @@ MainWindow::~MainWindow()
 void MainWindow::WindowsOp()
 {
     resourceManager->FixedResources();
+    effect->UpdateValues();
     return;
 }
 
@@ -124,14 +130,6 @@ void MainWindow::ConnectSignalsSlots()
     connect(ui_main_window->actionPointLight_shpere, SIGNAL(triggered()), this, SLOT(AddLightSphere()));
 
     connect(ui_main_window->actionLightScene, SIGNAL(triggered()), this, SLOT(ShowLightScene()));
-
-    // Effects
-    connect(ui_main_window->actionNormal_2, SIGNAL(triggered()), this, SLOT(SwitchEffect()));
-        ui_main_window->actionNormal_2->setObjectName("Normal");
-    connect(ui_main_window->actionBlur, SIGNAL(triggered()), this, SLOT(SwitchEffect()));
-        ui_main_window->actionBlur->setObjectName("Blur");
-    connect(ui_main_window->actionBloom, SIGNAL(triggered()), this, SLOT(SwitchEffect()));
-        ui_main_window->actionBloom->setObjectName("Bloom");
 }
 
 void MainWindow::OpenColorDialog()
@@ -239,24 +237,6 @@ void MainWindow::AddPrimitive()
 void MainWindow::AddLightSphere()
 {
     scene->AddLightSphere();
-    updateGameObject();
-}
-
-void MainWindow::SwitchEffect()
-{
-    std::string effect = sender()->objectName().toStdString();
-    if (effect == "Normal")
-    {
-        showEffect = 0;
-    }
-    else if (effect == "Blur")
-    {
-        showEffect = 1;
-    }
-    else if (effect == "Bloom")
-    {
-        showEffect = 2;
-    }
     updateGameObject();
 }
 

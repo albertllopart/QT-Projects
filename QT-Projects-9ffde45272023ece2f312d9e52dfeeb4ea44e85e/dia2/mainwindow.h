@@ -13,6 +13,7 @@ class Hierarchy;
 class Inspector;
 class DrawRectWindow;
 class ResourceManager;
+class WidgetEffect;
 class Scene;
 
 class MainWindow : public QMainWindow
@@ -48,9 +49,6 @@ public slots:
     // LightSphere
     void AddLightSphere();
 
-    // Effects
-    void SwitchEffect();
-
 public:
     bool showLightScene = true;
     int showEffect = 0;
@@ -63,6 +61,7 @@ private:
     ResourceManager *resourceManager = nullptr;
     DrawRectWindow  *drawRect = nullptr;
     Scene     *scene = nullptr;
+    WidgetEffect* effect = nullptr;
 
     QColorDialog *color_dialog;
     QColor testing;

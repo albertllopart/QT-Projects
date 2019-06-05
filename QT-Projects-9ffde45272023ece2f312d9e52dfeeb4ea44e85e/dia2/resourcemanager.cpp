@@ -23,7 +23,7 @@ ResourceManager::ResourceManager(QWidget* parent) : QWidget(parent)
 void ResourceManager::ImportAssets()
 {
     // Fix
-    QDir dir(QApplication::applicationDirPath() + "/../../dia2/Models/");
+    QDir dir(QApplication::applicationDirPath() + "/Models/");
     QDirIterator searcher(dir, QDirIterator::Subdirectories);
 
     ImportTexture("Texture/Checker.jpg");

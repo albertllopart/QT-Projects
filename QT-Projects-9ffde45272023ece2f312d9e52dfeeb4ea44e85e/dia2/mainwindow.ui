@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>612</width>
-    <height>434</height>
+    <width>997</width>
+    <height>608</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,7 +40,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>612</width>
+     <width>997</width>
      <height>21</height>
     </rect>
    </property>
@@ -72,14 +72,6 @@
     <property name="title">
      <string>Render</string>
     </property>
-    <widget class="QMenu" name="menuEffect">
-     <property name="title">
-      <string>Effect</string>
-     </property>
-     <addaction name="actionNormal_2"/>
-     <addaction name="actionBlur"/>
-     <addaction name="actionBloom"/>
-    </widget>
     <addaction name="actionDeffered"/>
     <addaction name="actionNormal"/>
     <addaction name="actionDiffuse"/>
@@ -88,7 +80,6 @@
     <addaction name="separator"/>
     <addaction name="actionLightScene"/>
     <addaction name="separator"/>
-    <addaction name="menuEffect"/>
    </widget>
    <widget class="QMenu" name="menuCreate">
     <property name="title">
@@ -148,6 +139,15 @@
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_7"/>
+  </widget>
+  <widget class="QDockWidget" name="LightSceneEffects">
+   <property name="windowTitle">
+    <string>LightScene | Effects</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents"/>
   </widget>
   <action name="actionExit">
    <property name="text">

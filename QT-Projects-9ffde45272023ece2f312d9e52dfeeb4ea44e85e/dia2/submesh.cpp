@@ -73,7 +73,7 @@ void SubMesh::Update()
 
 void SubMesh::Draw()
 {
-    qInfo() << "Draw...";
+    //qInfo() << "Draw...";
     texture->Draw();
     int numVertices = dataSize / vertexFormat.size;
     if(vao.isCreated())
