@@ -403,7 +403,7 @@ void DeferredRenderer::PassBloom(Camera *camera)
     GL->glClearDepth(1.0f);
     GL->glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     GL->glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    QOpenGLFramebufferObject::bindDefault();
+    //QOpenGLFramebufferObject::bindDefault();
     //PassMeshes(camera);
 
     if(programBlur.bind())
